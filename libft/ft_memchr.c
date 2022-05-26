@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:06:02 by rle-thie         ###   ########.fr       */
+/*   Created: 2021/11/26 14:22:15 by rle-thie          #+#    #+#             */
+/*   Updated: 2021/12/10 15:48:14 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include <stddef.h>
+#include <string.h>
+#include <stdio.h>
 
-int main(int ac, char const **av, char **envp)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_data *data;
-	// char *str;
-	
-	(void)ac;
-	(void)av;
-	// data = malloc(sizeof(t_data));
-	// data.garb = malloc(sizeof(t_garbage));
-	data = init_all(envp);
-	loop(envp, data);
-	// ft_garb_free_all(data);
-	// free(data);
-	data = data;
+	size_t	i;
+	char	*dst;
+
+	dst = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (dst[i] == (char)c)
+			return ((void *)s + i);
+		i++;
+	}
 	return (0);
 }

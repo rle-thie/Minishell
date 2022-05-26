@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:06:02 by rle-thie         ###   ########.fr       */
+/*   Created: 2021/11/29 15:20:31 by rle-thie          #+#    #+#             */
+/*   Updated: 2021/12/10 13:23:00 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int main(int ac, char const **av, char **envp)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	t_data *data;
-	// char *str;
-	
-	(void)ac;
-	(void)av;
-	// data = malloc(sizeof(t_data));
-	// data.garb = malloc(sizeof(t_garbage));
-	data = init_all(envp);
-	loop(envp, data);
-	// ft_garb_free_all(data);
-	// free(data);
-	data = data;
-	return (0);
+	size_t	i;
+
+	if (size == 0)
+		return (ft_strlen(src));
+	if (size > 0)
+	{
+		i = 0;
+		while (src[i] != '\0' && i < (size - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
 }

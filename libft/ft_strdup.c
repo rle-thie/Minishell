@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:06:02 by rle-thie         ###   ########.fr       */
+/*   Created: 2021/11/23 15:36:04 by rle-thie          #+#    #+#             */
+/*   Updated: 2021/12/10 12:22:51 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int main(int ac, char const **av, char **envp)
+char	*ft_strdup(const char *s)
 {
-	t_data *data;
-	// char *str;
-	
-	(void)ac;
-	(void)av;
-	// data = malloc(sizeof(t_data));
-	// data.garb = malloc(sizeof(t_garbage));
-	data = init_all(envp);
-	loop(envp, data);
-	// ft_garb_free_all(data);
-	// free(data);
-	data = data;
-	return (0);
+	int		i;
+	char	*cpy;
+	int		j;
+
+	j = 0;
+	while (s[j])
+		j++;
+	cpy = malloc(sizeof(char) * j + 1);
+	if (cpy == NULL)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		cpy[i] = s[i];
+		i++;
+	}
+	cpy[i] = '\0';
+	return (cpy);
 }

@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:06:02 by rle-thie         ###   ########.fr       */
+/*   Created: 2021/12/09 12:19:22 by rle-thie          #+#    #+#             */
+/*   Updated: 2021/12/13 13:22:50 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int main(int ac, char const **av, char **envp)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*))
 {
-	t_data *data;
-	// char *str;
-	
-	(void)ac;
-	(void)av;
-	// data = malloc(sizeof(t_data));
-	// data.garb = malloc(sizeof(t_garbage));
-	data = init_all(envp);
-	loop(envp, data);
-	// ft_garb_free_all(data);
-	// free(data);
-	data = data;
-	return (0);
+	t_list	*alst;
+	t_list	*new;
+
+	if (!lst || !f)
+		return (NULL);
+	alst = NULL;
+	while (lst)
+	{
+		new = ft_lstnew(lst->content);
+		if (!new)
+		{
+			ft_lstclear(&alst, del);
+			return (NULL);
+		}
+		new->content = f(new->content);
+		ft_lstadd_back(&alst, new);
+		lst = lst->next;
+	}
+	return (alst);
 }

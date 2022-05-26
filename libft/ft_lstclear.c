@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:06:02 by rle-thie         ###   ########.fr       */
+/*   Created: 2021/12/07 18:03:22 by rle-thie          #+#    #+#             */
+/*   Updated: 2021/12/13 12:54:01 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int main(int ac, char const **av, char **envp)
+// static void ft_lstdelonee(t_list *lst, void (*del)(void*))
+// {
+// 	del((void*)lst);
+// }
+
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_data *data;
-	// char *str;
-	
-	(void)ac;
-	(void)av;
-	// data = malloc(sizeof(t_data));
-	// data.garb = malloc(sizeof(t_garbage));
-	data = init_all(envp);
-	loop(envp, data);
-	// ft_garb_free_all(data);
-	// free(data);
-	data = data;
-	return (0);
+	t_list	*tmp;
+	t_list	*tmp2;
+
+	tmp = *lst;
+	while (tmp != NULL)
+	{
+		tmp2 = tmp->next;
+		ft_lstdelone(tmp, del);
+		tmp = tmp2;
+	}
+	*lst = NULL;
 }

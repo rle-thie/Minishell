@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:06:02 by rle-thie         ###   ########.fr       */
+/*   Created: 2021/12/02 12:46:57 by rle-thie          #+#    #+#             */
+/*   Updated: 2021/12/13 12:47:02 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int main(int ac, char const **av, char **envp)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_data *data;
-	// char *str;
-	
-	(void)ac;
-	(void)av;
-	// data = malloc(sizeof(t_data));
-	// data.garb = malloc(sizeof(t_garbage));
-	data = init_all(envp);
-	loop(envp, data);
-	// ft_garb_free_all(data);
-	// free(data);
-	data = data;
-	return (0);
+	int		nbr1;
+	int		nb;
+
+	nb = n;
+	if (nb == -2147483648)
+		ft_putstr_fd("-2147483648", fd);
+	else
+	{
+		if (nb < 0)
+		{
+			ft_putchar_fd('-', fd);
+			nbr1 = nb * -1;
+			ft_putnbr_fd(nbr1, fd);
+		}
+		else
+		{
+			nbr1 = nb;
+			while (nbr1 > 9)
+			{
+				ft_putnbr_fd(nbr1 / 10, fd);
+				nbr1 = nbr1 % 10;
+			}
+			ft_putchar_fd(nbr1 + 48, fd);
+		}
+	}
 }

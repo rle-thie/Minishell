@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:06:02 by rle-thie         ###   ########.fr       */
+/*   Created: 2021/11/24 16:25:20 by rle-thie          #+#    #+#             */
+/*   Updated: 2021/12/10 17:00:29 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include <stddef.h>
 
-int main(int ac, char const **av, char **envp)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_data *data;
-	// char *str;
-	
-	(void)ac;
-	(void)av;
-	// data = malloc(sizeof(t_data));
-	// data.garb = malloc(sizeof(t_garbage));
-	data = init_all(envp);
-	loop(envp, data);
-	// ft_garb_free_all(data);
-	// free(data);
-	data = data;
-	return (0);
+	int		i;
+	int		len;
+
+	i = 0;
+	len = 0;
+	while (s[len])
+		len++;
+	while (s[i] && s[len] != (char)c)
+	{
+		i++;
+		len--;
+	}
+	if (s[len] == (char)c)
+		return ((char *)&s[len]);
+	else
+		return (NULL);
 }

@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rle-thie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 11:17:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:09:46 by rle-thie         ###   ########.fr       */
+/*   Created: 2021/11/24 17:07:50 by rle-thie          #+#    #+#             */
+/*   Updated: 2021/11/26 11:54:43 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PARSING_H
-# define PARSING_H
+#include <string.h>
+#include <stdio.h>
 
-void	loop(char **envp, t_data *data);
-void	create_token(char *str, t_data *data);
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*s1;
 
-
-#endif
+	i = 0;
+	s1 = (char *)s;
+	while (i < n)
+		s1[i++] = '\0';
+}
