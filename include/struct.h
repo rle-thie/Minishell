@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 17:13:58 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/05/30 19:59:11 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ enum	e_token_type
 struct	s_token
 {
 	struct s_token		*prev;
-	char				*content;
+	char				c;
 	t_token_type		type;
 	struct s_token		*next;
 };

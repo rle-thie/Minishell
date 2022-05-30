@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/05/26 16:51:19 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/05/30 20:12:53 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,5 +57,9 @@ re: fclean all
 
 rc: fclean all
 	${RM} ${OBJS} && clear
+
+r: fclean all
+	${RM} ${OBJS}
+	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --verbose ./${NAME}
 
 .PHONY: all clean fclean re
