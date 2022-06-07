@@ -17,6 +17,9 @@ void	init_garb(t_data *data)
 	data->garb = malloc(sizeof(t_garbage));
 	if (!data->garb)
 		exit(1);
+	data->garb->next = NULL;
+	data->garb->prev = NULL;
+	data->garb->ptr = NULL;
 }
 
 t_data	*init_all(char **envp)

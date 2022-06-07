@@ -1,62 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:00:12 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/30 19:59:21 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/07 04:33:23 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// creer new_token();
-t_token	*new_token(char c, t_data *data)
+t_token	*ft_create_lst_token(t_data *data, char ch)
 {
-	t_token	*new;
+	t_token *new;
 
 	new = ft_malloc(sizeof(t_token), data);
-	new->c = c;
 	new->next = NULL;
 	new->prev = NULL;
+	new->c = ch;
+	printf("lst created '%c'\n", new->c);
 	return (new);
 }
 
-// void	add_token_lst(char c, t_data)
-// {
-// 	if (!data->token)
-// 	{
-// 		// new token tout ca
-// 		data->token = ft_malloc(sizeof(t_token), data);
-// 		data->token->prev = NULL;
-// 		data->token->next = NULL;
-// 		data->token->content = c;
-// 		data->token->type = type_char(c, token_type);
-// 	}
-// 	else
-// 	{
-// 		while (data->token->next)
-// 			data->token = data->token->next;
-// 		data->token->next = new_token();
-// 		data->token->next->prev = data->token;
-// 		data->token = data->token->next;
-		
-// 	}
-// }
-
-void	create_token(char *str, t_data *data)
+void	ft_lst_token_add(t_data *data, char ch)
 {
-	int	i;
+	data->token->next = ft_create_lst_token(data, ch);
+}
+
+void	lexer(char *str, t_data *data)
+{
+	int i;
+	t_token *tmp;
 
 	i = 0;
-	str=str;
-	data=data;
 	while (str[i])
 	{
-		new_token(str[i], data);
+		if (!data->token)
+			data->token = ft_create_lst_token(data, str[i]);
+		else
+		{
+			data->token->next = ft_create_lst_token(data, str[i]);
+			data->token->next->prev = data->token;
+		}
 		i++;
 	}
+	tmp = data->token;
+	tmp=tmp;
+	while (tmp->next)
+	{
+		printf("%c %p %c\n", tmp->c, &tmp->next, tmp->next->c);
+		tmp = tmp->next;
+	}
 	
+	// ft_sort_char()
+	printf("end func\n");
 }

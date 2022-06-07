@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/05/30 20:12:53 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/06/07 03:40:02 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS_MAIN = $(addprefix srcs/, main.c)
 SRCS_PARSING = $(addprefix srcs/parsing/, gc.c gc_utils.c \
 										init.c)
 
-SRCS_LEXER = $(addprefix srcs/lexer/, token.c)
+SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c)
 
 SRCS_LOOP = $(addprefix srcs/loop/, loop.c)
 
@@ -61,5 +61,10 @@ rc: fclean all
 r: fclean all
 	${RM} ${OBJS}
 	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --verbose ./${NAME}
+
+v: fclean all
+	${RM} ${OBJS}
+	clear
+	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME}
 
 .PHONY: all clean fclean re

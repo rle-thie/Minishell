@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 01:13:48 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 16:29:30 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/07 03:20:41 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,18 @@ int	ft_free(void *ptr, t_data *data)
 
 void 	ft_garb_free_all(t_data *data)
 {
-	while (data->garb->next != NULL)
+	while (!data->garb || data->garb->next != NULL)
 		data->garb = data->garb->next;
 	while (data->garb->prev)
 	{
 		data->garb = data->garb->prev;
-		free(data->garb->next);
 		free(data->garb->next->ptr);
+		free(data->garb->next);
 	}
-	free(data->garb->ptr);
-	free(data->garb);
+	if (data->garb)
+	{
+		free(data->garb->ptr);
+		free(data->garb);
+	}
+	free(data);
 }

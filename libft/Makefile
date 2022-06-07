@@ -6,14 +6,14 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 17:18:32 by rle-thie          #+#    #+#              #
-#    Updated: 2022/02/28 15:30:27 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/06/07 03:06:04 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = ft_substr.c ft_strncmp.c ft_atoi.c ft_split.c \
 		ft_strchr.c ft_putchar_fd.c ft_putnbr_fd.c \
 		ft_itoa.c ft_memcmp.c ft_strlcpy.c ft_strlcat.c \
-		ft_strrchr.c ft_memset.c ft_strdup.c ft_calloc.c \
+		ft_strrchr.c ft_memset.c ft_strdup.c \
 		ft_toupper.c ft_putendl_fd.c ft_isdigit.c ft_strtrim.c \
 		ft_strlen.c ft_isprint.c ft_memcpy.c ft_strmapi.c \
 		ft_tolower.c ft_strnstr.c ft_putstr_fd.c ft_bzero.c \

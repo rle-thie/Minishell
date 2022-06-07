@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 16:42:26 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/30 20:02:23 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/07 01:46:56 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	loop(char **envp, t_data *data)
 	while (1)
 	{
 		str = readline("Minishell:");
-		create_token(str, data);
+		lexer(str, data);
 		break;
 	}
 }

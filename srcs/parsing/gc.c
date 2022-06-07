@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:04:20 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/26 14:34:37 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/07 03:14:04 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,37 @@ void	*ft_malloc(size_t size, t_data *data)
 	if (!ptr)
 	{
 		// securiser le malloc tout ca
-		data = data;
 		exit(1);
 	}
 	if (data->garb && data->garb->ptr)
+	{
 		ft_garb_add(data, ft_garb_new(ptr, data));
+	}
+	else if (data->garb)
+	{
+		data->garb->prev = NULL;
+		data->garb->next = NULL;
+		data->garb->ptr = ptr;
+	}
+	// parce que la fonction malloc return un ptr de base 
+	return (ptr);
+}
+
+void	*ft_calloc(size_t size, t_data *data)
+{
+	void	*ptr;
+	
+	ptr = malloc(size);
+	ft_bzero(ptr, size);
+	if (!ptr)
+	{
+		// securiser le malloc tout ca
+		exit(1);
+	}
+	if (data->garb && data->garb->ptr)
+	{
+		ft_garb_add(data, ft_garb_new(ptr, data));
+	}
 	else if (data->garb)
 	{
 		data->garb->prev = NULL;
