@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:00:12 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/07 04:33:23 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/07 05:05:07 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,26 @@ void	lexer(char *str, t_data *data)
 	while (str[i])
 	{
 		if (!data->token)
+		{
 			data->token = ft_create_lst_token(data, str[i]);
+			tmp = data->token;
+		}
 		else
 		{
 			data->token->next = ft_create_lst_token(data, str[i]);
 			data->token->next->prev = data->token;
+			data->token = data->token->next;
 		}
 		i++;
 	}
-	tmp = data->token;
-	tmp=tmp;
+	
 	while (tmp->next)
 	{
-		printf("%c %p %c\n", tmp->c, &tmp->next, tmp->next->c);
+		printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
 		tmp = tmp->next;
 	}
-	
+	printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
+
 	// ft_sort_char()
-	printf("end func\n");
+	// printf("end func\n");
 }

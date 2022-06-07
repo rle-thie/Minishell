@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/06/07 03:40:02 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/06/07 04:52:43 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,10 @@ fclean: clean
 	${RM} ${NAME}
 
 re: fclean all
+
+ree: fclean all
+	clear
+	./${NAME}
 
 rc: fclean all
 	${RM} ${OBJS} && clear
