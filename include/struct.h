@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/05/30 19:59:11 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:26:58 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ enum	e_token_type
 	IN_QUOTE = 13,
 	CMD = 14,
 	ARG = 15,
-	HERE_DOC_EXPEND = 16
+	HERE_DOC_EXPEND = 16,
+	JSP = 666
 };
 
 struct	s_token

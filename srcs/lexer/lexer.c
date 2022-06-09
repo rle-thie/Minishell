@@ -6,11 +6,32 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:00:12 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/07 05:05:07 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:41:58 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+t_token_type	choose_type(char ch)
+{
+	t_token_type type;
+
+	if (ch == ' ')
+		type = WHITE_SPACE;
+	else if (ch == PIPE)
+		type = PIPE;
+	else if (ch == DQUOTE)
+		type = DQUOTE;
+	else if (ch == REDIR_IN)
+		type = REDIR_IN;
+	else if (ch == REDIR_OUT)
+		type = REDIR_OUT;
+	else if (ch == DOLLAR)
+		type = DOLLAR;
+	else
+		type = LETTER;
+	return (type);
+}
 
 t_token	*ft_create_lst_token(t_data *data, char ch)
 {
@@ -20,7 +41,8 @@ t_token	*ft_create_lst_token(t_data *data, char ch)
 	new->next = NULL;
 	new->prev = NULL;
 	new->c = ch;
-	printf("lst created '%c'\n", new->c);
+	new->type = choose_type(new->c);
+	printf("lst created '%c' %d\n", new->c, new->type);
 	return (new);
 }
 
@@ -51,6 +73,7 @@ void	lexer(char *str, t_data *data)
 		i++;
 	}
 	
+	// print la list
 	while (tmp->next)
 	{
 		printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
