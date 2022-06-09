@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:05:29 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/09 16:08:48 by ldevy            ###   ########.fr       */
+/*   Created: 2022/06/09 16:05:09 by ldevy             #+#    #+#             */
+/*   Updated: 2022/06/09 18:16:12 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	MINISHELL_H
-# define MINISHELL_H
+#ifndef BUILT_IN_H
+# define BUILT_IN_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-
-#include "../libft/libft.h"
-
-// include files
-# include "struct.h"
-# include "init.h"
-# include "parsing.h"
-
-
-// #include "parsing.h"
-
-
-// #include "built_in"
-# include "built_in.h"
+void	my_echo(char **cmd);
+int		check_nl(char **cmd);
 
 #endif
