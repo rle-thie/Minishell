@@ -6,13 +6,13 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:37:03 by rle-thie          #+#    #+#             */
-/*   Updated: 2021/12/13 12:40:36 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:48:50 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_free(char **strs)
+static void	ft_free_double(char **strs)
 {
 	int	i;
 
@@ -95,7 +95,7 @@ char	**ft_split(char const *s, char c)
 		strs[j] = malloc(sizeof(char) * (malloc_size(s, i, c) + 1));
 		if (!strs[j])
 		{
-			ft_free(strs);
+			ft_free_double(strs);
 			return (NULL);
 		}
 		i = mine_substr(s, i, strs[j], c);
