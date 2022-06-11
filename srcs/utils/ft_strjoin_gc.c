@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:28:25 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/11 03:33:02 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/11 03:46:36 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,5 @@ char	*ft_strjoin_gc(char const *s1, char const *s2, t_data *data)
 	ft_free((char *)s1, data);
 	return (tab);
 }
+
+// void ft_charjoin_gc(char *s1, char c, t_data *data)

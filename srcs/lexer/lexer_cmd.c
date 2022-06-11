@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 01:14:35 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/11 02:58:13 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/11 03:45:08 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,16 @@ t_token	*ft_cmd_add(t_token *token, t_data *data)
 
 void	create_cmd(t_token *cmd, t_token *token, t_data *data)
 {
+	char *str;
+
+	// str = "";
+	// str = ft_strjoin_gc(str, ".oui", data);
+	// printf("\n\n--%s--\n\n", str);
 	cmd=cmd;
 	data=data;
 	while (token->next)
 	{
+		str = "";
 		while (token->type == WHITE_SPACE && token->next)
 			token = token->next;
 		
@@ -55,6 +61,7 @@ void	create_cmd(t_token *cmd, t_token *token, t_data *data)
 			printf("%c", token->c);
 			token = token->next;
 		}
+		printf("%s\n", str);
 		if (token->next)
 		{
 			printf("\n");
