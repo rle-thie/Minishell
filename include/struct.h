@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/09 13:51:22 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/11 01:23:06 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ struct	s_token
 {
 	struct s_token		*prev;
 	char				c;
+	char				*str;
 	t_token_type		type;
 	struct s_token		*next;
 };
@@ -60,6 +61,7 @@ struct s_data
 	struct s_garbage *garb;
 	char **env;
 	struct	s_token *token;
+	struct	s_token *cmd;
 };
 
 

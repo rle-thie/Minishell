@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/06/07 04:52:43 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/06/11 01:53:13 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS_MAIN = $(addprefix srcs/, main.c)
 SRCS_PARSING = $(addprefix srcs/parsing/, gc.c gc_utils.c \
 										init.c)
 
-SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c)
+SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c)
 
 SRCS_LOOP = $(addprefix srcs/loop/, loop.c)
 
@@ -38,7 +38,7 @@ RM = rm -rf
 all: ${NAME}
 
 ${NAME}:	${OBJS}
-		@make -C libft
+		@make bonus -C libft
 		${CC} ${CFLAGS} ${OBJS} -lreadline -o $@ ${LIBFT}
 
 ${OBJDIR}/%.o:%.c

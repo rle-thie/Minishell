@@ -6,13 +6,13 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:00:12 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/07 15:41:58 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/06/11 02:45:53 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_token_type	choose_type(char ch)
+t_token_type	choose_type_char(char ch)
 {
 	t_token_type type;
 
@@ -41,14 +41,9 @@ t_token	*ft_create_lst_token(t_data *data, char ch)
 	new->next = NULL;
 	new->prev = NULL;
 	new->c = ch;
-	new->type = choose_type(new->c);
-	printf("lst created '%c' %d\n", new->c, new->type);
+	new->type = choose_type_char(new->c);
+	// printf("lst created '%c' %d\n", new->c, new->type);
 	return (new);
-}
-
-void	ft_lst_token_add(t_data *data, char ch)
-{
-	data->token->next = ft_create_lst_token(data, ch);
 }
 
 void	lexer(char *str, t_data *data)
@@ -72,15 +67,16 @@ void	lexer(char *str, t_data *data)
 		}
 		i++;
 	}
-	
+	tmp=tmp;
 	// print la list
-	while (tmp->next)
-	{
-		printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
-		tmp = tmp->next;
-	}
-	printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
+	// printf("caca");
+	// while (tmp->next)
+	// {
+	// 	printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
+	// 	tmp = tmp->next;
+	// }
+	// printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
 
-	// ft_sort_char()
+	create_cmd(data->cmd, tmp, data);
 	// printf("end func\n");
 }
