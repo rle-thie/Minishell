@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 17:18:32 by rle-thie          #+#    #+#              #
-#    Updated: 2022/06/07 03:06:04 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/06/11 01:41:39 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,19 @@ SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 
 NAME = libft.a
 
+OBJDIR = libft_objs
+
 CC = gcc
 
 FLAGS = -Wall -Werror -Wextra
 
-OBJ = ${SRC:.c=.o}
+OBJ = $(addprefix ${OBJDIR}/, ${SRC:.c=.o})
 
-OBJ_BONUS = ${SRC_BONUS:.c=.o}
+# OBJ_BONUS = ${SRC_BONUS:.c=.o}
+
+OBJ_BONUS = $(addprefix ${OBJDIR}/, ${SRC_BONUS:.c=.o})
+
+RM = rm -rf
 
 all:	${NAME}
 
@@ -42,11 +48,12 @@ ${NAME}:	${OBJ}
 bonus: ${OBJ} ${OBJ_BONUS}
 	ar -rcs ${NAME} ${OBJ} ${OBJ_BONUS}
 	
-.c.o:
-	${CC} ${FLAGS} -I includes -c $< -o ${<:.c=.o}
+${OBJDIR}/%.o:%.c
+	@mkdir -p ${@D}
+	${CC} ${FLAGS} -I includes -c $< -o $@
 
 clean: 
-	rm -f ${OBJ} ${OBJ_BONUS}
+	${RM} ${OBJDIR}
 
 fclean: clean
 	rm -f ${NAME}
