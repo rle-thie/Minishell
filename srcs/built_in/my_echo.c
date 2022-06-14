@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:03:11 by ldevy             #+#    #+#             */
-/*   Updated: 2022/06/09 18:45:42 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/06/10 13:45:58 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ int	check_nl(char **cmd)
 		{
 			while (cmd[index][i] == 'n')
 				i++;
-			if (cmd[index][i] && cmd[index][i] != 'n')
-				return (index);
+			if (cmd[index][i] && cmd[index][i] != 'n' && index == 1)
+				return (0);
+			return (1);
 		}
 		else
-			return (index);
+			return (0);
 	}
-	return (index);
+	return (0);
 }
 
 void	my_echo(char **cmd)
@@ -44,7 +45,7 @@ void	my_echo(char **cmd)
 
 	index = 1;
 	new_line = check_nl(cmd);
-	if (!new_line)
+	if (new_line)
 		index++;
 	while (cmd[index])
 	{

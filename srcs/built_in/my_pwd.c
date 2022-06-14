@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   my_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/09 16:05:09 by ldevy             #+#    #+#             */
-/*   Updated: 2022/06/10 14:39:37 by ldevy            ###   ########.fr       */
+/*   Created: 2022/06/10 14:12:13 by ldevy             #+#    #+#             */
+/*   Updated: 2022/06/10 17:37:13 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#include "../../include/minishell.h"
 
-//echo
-void	my_echo(char **cmd);
-int		check_nl(char **cmd);
-//pwd
-void	my_pwd(char **cmd);
+void	my_pwd(char **cmd)
+{
+	char	*path;
 
-#endif
+	(void)cmd;
+	path = getcwd((char *) NULL, 0);
+	if (path == NULL)
+	{
+		return ; //erreur return value EXIT_FAILURE
+	}
+	else
+	{
+		ft_putstr_fd(path, STDOUT_FILENO);
+		free(path);
+		//return value EXIT_SUCCESS
+	}
+	ft_putstr_fd("\n", STDOUT_FILENO);
+}
