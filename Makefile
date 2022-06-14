@@ -6,7 +6,7 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/06/10 14:22:00 by ldevy            ###   ########.fr        #
+#    Updated: 2022/06/14 18:41:03 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c)
 
 SRCS_LOOP = $(addprefix srcs/loop/, loop.c)
 
-SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c)
+SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
+									my_env.c)
 
 OBJDIR = objs
 
