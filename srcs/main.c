@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/20 20:01:30 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/03 16:22:55 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // {
 // 	t_data *data;
 // 	char *str;
-	
+
 // 	(void)ac;
 // 	(void)av;
 // 	data = init_all(envp);
@@ -32,7 +32,7 @@
 // 	return (0);
 // }
 
-int	main(int ac, char **argv)
+int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	(void)argv;
@@ -40,5 +40,14 @@ int	main(int ac, char **argv)
 	char *home = getenv("HOME");
 
 	printf("%s", home);
+
+	t_data	*data;
+	//char *str;
+
+	(void)ac;
+	(void)av;
+	data = init_all(envp);
+	my_env(&av[1], *data);
+
 	return (0);
 }
