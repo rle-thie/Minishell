@@ -6,31 +6,34 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:05:29 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/09 16:08:48 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/04 15:35:17 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
-#include "../libft/libft.h"
+# include "../libft/libft.h"
 
 // include files
 # include "struct.h"
 # include "init.h"
 # include "parsing.h"
 
-
 // #include "parsing.h"
 
-
-// #include "built_in"
 # include "built_in.h"
+
+//init de l'environnement en liste chainee
+# include "init_env.h"
+
+//data en global var
+extern t_data	g_data;
 
 #endif

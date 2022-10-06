@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 11:16:50 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/03 17:45:47 by ldevy            ###   ########.fr       */
+/*   Created: 2022/10/03 16:39:47 by ldevy             #+#    #+#             */
+/*   Updated: 2022/10/03 17:01:08 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#include "../../include/minishell.h"
 
-// garbage collector
-void		ft_garb_add(t_data *data, t_garbage *new);
-t_garbage	*ft_garb_new(void *ptr_content, t_data *data);
-void		*ft_malloc(size_t size, t_data *data);
-void		*ft_calloc(size_t size, t_data *data);
-void		ft_garb_free_all(t_data *data);
+void	my_cd(char *path, t_data data)
+{
+	if (!path)
+		chdir(HOME);
+	
+}
 
-// init all
-t_data		*init_all(char **envp);
-void		init_garb(t_data *data);
-
-#endif
+//PWD ??
+//OLDPWD
+//quand on fait un cd on save le directory avant le dernier cd 
+// je crois qu'il me faut l'env dans une liste chainer pour pop et unpop des bails
+// et pouvoir consulter simplement les bails

@@ -6,11 +6,11 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/06/14 18:41:03 by ldevy            ###   ########.fr        #
+#    Updated: 2022/10/06 16:11:23 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ${SRCS_MAIN} ${SRCS_PARSING} ${SRCS_LOOP} ${SRCS_LEXER} ${SRCS_BUILT_IN}
+SRCS = ${SRCS_MAIN} ${SRCS_PARSING} ${SRCS_LOOP} ${SRCS_LEXER} ${SRCS_BUILT_IN} ${ENV}
 
 SRCS_MAIN = $(addprefix srcs/, main.c)
 
@@ -22,7 +22,8 @@ SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c)
 SRCS_LOOP = $(addprefix srcs/loop/, loop.c)
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
-									my_env.c)
+									my_env.c my_unset.c my_export.c)
+ENV = $(addprefix srcs/init_env/, init_env.c)
 
 OBJDIR = objs
 
@@ -34,7 +35,7 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 
 RM = rm -rf
 

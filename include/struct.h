@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/07 15:26:58 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:23:30 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	STRUCT_H
+#ifndef STRUCT_H
 # define STRUCT_H
 
 typedef struct s_garbage	t_garbage;
 typedef struct s_data		t_data;
-typedef struct	s_token t_token;
-typedef enum e_token_type t_token_type;
-
+typedef struct s_token		t_token;
+typedef enum e_token_type	t_token_type;
+typedef struct s_env		t_env;
 
 enum	e_token_type
 {
@@ -55,12 +55,19 @@ struct	s_garbage
 	struct s_garbage	*next;
 };
 
+struct s_env
+{
+	t_env	*next;
+	t_env	*prev;
+	char	*str;
+	char	*name;
+};
 struct s_data
 {
-	struct s_garbage *garb;
-	char **env;
-	struct	s_token *token;
+	t_garbage	*garb;
+	t_env		*env_head;
+	char		**env;
+	t_token 	*token;
 };
-
 
 #endif
