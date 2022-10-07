@@ -6,23 +6,52 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:11:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/06 20:36:31 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/07 12:32:24 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+static void	ft_print_error(char *str)
+{
+	ft_putstr_fd("bash: export: `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	//exit status failure
+}
+
 void	my_export(char **cmd)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
+	if (!cmd)
+		env_order();
 	while (cmd[i])
 	{
-		env_order();
+		if (!void_arg_export_checker(cmd[i]))
+			ft_print_error(cmd[i]);
 		i++;
 		//exit status success
 	}
+}
+
+int	void_arg_export_checker(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_strchr(str, '=') || (!ft_isalpha(str[i]) && str[i] != '_'))
+		return (0);
+	i++;
+	while (str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (0);
+		i++;
+	}
+	make_node(str);
+	return (1);
 }
 
 void	env_order(void)
@@ -54,14 +83,6 @@ void	env_order(void)
 	}
 }
 
-// static void	print_error(char *str)
-// {
-// 	ft_putstr_fd("bash: export: `", STDERR_FILENO);
-// 	ft_putstr_fd(str, STDERR_FILENO);
-// 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-// 	//exit status failure
-// }
-
 int	check_env_index(char *str)
 {
 	t_env	*head;
@@ -85,22 +106,3 @@ int	check_env_index(char *str)
 	}
 	return (i);
 }
-
-int	env_size(void)
-{
-	t_env	*head;
-	int		i;
-
-	head = g_data.env_head;
-	i = 0;
-	while (head->next)
-	{
-		i++;
-		head = head->next;
-	}
-	if (head)
-		i++;
-	return (i);
-}
-
-//si on a pas d'argument on print l'env trié en alphabetique

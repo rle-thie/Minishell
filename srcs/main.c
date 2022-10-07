@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/06 19:29:10 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/07 18:09:00 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ t_data g_data;
 int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
-	(void)av;
 
 	// data = init_all(envp);
 	g_data.env = envp;
 	g_data.env_head = NULL;
 	init_env();
-	env_order();
-	//show_env();
+	my_pwd(av);
+	my_cd(&av[1]);
+	my_pwd(av);
+	show_env();
 	return (0);
 }

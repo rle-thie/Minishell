@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 17:11:05 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/05 18:19:37 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/07 18:54:04 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	make_node(char *str)
 		return (0);
 	new->name = ft_malloc(find_signe(str) + 1, &g_data);
 	new->str = ft_malloc(size + 1, &g_data);
+	if (!new->name || ! new->str)
+		return (0);
 	ft_strlcpy(new->name, str, find_signe(str) + 1);
 	ft_strlcpy(new->str, ft_strchr(str, '=') + 1, size + 1);
 	new->next = NULL;
@@ -74,4 +76,19 @@ int	find_signe(char *str)
 	return (i);
 }
 
+int	env_size(void)
+{
+	t_env	*head;
+	int		i;
 
+	head = g_data.env_head;
+	i = 0;
+	while (head->next)
+	{
+		i++;
+		head = head->next;
+	}
+	if (head)
+		i++;
+	return (i);
+}

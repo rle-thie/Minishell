@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:05:09 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/06 19:28:24 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/07 19:05:15 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //echo
 void	my_echo(char **cmd);
 int		check_nl(char **cmd);
+
 //pwd
 void	my_pwd(char **cmd);
 
@@ -34,6 +35,13 @@ void	del_env_link(t_env *link);
 void	my_export(char **cmd);
 void	env_order(void);
 int		check_env_index(char *str);
-int		env_size(void);
+int		void_arg_export_checker(char *str);
+
+//my_cd
+void	my_cd(char **cmd);
+void	ft_cd_error(char *str, int e);
+char	*get_home(void);
+void	change_pwds(void);
+t_env	*find_cd_link(char *str);
 
 #endif
