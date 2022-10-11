@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:39:47 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/07 19:10:25 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/11 18:28:08 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	change_pwds(void)
 	temp = getcwd((char *) NULL, 0);
 	oldpwd = find_cd_link("OLDPWD");
 	pwd = find_cd_link("PWD");
-	free(oldpwd->str);
+	ft_free(oldpwd->str, &g_data);
 	oldpwd->str = ft_malloc(sizeof(*(pwd->str)) * ft_strlen(pwd->str), &g_data);
 	ft_strlcpy(oldpwd->str, pwd->str, ft_strlen(pwd->str));
-	free(pwd->str);
+	ft_free(pwd->str, &g_data);
 	pwd->str = ft_malloc(sizeof(*temp) * ft_strlen(temp), &g_data);
 	ft_strlcpy(pwd->str, temp, ft_strlen(temp));
 	free(temp);

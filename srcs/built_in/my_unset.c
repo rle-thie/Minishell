@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:07:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/05 18:23:07 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/11 18:30:06 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	del_env_link(t_env *link)
 		link->prev->next = link->next;
 		link->next->prev = link->prev;
 	}
-	free(link);
+	ft_free(link, &g_data);
 	//attention peut-etre double free pour le garb
 }
 
