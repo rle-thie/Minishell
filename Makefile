@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
+#    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/06/11 03:32:21 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/10/11 15:40:19 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ${SRCS_MAIN} ${SRCS_PARSING} ${SRCS_LOOP} ${SRCS_LEXER} ${SRCS_UTILS}
+SRCS = ${SRCS_MAIN} ${SRCS_PARSING} ${SRCS_LOOP} ${SRCS_LEXER} ${SRCS_BUILT_IN} ${ENV} ${SRCS_UTILS}
 
 SRCS_MAIN = $(addprefix srcs/, main.c)
 
@@ -23,6 +23,10 @@ SRCS_LOOP = $(addprefix srcs/loop/, loop.c)
 
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c)
 
+SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
+									my_env.c my_unset.c my_export.c my_cd.c)
+ENV = $(addprefix srcs/init_env/, init_env.c)
+
 OBJDIR = objs
 
 OBJS = $(addprefix ${OBJDIR}/, ${SRCS:.c=.o})
@@ -33,7 +37,7 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 
 RM = rm -rf
 

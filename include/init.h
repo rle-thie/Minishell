@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:16:50 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/10 02:56:35 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:41:59 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	INIT_H
+#ifndef INIT_H
 # define INIT_H
 
 
@@ -26,9 +26,8 @@ void	*ft_calloc(size_t size, t_data *data);
 void 	ft_garb_free_all(t_data *data);
 void	ft_free(void *ptr, t_data *data);
 
-
 // init all
-t_data	*init_all(char **envp);
-void	init_garb(t_data *data);
+t_data		*init_all(char **envp);
+void		init_garb(t_data *data);
 
 #endif
