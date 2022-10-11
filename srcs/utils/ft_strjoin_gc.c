@@ -6,13 +6,13 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:28:25 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/11 03:46:36 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/09/30 03:09:59 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*ft_strjoin_gc(char const *s1, char const *s2, t_data *data)
+char	*ft_strjoin_gc(char *s1, char *s2, t_data *data)
 {
 	size_t	lentt;
 	char	*tab;
@@ -33,7 +33,7 @@ char	*ft_strjoin_gc(char const *s1, char const *s2, t_data *data)
 	while (s2[y])
 		tab[i++] = s2[y++];
 	tab[i] = '\0';
-	ft_free((char *)s1, data);
+	ft_free(s1, data);
 	return (tab);
 }
 

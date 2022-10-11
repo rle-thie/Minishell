@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/06/11 03:32:21 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/10/01 23:22:51 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,12 @@ SRCS_MAIN = $(addprefix srcs/, main.c)
 SRCS_PARSING = $(addprefix srcs/parsing/, gc.c gc_utils.c \
 										init.c)
 
-SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c)
+SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
+									lexer_cmd_utils.c)
 
 SRCS_LOOP = $(addprefix srcs/loop/, loop.c)
 
-SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c)
+SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c ft_print_token.c)
 
 OBJDIR = objs
 

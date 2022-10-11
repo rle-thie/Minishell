@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:00:12 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/11 02:45:53 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:49:01 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_token_type	choose_type_char(char ch)
 		type = PIPE;
 	else if (ch == DQUOTE)
 		type = DQUOTE;
+	else if (ch == QUOTE)
+		type = QUOTE;
 	else if (ch == REDIR_IN)
 		type = REDIR_IN;
 	else if (ch == REDIR_OUT)
@@ -40,7 +42,9 @@ t_token	*ft_create_lst_token(t_data *data, char ch)
 	new = ft_malloc(sizeof(t_token), data);
 	new->next = NULL;
 	new->prev = NULL;
+	new->c = '\0';
 	new->c = ch;
+	// new->str = NULL;
 	new->type = choose_type_char(new->c);
 	// printf("lst created '%c' %d\n", new->c, new->type);
 	return (new);
@@ -67,16 +71,13 @@ void	lexer(char *str, t_data *data)
 		}
 		i++;
 	}
-	tmp=tmp;
-	// print la list
-	// printf("caca");
-	// while (tmp->next)
-	// {
-	// 	printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
-	// 	tmp = tmp->next;
-	// }
-	// printf("prev=%p, current=%c, next=%p\n", tmp->prev, tmp->c, tmp->next);
+	if (i <= 0)
+		return ;
 
-	create_cmd(data->cmd, tmp, data);
+	create_cmd(data->cmd, tmp, data, i);
+
+	ft_print_token(data->cmd);
+	
+	// printf("%p %s\n", data->cmd, data->cmd->str);
 	// printf("end func\n");
 }

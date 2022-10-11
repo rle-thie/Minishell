@@ -30,6 +30,7 @@ t_data	*init_all(char **envp)
 	if (!data)
 		exit(1);
 	data->token = NULL;
+	data->cmd = NULL;
 	data->garb = NULL;
 	data->env = envp;
 	init_garb(data);
