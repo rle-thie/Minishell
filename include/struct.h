@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/11 15:43:17 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/13 01:23:52 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ struct s_data
 	t_env		*env_head;
 	char		**env;
 	t_token 	*token;
+	t_token 	*cmd;
 };
 
 #endif

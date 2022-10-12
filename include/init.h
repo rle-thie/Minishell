@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:16:50 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/11 15:41:59 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/13 01:28:29 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void 	ft_garb_free_all(t_data *data);
 void	ft_free(void *ptr, t_data *data);
 
 // init all
-t_data		*init_all(char **envp);
+t_data	init_all(char **envp);
 void		init_garb(t_data *data);
 
 #endif

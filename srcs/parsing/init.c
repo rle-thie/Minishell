@@ -22,17 +22,14 @@ void	init_garb(t_data *data)
 	data->garb->ptr = NULL;
 }
 
-t_data	*init_all(char **envp)
+t_data	init_all(char **envp)
 {
-	t_data *data;
+	t_data	data;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		exit(1);
-	data->token = NULL;
-	data->cmd = NULL;
-	data->garb = NULL;
-	data->env = envp;
-	init_garb(data);
+	data.token = NULL;
+	data.cmd = NULL;
+	data.garb = NULL;
+	data.env = envp;
+	init_garb(&data);
 	return (data);
 }

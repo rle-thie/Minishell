@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 01:13:48 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/06/10 02:50:51 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:30:13 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void 	ft_garb_free_all(t_data *data)
 		free(data->garb->ptr);
 		free(data->garb);
 	}
-	free(data);
+	// free(data);
 }

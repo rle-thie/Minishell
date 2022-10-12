@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/11 16:07:11 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/13 01:47:28 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,21 @@ t_data g_data;
 
 int main(int ac, char const **av, char **envp)
 {
-    t_data *data;
     char *str;
-    
+	
     (void)ac;
     (void)av;
-    data = init_all(envp);
+    g_data = init_all(envp);
 
     envp = envp;
     while (1)
     {
         str = readline("Minishell : ");
-        lexer(str, data);
+        lexer(str, &g_data);
         break;
     }
-    str=str;
-    ft_garb_free_all(data);
+    // str=str;
+    ft_garb_free_all(&g_data);
     return (0);
 }
 
