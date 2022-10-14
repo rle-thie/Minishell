@@ -6,19 +6,21 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/10/14 12:19:05 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/10/14 17:33:37 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ${SRCS_MAIN} ${SRCS_INIT} ${SRCS_LEXER} ${SRCS_BUILT_IN} ${ENV} ${SRCS_UTILS}
+SRCS = ${SRCS_MAIN} ${SRCS_INIT} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_UTILS} ${SRCS_BUILT_IN} ${ENV}
 
 SRCS_MAIN = $(addprefix srcs/, main.c)
 
-SRCS_INIT = $(addprefix srcs/parsing/, gc.c gc_utils.c \
+SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 										init.c init_env.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c)
+
+SRCS_PARSER = $(addprefix srcs/parsing/, parser.c)
 
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c ft_print_token.c)
 
