@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/13 01:47:28 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:22:58 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ int main(int ac, char const **av, char **envp)
 	
     (void)ac;
     (void)av;
-    g_data = init_all(envp);
+    init_all(envp);
 
-    envp = envp;
     while (1)
     {
         str = readline("Minishell : ");

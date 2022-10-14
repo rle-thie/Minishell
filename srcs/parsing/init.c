@@ -22,7 +22,7 @@ void	init_garb(t_data *data)
 	data->garb->ptr = NULL;
 }
 
-t_data	init_all(char **envp)
+void	init_all(char **envp)
 {
 	t_data	data;
 
@@ -31,5 +31,6 @@ t_data	init_all(char **envp)
 	data.garb = NULL;
 	data.env = envp;
 	init_garb(&data);
-	return (data);
+	g_data = data;
+	init_env();
 }

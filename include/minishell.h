@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:05:29 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/11 15:42:11 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/14 12:15:27 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@
 // #include "parsing.h"
 
 # include "built_in.h"
-
-//init de l'environnement en liste chainee
-# include "init_env.h"
 
 //exec 
 # include "exec.h"

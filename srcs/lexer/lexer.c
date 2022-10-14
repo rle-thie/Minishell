@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:00:12 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/11 09:49:01 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:23:37 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	lexer(char *str, t_data *data)
 
 	create_cmd(data->cmd, tmp, data, i);
 
-	ft_print_token(data->cmd);
+	// ft_print_token(data->cmd);
 	
 	// printf("%p %s\n", data->cmd, data->cmd->str);
 	// printf("end func\n");
