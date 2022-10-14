@@ -30,6 +30,7 @@ void	init_all(char **envp)
 	data.cmd = NULL;
 	data.garb = NULL;
 	data.env = envp;
+	data.env_head = NULL;
 	init_garb(&data);
 	g_data = data;
 	init_env();
