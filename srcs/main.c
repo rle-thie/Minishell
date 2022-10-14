@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/14 12:22:58 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:19:26 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,20 @@ t_data g_data;
 // 	return (0);
 // }
 
-int main(int ac, char const **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-    char *str;
-	
-    (void)ac;
-    (void)av;
-    init_all(envp);
+	(void)ac;
+	init_all(envp);
 
-    while (1)
-    {
-        str = readline("Minishell : ");
-        lexer(str, &g_data);
-        break;
-    }
-    // str=str;
-    ft_garb_free_all(&g_data);
-    return (0);
+	my_unset(av);
+	printf("ls path   : %s\n", path("ls"));
+	printf("grep path : %s\n", path("grep"));
+	printf("ls path   : %s\n", path("ls"));
+	printf("env path  : %s\n", path("env"));
+	printf("ping path : %s\n", path("ping"));
+
+	ft_garb_free_all(&g_data);
+	return (0);
 }
 
 // int	main(int ac, char **av, char **envp)
