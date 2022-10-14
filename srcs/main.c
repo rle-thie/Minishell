@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/14 12:22:58 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:24:12 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int main(int ac, char const **av, char **envp)
     {
         str = readline("Minishell : ");
         lexer(str, &g_data);
+		// parser();
         break;
     }
     // str=str;
