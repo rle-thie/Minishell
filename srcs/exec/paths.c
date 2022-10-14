@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:35:48 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/14 16:09:26 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/14 17:47:17 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*path(char *cmd)
 	char	*path;
 
 	env_path = find_path_str();
+	if (!env_path || !access(cmd, X_OK | F_OK))
+		return (cmd);
 	tmp_path = make_path(ft_split(env_path, ':'), cmd);
 	if (tmp_path)
 	{
@@ -27,7 +29,7 @@ char	*path(char *cmd)
 		free(tmp_path);
 		return (path);
 	}
-	return (NULL);
+	return (cmd);
 }
 
 char	*make_path(char **test_path, char *cmd)
@@ -44,19 +46,19 @@ char	*make_path(char **test_path, char *cmd)
 		if (tmp_path)
 			free(tmp_path);
 		tmp_path = exec_path_test(tmp_cmd, test_path[i]);
-		if (!access(tmp_path, F_OK | X_OK))
+		if (!access(tmp_path, X_OK | F_OK))
+		{
+			i = -1;
 			break ;
-		//free(tmp_path);
+		}
 		i++;
 	}
-	// if (test_path[i])
-	// {
-	// 	free(tmp_path);
-	// 	return (NULL);
-	// }
 	free(tmp_cmd);
 	free_split(test_path);
-	return (tmp_path);
+	if (i < 0)
+		return (tmp_path);
+	free(tmp_path);
+	return (NULL);
 }
 
 char	*exec_path_test(char *cmd, char *path)
