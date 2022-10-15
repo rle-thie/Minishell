@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/13 01:23:52 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/15 01:13:32 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 typedef struct s_garbage	t_garbage;
 typedef struct s_data		t_data;
 typedef struct s_token		t_token;
+typedef struct s_cmd		t_cmd;
 typedef enum e_token_type	t_token_type;
 typedef struct s_env		t_env;
 
@@ -49,6 +50,17 @@ struct	s_token
 	struct s_token		*next;
 };
 
+struct	s_cmd
+{
+	struct s_cmd		*prev;
+	struct s_cmd		*next;
+	char				*cmd_name;
+	char				*flags;
+	char				**args;
+	int					nbr_args;
+	char				**flags_and_args;	
+};
+
 struct	s_garbage
 {
 	struct s_garbage	*prev;
@@ -70,6 +82,7 @@ struct s_data
 	char		**env;
 	t_token 	*token;
 	t_token 	*cmd;
+	t_cmd		*formated_cmd;
 };
 
 #endif
