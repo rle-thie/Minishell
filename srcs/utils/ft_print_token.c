@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:28 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/01 01:29:03 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:12:01 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,15 @@ void	ft_print_token(t_token *token)
 	}
 	if (token)
 		printf("%p %p [%s] %d %p\n", token->prev, token, token->str, token->type, token->next);
+}
+
+void	ft_print_formated(t_cmd *token)
+{
+	while (token->next)
+	{
+		printf("%p %p [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->next);
+		token = token->next;
+	}
+	if (token)
+		printf("%p %p [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->next);
 }
