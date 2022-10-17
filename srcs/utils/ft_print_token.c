@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:28 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/15 17:12:01 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/17 15:07:34 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_print_token(t_token *token)
 
 void	ft_print_formated(t_cmd *token)
 {
-	while (token->next)
+	while (token && token->next)
 	{
 		printf("%p %p [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->next);
 		token = token->next;

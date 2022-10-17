@@ -27,6 +27,7 @@ void	init_all(char **envp)
 	t_data	data;
 
 	data.token = NULL;
+	data.formated_cmd = NULL;
 	data.cmd = NULL;
 	data.garb = NULL;
 	data.env = envp;
