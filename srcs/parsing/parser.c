@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:26:17 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/17 15:45:40 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:05:43 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,18 @@ void	parser(void)
 	
 	i = 0;
 	tmp = g_data.cmd;
+	if (!g_data.cmd)
+	{
+		printf("pas de cmd\n");
+		return ;
+	}
 	while (tmp->next)
 	{
 		if (i++ == 0 && tmp)
 			fill_cmd(tmp);
-		tmp = tmp->next;
 		if (tmp->type == PIPE)
 			i = 0;
+		tmp = tmp->next;
 	}
 
 
