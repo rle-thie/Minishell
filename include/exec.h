@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:14:18 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/14 14:40:25 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/17 18:13:27 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,8 @@ char	*exec_path_test(char *cmd, char *path);
 void	free_split(char **paths);
 char	*find_path_str(void);
 
+//exec
+void	struct_to_char(void);
+void	struct_to_char_p2(void);
+void	reset_env_char(void);
 #endif
