@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:26:17 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/17 20:05:43 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:19:51 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	fill_cmd(t_token *cmd)
 {
 	cmd=cmd;
 	add_back_parser();
-	// g_data.formated_cmd = g_data.formated_cmd->next;
+	// ajouter une fction qui fill tout les champs.......
 	g_data.formated_cmd->cmd_name = cmd->str;
 	printf("%s\n", g_data.formated_cmd->cmd_name);
 }
@@ -75,6 +75,12 @@ void	parser(void)
 		if (tmp->type == PIPE)
 			i = 0;
 		tmp = tmp->next;
+	}
+	if (tmp)
+	{
+		printf("encore.............%s\n", tmp->str);
+		if (i++ == 0 && tmp)
+			fill_cmd(tmp);
 	}
 
 
