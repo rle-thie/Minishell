@@ -6,19 +6,11 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/10/14 18:50:34 by ldevy            ###   ########.fr        #
+#    Updated: 2022/10/18 15:40:28 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ${SRCS_MAIN} ${SRCS_INIT} ${SRCS_LEXER} ${SRCS_BUILT_IN} ${ENV} ${SRCS_UTILS} ${SRCS_EXEC}
-=======
-#    Updated: 2022/10/14 17:33:37 by rle-thie         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-SRCS = ${SRCS_MAIN} ${SRCS_INIT} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_UTILS} ${SRCS_BUILT_IN} ${ENV}
->>>>>>> origin/master
+SRCS = ${SRCS_MAIN} ${SRCS_INIT} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_UTILS} ${SRCS_BUILT_IN} ${ENV} ${SRCS_EXEC}
 
 SRCS_MAIN = $(addprefix srcs/, main.c)
 

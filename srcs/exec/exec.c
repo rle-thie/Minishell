@@ -6,28 +6,29 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/17 18:34:38 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/18 15:52:16 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// void	exec(char *str)
-// {
-// 	int	pid;
+void	exec(char *str, char **args)
+{
+	int	pid;
 
-// 	pid = fork();
-// 	if (pid == -1)
-// 	{
-// 		perror("bash :");
-// 		return ;
-// 	}
-// 	if (pid == 0)
-// 	{
-// 		execve(path(str), );
-// 		perror("bash :");
-// 	}
-// }
+	struct_to_char();
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("bash :");
+		return ;
+	}
+	if (pid == 0)
+	{
+		execve(path(str), args, g_data.env);
+		perror("bash :");
+	}
+}
 
 void	reset_env_char(void)
 {
