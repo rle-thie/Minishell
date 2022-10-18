@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/09/30 16:58:56 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:12:23 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define UTILS_H
 
 char	*ft_strjoin_gc(char *s1, char *s2, t_data *data);
+
 void	ft_print_token(t_token *token);
+void	ft_print_formated(t_cmd *token);
 
 #endif
