@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:26:17 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/18 22:44:14 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/19 03:17:52 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_cmd	*create_parser_list(void)
 	// new->c = ch;
 	// new->str = NULL;
 	// new->type = choose_type_char(new->c);
-	printf("lst created\n");
+	// printf("lst created\n");
 	return (new);
 }
 
@@ -47,12 +47,37 @@ void	add_back_parser(void)
 	}
 }
 
+char	*fill_flags(t_token *cmd)
+{
+	char	*flags;
+
+	flags = ft_calloc(sizeof(char) * 500, &g_data);
+	if (!cmd)
+		return (NULL);
+	while(cmd->next && cmd->type != PIPE)
+	{
+		if (cmd->type == WORD && cmd->str[0] != '-')
+			break;
+		if (cmd->type == WORD && cmd->str[0] == '-')
+			flags = ft_strjoin_gc(flags, cmd->str, &g_data);
+		cmd = cmd->next;
+	}
+	if (cmd)
+	{
+		if (cmd->type == WORD && cmd->str[0] == '-')
+			flags = ft_strjoin_gc(flags, cmd->str, &g_data);
+	}
+	return (flags);
+}
+
 void	fill_cmd(t_token *cmd)
 {
 	cmd=cmd;
 	add_back_parser();
 	// ajouter une fction qui fill tout les champs.......
 	g_data.formated_cmd->cmd_name = cmd->str;
+	cmd = cmd->next;
+	g_data.formated_cmd->flags = fill_flags(cmd);
 	// printf("%s\n", g_data.formated_cmd->cmd_name);
 }
 
