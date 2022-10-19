@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:17:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/18 17:18:36 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:13:40 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	fill_type(t_token *cmd, t_data *data);
 
 // lexer_space.c
 void	lexer_space(t_token *cmd);
+
+// flags
+char	*fill_flags(t_token *cmd);
 
 // parsing
 void	parser(void);
