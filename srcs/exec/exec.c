@@ -6,11 +6,108 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/18 15:52:16 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/20 18:42:18 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+//je vais avoir besoin du nombre de cmds
+void	parent_process(char **av)
+{
+	t_fd	*pipe_fd;
+	int	i;
+
+	pipe_fd = open_pipes(av);
+
+	i = 0;
+	while (pipe_fd[i].fd[0] != -1)
+	{
+		printf("%d %d\n", pipe_fd[i].fd[0], pipe_fd[i].fd[1]);
+		i++;
+	}
+	close_pipes(pipe_fd);
+}
+
+t_fd	*open_pipes(char **av)
+{
+	t_fd	*pipe_fd;
+	int		size;
+	int		i;
+
+	//size = cmd_number(); quand on join nos parties on fera ça
+	size = nb_pipes(av);
+	if (size == 0)
+		return (NULL);
+	pipe_fd = ft_malloc(sizeof(t_fd) * (size + 1), &g_data);
+	i = 0;
+	while (i < size)
+	{
+		if (pipe(pipe_fd[i].fd) > 0)
+		{
+			perror("bash :");
+			return (NULL);
+		}
+		i++;
+	}
+	pipe_fd[i].fd[0] = -1;
+	return (pipe_fd);
+}
+
+int	close_pipes(t_fd	*pipe_fd)
+{
+	int	i;
+
+	i = 0;
+	while (pipe_fd[i].fd[0] != -1)
+	{
+		close(pipe_fd[i].fd[0]);
+		close(pipe_fd[i].fd[1]);
+		i++;
+	}
+	ft_free(pipe_fd, &g_data);
+	return (0);
+}
+
+int	nb_pipes(char **str)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	j = 0;
+	i = 0;
+	k = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == '|')
+				k++;
+			j++;
+		}
+		i++;
+	}
+	return (k);
+}
+
+int	cmd_number(void)
+{
+	t_cmd	*head;
+	int		i;
+
+	i = 0;
+	head = g_data.formated_cmd;
+	while (head->next)
+	{
+		i++;
+		head = head->next;
+	}
+	if (head)
+		i++;
+	return (i);
+}
 
 void	exec(char *str, char **args)
 {
@@ -28,67 +125,5 @@ void	exec(char *str, char **args)
 		execve(path(str), args, g_data.env);
 		perror("bash :");
 	}
-}
-
-void	reset_env_char(void)
-{
-	int	i;
-
-	i = 0;
-	while (g_data.env[i])
-	{
-		ft_free(g_data.env[i], &g_data);
-		i++;
-	}
-	ft_free(g_data.env, &g_data);
-}
-
-void	struct_to_char(void)
-{
-	t_env	*head;
-	int		size;
-	int		i;
-
-	i = 0;
-	if (g_data.env)
-		reset_env_char();
-	g_data.env = ft_malloc(((env_size() + 1) * sizeof(*g_data.env)), &g_data);
-	head = g_data.env_head;
-	while (head->next)
-	{
-		size = ft_strlen(head->name) + ft_strlen(head->str) + 1;
-		g_data.env[i] = ft_malloc(size, &g_data);
-		g_data.env[i] = "";
-		g_data.env[i] = ft_strjoin_gc(g_data.env[i], head->name, &g_data);
-		g_data.env[i] = ft_strjoin_gc(g_data.env[i], "=", &g_data);
-		g_data.env[i] = ft_strjoin_gc(g_data.env[i], head->str, &g_data);
-		i++;
-		head = head->next;
-	}
-	struct_to_char_p2();
-}
-
-void	struct_to_char_p2(void)
-{
-	t_env	*head;
-	int		size;
-	int		i;
-
-	i = 0;
-	head = g_data.env_head;
-	while (head->next)
-	{
-		i++;
-		head = head->next;
-	}
-	if (head)
-	{
-		size = ft_strlen(head->name) + ft_strlen(head->str) + 1;
-		g_data.env[i] = ft_malloc(size, &g_data);
-		g_data.env[i] = "";
-		g_data.env[i] = ft_strjoin_gc(g_data.env[i], head->name, &g_data);
-		g_data.env[i] = ft_strjoin_gc(g_data.env[i], "=", &g_data);
-		g_data.env[i] = ft_strjoin_gc(g_data.env[i], head->str, &g_data);
-	}
-	g_data.env[i + 1] = NULL;
+	wait(NULL);
 }

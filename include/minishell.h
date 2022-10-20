@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:05:29 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/14 16:16:57 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/20 13:32:11 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
-
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "../libft/libft.h"
 
 // include files

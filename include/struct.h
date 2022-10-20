@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/15 01:13:32 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:23:19 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,9 @@ struct s_data
 	t_token 	*cmd;
 	t_cmd		*formated_cmd;
 };
-
+typedef struct s_fd
+{
+	int	fd[2];
+}	t_fd;
+ 
 #endif
