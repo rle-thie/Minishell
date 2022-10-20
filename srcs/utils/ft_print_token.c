@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:28 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/17 15:07:34 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/20 02:06:06 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_print_token(t_token *token)
 {
+	printf("-----CMD-----\n");
 	while (token->next)
 	{
 		printf("%p %p [%s] %d %p\n", token->prev, token, token->str, token->type, token->next);
@@ -25,6 +26,7 @@ void	ft_print_token(t_token *token)
 
 void	ft_print_formated(t_cmd *token)
 {
+	printf("-----FORMATED_CMD-----\n");
 	while (token && token->next)
 	{
 		printf("%p %p [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->next);
@@ -32,4 +34,18 @@ void	ft_print_formated(t_cmd *token)
 	}
 	if (token)
 		printf("%p %p [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->next);
+}
+
+void	ft_print_args(char **str)
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i] != NULL)
+	{
+		printf("'%s' ", str[i++]);
+	}
+	printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:26:17 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/19 14:12:29 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/20 02:09:30 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,17 @@ void	add_back_parser(void)
 
 void	fill_cmd(t_token *cmd)
 {
-	cmd=cmd;
+	// cmd=cmd;
 	add_back_parser();
 	// ajouter une fction qui fill tout les champs.......
 	g_data.formated_cmd->cmd_name = cmd->str;
-	cmd = cmd->next;
-	g_data.formated_cmd->flags = fill_flags(cmd);
+	if (cmd->next)
+	{
+		cmd = cmd->next;
+		g_data.formated_cmd->flags = fill_flags(cmd);
+		g_data.formated_cmd->args = fill_args(cmd);
+		// ft_print_args(g_data.formated_cmd->args);
+	}
 	// printf("%s\n", g_data.formated_cmd->cmd_name);
 }
 
@@ -66,10 +71,7 @@ void	parser(void)
 	i = 0;
 	tmp = g_data.cmd;
 	if (!g_data.cmd)
-	{
-		// printf("pas de cmd\n");
 		return ;
-	}
 	while (tmp->next)
 	{
 		if (i++ == 0 && tmp)
@@ -80,7 +82,6 @@ void	parser(void)
 	}
 	if (tmp)
 	{
-		// printf("encore.............%s\n", tmp->str);
 		if (i++ == 0 && tmp)
 			fill_cmd(tmp);
 	}
@@ -89,5 +90,5 @@ void	parser(void)
 	while (g_data.formated_cmd->prev)
 		g_data.formated_cmd = g_data.formated_cmd->prev;
 	// printf("%s %s\n", g_data.formated_cmd->prev->cmd_name, g_data.formated_cmd->cmd_name);
-	ft_print_formated(g_data.formated_cmd);
+	// ft_print_formated(g_data.formated_cmd);
 }
