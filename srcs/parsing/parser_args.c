@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/20 02:08:08 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:35:43 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,6 @@ char **create_args(t_token *cmd, int len_args)
 		return (NULL);
 	return (args);
 }
-
-// int	lstlen(char **str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		i++;
-// 	}
-// 	printf("int:%d\n", i);
-// 	return (i);
-// }
 
 // char **merge_args(char **args1, char **args2)
 // {
