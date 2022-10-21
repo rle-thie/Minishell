@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:00:12 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/15 18:14:44 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/18 17:46:18 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_token	*ft_create_lst_token(t_data *data, char ch)
 	return (new);
 }
 
+
 void	lexer(char *str, t_data *data)
 {
 	int i;
@@ -75,9 +76,7 @@ void	lexer(char *str, t_data *data)
 		return ;
 
 	create_cmd(data->cmd, tmp, data, i);
-
-	// ft_print_token(data->cmd);
+	lexer_space(data->cmd);
 	
-	// printf("%p %s\n", data->cmd, data->cmd->str);
-	// printf("end func\n");
+	// ft_print_token(data->cmd);
 }

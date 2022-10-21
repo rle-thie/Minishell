@@ -6,7 +6,7 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/10/20 16:39:07 by ldevy            ###   ########.fr        #
+#    Updated: 2022/10/21 18:58:31 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,10 @@ SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 										init.c init_env.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
-									lexer_cmd_utils.c)
+									lexer_cmd_utils.c lexer_space.c)
 
-SRCS_PARSER = $(addprefix srcs/parsing/, parser.c)
+SRCS_PARSER = $(addprefix srcs/parsing/, parser.c parser_flags.c \
+										parser_args.c parser_flags_args.c)
 
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c ft_print_token.c)
 
