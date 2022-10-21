@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/15 01:13:32 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/21 18:42:25 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,13 @@ struct	s_cmd
 	char				*flags;
 	char				**args;
 	int					nbr_args;
-	char				**flags_and_args;	
+	char				**flags_and_args;
+	char				**redir_in;
+	char				**redir_out;
+	int					bool_redir_out;
+	int					bool_redir_in;
+	int					pipe_in;
+	int					pipe_out;
 };
 
 struct	s_garbage

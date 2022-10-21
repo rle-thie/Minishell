@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:11:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/19 14:12:39 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/21 18:11:47 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	*fill_flags(t_token *cmd)
 		if (cmd->type == WORD && cmd->str[0] == '-')
 			flags = ft_strjoin_gc(flags, cmd->str, &g_data);
 	}
-	// printf("'%s'\n\n", delete_tiret(flags));
-	return (delete_tiret(flags));
+	printf("'%s'\n", delete_tiret(flags));
+	flags = delete_tiret(flags);
+	// flags = 
+	// return (flags);
 }
