@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/18 15:54:09 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/21 16:54:09 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ t_data g_data;
 int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
+	(void)av;
 	init_all(envp);
 
-	exec("echo", &av[1]);
+	parent_process(av);
 
 	ft_garb_free_all(&g_data);
 	return (0);

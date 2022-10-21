@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/20 18:42:18 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/21 18:43:30 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,48 @@
 //je vais avoir besoin du nombre de cmds
 void	parent_process(char **av)
 {
+	char 	*avs[] = {"ls", NULL };
 	t_fd	*pipe_fd;
-	int	i;
+	int		i;
 
 	pipe_fd = open_pipes(av);
-
 	i = 0;
 	while (pipe_fd[i].fd[0] != -1)
 	{
-		printf("%d %d\n", pipe_fd[i].fd[0], pipe_fd[i].fd[1]);
+		exec("ls", avs, pipe_fd);
 		i++;
 	}
 	close_pipes(pipe_fd);
+}
+
+void	child_process()
+{
+	int	ret;
+	
+	if (pipe_write)
+		dup2()
+	close_pipes(fds);
+	ret = execve(path(str), args, g_data.env);
+	exit(ret);
+}
+
+void	exec(char *str, char **args, t_fd *fds)
+{
+	int	pid;
+
+	(void)str;
+	(void)args;
+
+	struct_to_char();
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("bash :");
+		return ;
+	}
+	if (pid == 0)
+		child_process();
+	wait(NULL);
 }
 
 t_fd	*open_pipes(char **av)
@@ -43,7 +73,7 @@ t_fd	*open_pipes(char **av)
 	i = 0;
 	while (i < size)
 	{
-		if (pipe(pipe_fd[i].fd) > 0)
+		if (pipe(pipe_fd[i].fd) < 0)
 		{
 			perror("bash :");
 			return (NULL);
@@ -61,8 +91,10 @@ int	close_pipes(t_fd	*pipe_fd)
 	i = 0;
 	while (pipe_fd[i].fd[0] != -1)
 	{
-		close(pipe_fd[i].fd[0]);
-		close(pipe_fd[i].fd[1]);
+		if (close(pipe_fd[i].fd[0]) < 0)
+			perror("bash :");
+		if (close(pipe_fd[i].fd[1]) < 0)
+			perror("bash :");
 		i++;
 	}
 	ft_free(pipe_fd, &g_data);
@@ -109,21 +141,3 @@ int	cmd_number(void)
 	return (i);
 }
 
-void	exec(char *str, char **args)
-{
-	int	pid;
-
-	struct_to_char();
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("bash :");
-		return ;
-	}
-	if (pid == 0)
-	{
-		execve(path(str), args, g_data.env);
-		perror("bash :");
-	}
-	wait(NULL);
-}

@@ -1,0 +1,13 @@
+ignoreleak
+include
+libft
+ls
+Makefile
+minishell
+objs
+README.md
+srcs
+subject
+test
+test1.txt
+test.txt
