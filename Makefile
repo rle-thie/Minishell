@@ -20,8 +20,10 @@ SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c lexer_space.c)
 
-SRCS_PARSER = $(addprefix srcs/parsing/, parser.c parser_flags.c \
-										parser_args.c parser_flags_args.c)
+SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
+										parser_flags.c parser_flags_utils.c \
+										parser_args.c \
+										parser_flags_args.c)
 
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c ft_print_token.c)
 

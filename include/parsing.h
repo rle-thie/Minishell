@@ -27,6 +27,8 @@ void	lexer_space(t_token *cmd);
 
 // flags
 char	*fill_flags(t_token *cmd);
+// flags_utils.c
+char	*put_tiret(char *str);
 
 // args
 char	**fill_args(t_token *cmd);

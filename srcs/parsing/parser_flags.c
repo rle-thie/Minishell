@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:11:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/23 16:23:28 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:21:02 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	only_tiret(char *str)
 	return (1);
 }
 
-char	*delete_tiret(char *str)
+char	*delete_tirets(char *str)
 {
 	char	*str2;
 	int		i;
@@ -110,6 +110,7 @@ char	*fill_flags(t_token *cmd)
 		if (cmd->type == WORD && cmd->str[0] == '-')
 			flags = ft_strjoin_gc(flags, cmd->str, &g_data);
 	}
-	flags = delete_tiret(flags);
+	flags = delete_tirets(flags);
+	flags = put_tiret(flags);
 	return (flags);
 }
