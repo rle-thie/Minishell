@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:26:17 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/21 00:04:29 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/23 16:17:32 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	fill_cmd(t_token *cmd)
 	{
 		cmd = cmd->next;
 		g_data.formated_cmd->flags = fill_flags(cmd);
-		if (g_data.formated_cmd->flags[0] == '\0')
-			g_data.formated_cmd->flags = NULL;
 		g_data.formated_cmd->args = fill_args(cmd);
 	}
 	g_data.formated_cmd->flags_and_args = fill_flags_args(
@@ -66,7 +64,7 @@ void	fill_cmd(t_token *cmd)
 		g_data.formated_cmd->args,
 		g_data.formated_cmd->nbr_args,
 		g_data.formated_cmd->cmd_name);
-	// ft_print_args(g_data.formated_cmd->flags_and_args);
+	ft_print_args(g_data.formated_cmd->flags_and_args);
 	// printf("%s\n", g_data.formated_cmd->cmd_name);
 }
 
