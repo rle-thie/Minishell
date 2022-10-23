@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:26:17 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/23 17:04:57 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/23 18:59:04 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ t_cmd	*create_parser_list(void)
 	new->flags = NULL;
 	new->args = NULL;
 	new->nbr_args = 0;
+	new->pipe_in = 0;
+	new->pipe_out = 0;
+	new->bool_redir_in = 0;
+	new->bool_redir_out = 0;
+	new->index = -1;
 	// new->c = ch;
 	// new->str = NULL;
 	// new->type = choose_type_char(new->c);
@@ -92,6 +97,7 @@ void	parser(void)
 	}
 	while (g_data.formated_cmd->prev)
 		g_data.formated_cmd = g_data.formated_cmd->prev;
+	add_bool_var(g_data.formated_cmd);
 	// printf("%s %s\n", g_data.formated_cmd->prev->cmd_name, g_data.formated_cmd->cmd_name);
 	// ft_print_formated(g_data.formated_cmd);
 }

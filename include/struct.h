@@ -65,6 +65,7 @@ struct	s_cmd
 	int					bool_redir_in;
 	int					pipe_in;
 	int					pipe_out;
+	int					index;
 };
 
 struct	s_garbage

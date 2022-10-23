@@ -18,5 +18,6 @@ char	*ft_strjoin_gc(char *s1, char *s2, t_data *data);
 void	ft_print_token(t_token *token);
 void	ft_print_formated(t_cmd *token);
 void	ft_print_args(char **str);
+void	print_bool(t_cmd *cmd);
 
 #endif
