@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   parser_flags_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/19 19:02:47 by rle-thie         ###   ########.fr       */
+/*   Created: 2022/10/23 17:22:21 by rle-thie          #+#    #+#             */
+/*   Updated: 2022/10/23 17:22:33 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	UTILS_H
-# define UTILS_H
+#include "../../include/minishell.h"
 
-char	*ft_strjoin_gc(char *s1, char *s2, t_data *data);
+char	*put_tiret(char *str)
+{
+	char	*flags;
 
-void	ft_print_token(t_token *token);
-void	ft_print_formated(t_cmd *token);
-void	ft_print_args(char **str);
-void	print_bool(t_cmd *cmd);
-
-#endif
+	if (!str)
+		return (NULL);
+	flags = ft_calloc(sizeof(char) * (ft_strlen(str) + 2), &g_data);
+	flags[0] = '-';
+	flags = ft_strjoin_gc(flags, str, &g_data);
+	ft_free(str, &g_data);
+	return (flags);
+}

@@ -49,3 +49,28 @@ void	ft_print_args(char **str)
 	}
 	printf("\n");
 }
+
+void print_bool(t_cmd *cmd)
+{
+	while (cmd->next)
+	{
+		printf("id:%d\nredir_in:%d\nredir_out:%d\npipe_in:%d\npipe_out:%d\n",
+		cmd->index,
+		cmd->bool_redir_in,
+		cmd->bool_redir_out,
+		cmd->pipe_in,
+		cmd->pipe_out);
+		printf("\n");
+		cmd = cmd->next;
+	}
+	if (cmd)
+	{
+		printf("id:%d\nredir_in:%d\nredir_out:%d\npipe_in:%d\npipe_out:%d\n",
+		cmd->index,
+		cmd->bool_redir_in,
+		cmd->bool_redir_out,
+		cmd->pipe_in,
+		cmd->pipe_out);
+		printf("\n");
+	}
+}
