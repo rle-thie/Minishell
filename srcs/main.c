@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/21 18:57:26 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/22 16:08:11 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ t_data g_data;
 
 int	main(int ac, char **av, char **envp)
 {
-	char *str;
-	
+	char	*str;
+
 	(void)ac;
 	(void)av;
 	init_all(envp);
 
-    while (1)
-    {
-        str = readline("Minishell : ");
+	while (1)
+	{
+		str = readline("Minishell : ");
 		lexer(str, &g_data);
 		parser();
-		
+		parent_process();
 		g_data.cmd = NULL;
 		g_data.token = NULL;
-		break;
-    }
+		break ;
+	}
 	ft_garb_free_all(&g_data);
 	return (0);
 }
