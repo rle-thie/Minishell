@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:14:18 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/22 16:06:08 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/24 18:32:05 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ void	parent_process(void);
 t_fd	*open_pipes(void);
 int		close_pipes(t_fd	*pipe_fd);
 int		cmd_number(void);
+void	child_process(t_fd *fds, t_cmd *cmd);
 
+//debug
+void	print_cmd(t_cmd *cmd);
 #endif
