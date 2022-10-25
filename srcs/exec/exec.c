@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/24 18:42:47 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/25 18:50:01 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,20 @@ void	parent_process(void)
 	int		i;
 
 	head = g_data.formated_cmd;
+	if (!head)
+		return ;
 	pipe_fd = open_pipes();
 	while (head)
 	{
-		exec(pipe_fd, head);
+		if (pipe_fd || head->index == cmd_number() - 1)
+			exec(pipe_fd, head);
 		head = head->next;
 	}
 	close_pipes(pipe_fd);
 	i = 0;
 	while (i < cmd_number())
 	{
-		printf("not waited\n");
 		wait(NULL);
-		printf("waited\n");
 		i++;
 	}
 }
@@ -54,11 +55,14 @@ void	exec(t_fd *fds, t_cmd *cmd)
 void	child_process(t_fd *fds, t_cmd *cmd)
 {
 	int	ret;
-	
-	if (cmd->pipe_out)
-		dup2(fds[cmd->index].fd[1], STDOUT_FILENO);
-	if (cmd->pipe_in)
-		dup2(fds[cmd->index].fd[0], STDIN_FILENO);
+
+	if (fds)
+	{
+		if (cmd->pipe_out)
+			dup2(fds[cmd->index].fd[1], STDOUT_FILENO);
+		if (cmd->pipe_in)
+			dup2(fds[cmd->index - 1].fd[0], STDIN_FILENO);
+	}
 	close_pipes(fds);
 	ret = execve(path(cmd->cmd_name), cmd->flags_and_args, g_data.env);
 	exit(ret);
@@ -79,7 +83,8 @@ t_fd	*open_pipes(void)
 	{
 		if (pipe(pipe_fd[i].fd) < 0)
 		{
-			perror("pipe opening");
+			perror("bash: start_pipeline: pgrp pipe:");
+			pipe_fd[i].fd[0] = -1;
 			return (NULL);
 		}
 		i++;
@@ -93,14 +98,14 @@ int	close_pipes(t_fd *pipe_fd)
 	int	i;
 
 	i = 0;
+	if (!pipe_fd)
+		return (0);
 	while (pipe_fd[i].fd[0] != -1)
 	{
-		if (pipe_fd[i].fd[0])
-			if (close(pipe_fd[i].fd[0]) < 0)
-				perror("pipe closing ");
-		if (pipe_fd[i].fd[1])
-			if (close(pipe_fd[i].fd[1]) < 0)
-				perror("pipe closing ");
+		if (close(pipe_fd[i].fd[0]) < 0)
+			perror("bash: end_pipeline: pgrp pipe:");
+		if (close(pipe_fd[i].fd[1]) < 0)
+			perror("bash: end_pipeline: pgrp pipe:");
 		i++;
 	}
 	ft_free(pipe_fd, &g_data);
@@ -143,6 +148,18 @@ void	print_cmd(t_cmd *cmd)
 	}
 	printf("cmd index %d\n", cmd->index);
 	printf("cmd next %p\n", cmd->next);
-	printf("cmd pipe in %d\n", cmd->bool_redir_out);
-	printf("cmd pipe out %d\n", cmd->bool_redir_in);
+	printf("cmd pipe in %d\n", cmd->pipe_in);
+	printf("cmd pipe out %d\n", cmd->pipe_out);
+}
+
+void	print_pipes(t_fd *pipe_fd)
+{
+	int	i;
+
+	i = 0;
+	while (pipe_fd[i].fd[0] != -1)
+	{
+		printf("%d %d\n", pipe_fd[i].fd[0], pipe_fd[i].fd[1]);
+		i++;
+	}
 }
