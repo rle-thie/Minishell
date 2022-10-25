@@ -90,6 +90,7 @@ struct s_data
 	t_token 	*token;
 	t_token 	*cmd;
 	t_cmd		*formated_cmd;
+	int			status;
 };
 
 #endif
