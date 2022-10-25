@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:26:17 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/23 18:59:04 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:05:54 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ void	fill_cmd(t_token *cmd)
 {
 	// cmd=cmd;
 	add_back_parser();
-	// ajouter une fction qui fill tout les champs.......
+	select_redir(cmd);
 	g_data.formated_cmd->cmd_name = cmd->str;
+	// g_data.formated_cmd->cmd_name = fill_cmdname(cmd);
 	if (cmd->next)
 	{
 		cmd = cmd->next;
@@ -72,6 +73,27 @@ void	fill_cmd(t_token *cmd)
 	// ft_print_args(g_data.formated_cmd->flags_and_args);
 	// printf("%s\n", g_data.formated_cmd->cmd_name);
 }
+
+// void	delete_lst(t_cmd *lst)
+// {
+// 	if (!lst->prev && !lst->next)
+// 		lst = NULL;
+// 	else if (!lst->prev)
+// 	{
+// 		*lst = *(lst)->next;
+// 		lst->prev = NULL;
+// 	}
+// 	else if (!lst->next)
+// 	{
+// 		lst = lst->prev;
+// 		lst->next = NULL;
+// 	}
+// 	else if (lst->prev && lst->next)
+// 	{
+// 		lst->prev->next = lst->next;
+// 		lst->next->prev = lst->prev;
+// 	}
+// }
 
 void	parser(void)
 {
@@ -99,5 +121,9 @@ void	parser(void)
 		g_data.formated_cmd = g_data.formated_cmd->prev;
 	add_bool_var(g_data.formated_cmd);
 	// printf("%s %s\n", g_data.formated_cmd->prev->cmd_name, g_data.formated_cmd->cmd_name);
+	// ft_print_formated(g_data.formated_cmd);
+	// delete_lst(g_data.formated_cmd->next->next->next);
+	// if (g_data.formated_cmd == NULL)
+	// 	printf("caca\n");
 	// ft_print_formated(g_data.formated_cmd);
 }
