@@ -25,9 +25,9 @@ t_token_type	choose_type_char(char ch)
 	else if (ch == QUOTE)
 		type = QUOTE;
 	else if (ch == REDIR_IN)
-		type = REDIR_IN;
+		type = REDIR;
 	else if (ch == REDIR_OUT)
-		type = REDIR_OUT;
+		type = REDIR;
 	else if (ch == DOLLAR)
 		type = DOLLAR;
 	else

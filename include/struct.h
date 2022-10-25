@@ -19,6 +19,7 @@ typedef struct s_token		t_token;
 typedef struct s_cmd		t_cmd;
 typedef enum e_token_type	t_token_type;
 typedef struct s_env		t_env;
+typedef struct s_redir		t_redir;
 
 enum	e_token_type
 {
@@ -29,6 +30,7 @@ enum	e_token_type
 	PIPE = '|',
 	REDIR_IN = '<',
 	REDIR_OUT = '>',
+	REDIR = 67,
 	DGREATER = 8,
 	HERE_DOC = 9,
 	DOLLAR = '$',
@@ -54,6 +56,7 @@ struct	s_cmd
 {
 	struct s_cmd		*prev;
 	struct s_cmd		*next;
+	struct s_redir		*redir;
 	char				*cmd_name;
 	char				*flags;
 	char				**args;
@@ -82,6 +85,15 @@ struct s_env
 	char	*str;
 	char	*name;
 };
+
+struct s_redir
+{
+	t_redir			*next;
+	t_redir			*prev;
+	char			*file_name;
+	t_token_type	type;
+};
+
 struct s_data
 {
 	t_garbage	*garb;

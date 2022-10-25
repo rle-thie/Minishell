@@ -41,7 +41,7 @@ char	**fill_flags_args(char *flags, char **args, int nbr_args, char *cmd);
 void	add_bool_var(t_cmd	*format_cmd);
 
 // redir
-void	select_redir(t_token *cmd);
+t_redir	*parse_redir(t_token *cmd);
 
 // parsing
 void	parser(void);

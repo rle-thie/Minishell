@@ -19,6 +19,7 @@ t_cmd	*create_parser_list(void)
 	new = ft_malloc(sizeof(t_cmd), &g_data);
 	new->prev = NULL;
 	new->next = NULL;
+	new->redir = NULL;
 	new->cmd_name = NULL;
 	new->flags = NULL;
 	new->args = NULL;
@@ -56,7 +57,7 @@ void	fill_cmd(t_token *cmd)
 {
 	// cmd=cmd;
 	add_back_parser();
-	select_redir(cmd);
+	g_data.formated_cmd->redir = parse_redir(cmd);
 	g_data.formated_cmd->cmd_name = cmd->str;
 	// g_data.formated_cmd->cmd_name = fill_cmdname(cmd);
 	if (cmd->next)
@@ -74,27 +75,6 @@ void	fill_cmd(t_token *cmd)
 	// printf("%s\n", g_data.formated_cmd->cmd_name);
 }
 
-// void	delete_lst(t_cmd *lst)
-// {
-// 	if (!lst->prev && !lst->next)
-// 		lst = NULL;
-// 	else if (!lst->prev)
-// 	{
-// 		*lst = *(lst)->next;
-// 		lst->prev = NULL;
-// 	}
-// 	else if (!lst->next)
-// 	{
-// 		lst = lst->prev;
-// 		lst->next = NULL;
-// 	}
-// 	else if (lst->prev && lst->next)
-// 	{
-// 		lst->prev->next = lst->next;
-// 		lst->next->prev = lst->prev;
-// 	}
-// }
-
 void	parser(void)
 {
 	int	i;
@@ -104,13 +84,14 @@ void	parser(void)
 	tmp = g_data.cmd;
 	if (!g_data.cmd)
 		return ;
-	while (tmp->next)
+	while (tmp && tmp->next)
 	{
 		if (i++ == 0 && tmp)
 			fill_cmd(tmp);
-		if (tmp->type == PIPE)
+		if (tmp && tmp->type == PIPE)
 			i = 0;
-		tmp = tmp->next;
+		if (tmp && tmp->next)
+			tmp = tmp->next;
 	}
 	if (tmp)
 	{
@@ -121,7 +102,8 @@ void	parser(void)
 		g_data.formated_cmd = g_data.formated_cmd->prev;
 	add_bool_var(g_data.formated_cmd);
 
-	ft_print_token(g_data.cmd);
+	if (g_data.cmd)
+		ft_print_token(g_data.cmd);
 	// printf("%s %s\n", g_data.formated_cmd->prev->cmd_name, g_data.formated_cmd->cmd_name);
 	// ft_print_formated(g_data.formated_cmd);
 	// delete_lst(g_data.formated_cmd->next->next->next);
