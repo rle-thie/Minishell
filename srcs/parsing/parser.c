@@ -120,6 +120,8 @@ void	parser(void)
 	while (g_data.formated_cmd->prev)
 		g_data.formated_cmd = g_data.formated_cmd->prev;
 	add_bool_var(g_data.formated_cmd);
+
+	ft_print_token(g_data.cmd);
 	// printf("%s %s\n", g_data.formated_cmd->prev->cmd_name, g_data.formated_cmd->cmd_name);
 	// ft_print_formated(g_data.formated_cmd);
 	// delete_lst(g_data.formated_cmd->next->next->next);

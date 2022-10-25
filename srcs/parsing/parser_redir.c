@@ -41,7 +41,7 @@ void	select_redir(t_token *cmd)
 	tmp=tmp;
 	// if (cmd == NULL)
 	// 	return NULL;
-	while (cmd->next && cmd->next->type != PIPE)
+	while (cmd->next && cmd->next->type != PIPE && cmd && cmd->type != PIPE)
 	{
 		if (cmd->type == REDIR_IN || cmd->type == REDIR_OUT)
 		{
@@ -53,8 +53,10 @@ void	select_redir(t_token *cmd)
 				cmd = cmd->next;
 			}
 			if (cmd->type == PIPE)
+			{
+				printf("break\n");
 				break ;
-			
+			}
 			cmd->type = cmd->prev->type;
 			printf("'%s'\n", cmd->str);
 
@@ -62,6 +64,7 @@ void	select_redir(t_token *cmd)
 		if (cmd->next)
 			cmd = cmd->next;
 	}
-	ft_print_token(tmp);
+	printf("fin\n");
+	// ft_print_token(tmp);
 	// return (cmd);
 }
