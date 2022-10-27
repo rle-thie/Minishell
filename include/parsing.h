@@ -40,8 +40,12 @@ char	**fill_flags_args(char *flags, char **args, int nbr_args, char *cmd);
 // booleen
 void	add_bool_var(t_cmd	*format_cmd);
 
-// redir
+// redir.c
 t_redir	*parse_redir(t_token *cmd);
+// redir_utils.c
+t_redir	*add_back_redir(t_redir *token, char *str);
+t_redir	*lst_put_start(t_redir *lst);
+t_token	*lst_start_token(t_token *lst);
 
 // parsing
 void	parser(void);

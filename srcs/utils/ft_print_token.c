@@ -14,7 +14,10 @@
 
 void	ft_print_token(t_token *token)
 {
+
 	printf("-----CMD-----\n");
+	if (!token)
+		return ;
 	while (token->next)
 	{
 		printf("%p %p [%s] %d %p\n", token->prev, token, token->str, token->type, token->next);
@@ -43,6 +46,7 @@ void	ft_print_args(char **str)
 	i = 0;
 	if (!str)
 		return ;
+	printf("-----ARGS-----\n");
 	while (str[i] != NULL)
 	{
 		printf("'%s' ", str[i++]);

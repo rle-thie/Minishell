@@ -53,12 +53,37 @@ void	add_back_parser(void)
 	}
 }
 
+char	*select_cmd(t_token *cmd)
+{
+	char	*str2;
+
+	str2 = NULL;
+	while (cmd->next && cmd && cmd->type != PIPE)
+	{
+		if (cmd->type == WORD)
+		{
+			str2 = cmd->str;
+			delete_lst(cmd);
+			return (str2);
+		}
+		cmd = cmd->next;
+	}
+	if (cmd && cmd->type == WORD)
+	{
+		str2 = cmd->str;
+		delete_lst(cmd);
+		return (str2);
+	}
+	return (NULL);
+}
+
 void	fill_cmd(t_token *cmd)
 {
 	// cmd=cmd;
 	add_back_parser();
 	g_data.formated_cmd->redir = parse_redir(cmd);
-	g_data.formated_cmd->cmd_name = cmd->str;
+	g_data.formated_cmd->cmd_name = select_cmd(cmd);
+	// g_data.formated_cmd->cmd_name = cmd->str;
 	// g_data.formated_cmd->cmd_name = fill_cmdname(cmd);
 	if (cmd->next)
 	{
@@ -102,8 +127,9 @@ void	parser(void)
 		g_data.formated_cmd = g_data.formated_cmd->prev;
 	add_bool_var(g_data.formated_cmd);
 
-	if (g_data.cmd)
-		ft_print_token(g_data.cmd);
+	// if (g_data.cmd)
+	// 	ft_print_token(g_data.cmd);
+
 	// printf("%s %s\n", g_data.formated_cmd->prev->cmd_name, g_data.formated_cmd->cmd_name);
 	// ft_print_formated(g_data.formated_cmd);
 	// delete_lst(g_data.formated_cmd->next->next->next);

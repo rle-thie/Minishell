@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_delete_lst.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/19 19:02:47 by rle-thie         ###   ########.fr       */
+/*   Created: 2022/10/27 02:06:15 by rle-thie          #+#    #+#             */
+/*   Updated: 2022/10/27 02:06:17 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	UTILS_H
-# define UTILS_H
+#include "../../include/minishell.h"
 
-char	*ft_strjoin_gc(char *s1, char *s2, t_data *data);
-char	*ft_strdup_gc(const char *s, t_data *data);
-t_token	*delete_lst(t_token *lst);
-
-void	ft_print_token(t_token *token);
-void	ft_print_formated(t_cmd *token);
-void	ft_print_args(char **str);
-void	print_bool(t_cmd *cmd);
-
-#endif
+t_token	*delete_lst(t_token *lst)
+{
+	if (!lst->prev && !lst->next)
+	{
+		g_data.cmd = NULL;
+		return (NULL);
+	}
+	else if (!lst->prev)
+	{
+		*lst = *(lst)->next;
+		lst->prev = NULL;
+	}
+	else if (!lst->next)
+	{
+		lst = lst->prev;
+		lst->next = NULL;
+	}
+	else if (lst->prev && lst->next)
+	{
+		lst->prev->next = lst->next;
+		lst->next->prev = lst->prev;
+	}
+	return (lst);
+}

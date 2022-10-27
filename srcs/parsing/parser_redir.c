@@ -12,27 +12,6 @@
 
 #include "../../include/minishell.h"
 
-void	delete_lst(t_token *lst)
-{
-	if (!lst->prev && !lst->next)
-		g_data.cmd = NULL;
-	else if (!lst->prev)
-	{
-		*lst = *(lst)->next;
-		lst->prev = NULL;
-	}
-	else if (!lst->next)
-	{
-		lst = lst->prev;
-		lst->next = NULL;
-	}
-	else if (lst->prev && lst->next)
-	{
-		lst->prev->next = lst->next;
-		lst->next->prev = lst->prev;
-	}
-}
-
 void	select_redir(t_token *cmd)
 {
 	while (cmd->next && cmd->next->type != PIPE && cmd && cmd->type != PIPE)
@@ -59,40 +38,6 @@ void	select_redir(t_token *cmd)
 	}
 }
 
-t_redir	*ft_create_redir(char *str)
-{
-	t_redir *new;
-
-	new = ft_malloc(sizeof(t_redir), &g_data);
-	new->next = NULL;
-	new->prev = NULL;
-	new->file_name = str;
-	new->type = 0;
-	// str=str;
-	// new->type = type;
-	// printf("lst created '%s'\n", str);
-	return (new);
-}
-
-t_redir	*add_back_redir(t_redir *token, char *str)
-{
-	t_redir *new;
-
-	new = token;
-	if (!token)
-	{
-		new = ft_create_redir(str);
-		// new->str = str;
-	}
-	else
-	{
-		new->next = ft_create_redir(str);
-		// new->str = str;
-		new->next->prev = new;
-		new = new->next;
-	}
-	return (new);
-}
 
 t_redir	*join_redir(t_token *cmd)
 {
@@ -121,34 +66,31 @@ t_redir	*join_redir(t_token *cmd)
 	return (redir_lst);
 }
 
-t_redir	*lst_put_start(t_redir *lst)
+int	is_redir(t_token *cmd)
 {
-	while (lst->prev)
-		lst = lst->prev;
-	return (lst);
+	while (cmd->next && cmd->next->type != PIPE)
+	{
+		if (cmd->type == REDIR)
+			return (1);
+		cmd = cmd->next;
+	}
+	if (cmd && cmd->type == REDIR)
+		return (1);
+	return (0);
 }
 
 void	delete_redir_type(t_token *cmd)
 {
-	t_token	*tmp;
-
-	tmp = cmd;
-	while (tmp->next && tmp && tmp->type != PIPE)
+	while (cmd && cmd->next && cmd->next->type != PIPE && cmd->type != PIPE)
 	{
-		if (tmp->type == REDIR)
+		if (cmd->type == REDIR)
 		{
-			printf("delete '%s'\n", tmp->str);
-			delete_lst(tmp);
-			tmp = cmd;
+			delete_lst(cmd);
 		}
-		else
-			tmp = tmp->next;
+		cmd = cmd->next;
 	}
-	if (tmp && tmp->type == REDIR)
-	{
-		printf("delete '%s'\n", tmp->str);
-		delete_lst(tmp);
-	}
+	if (cmd && cmd->type == REDIR)
+		delete_lst(cmd);
 }
 
 t_redir	*parse_redir(t_token *cmd)
@@ -159,9 +101,9 @@ t_redir	*parse_redir(t_token *cmd)
 	redir_lst = join_redir(cmd);
 	if (redir_lst)
 		redir_lst = lst_put_start(redir_lst);
-	// parser les redirection colle genre ">1>2"
-
 	delete_redir_type(cmd);
-	printf("fin\n");
+	delete_redir_type(cmd);
+	// ft_print_token(cmd);
+	// printf("fin\n");
 	return (redir_lst);
 }
