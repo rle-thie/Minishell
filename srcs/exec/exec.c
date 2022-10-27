@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/25 18:50:01 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/25 19:04:33 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	parent_process(void)
 {
 	t_fd	*pipe_fd;
 	t_cmd	*head;
+	int		status;
 	int		i;
 
+	status = 0;
 	head = g_data.formated_cmd;
 	if (!head)
 		return ;
@@ -32,7 +34,7 @@ void	parent_process(void)
 	i = 0;
 	while (i < cmd_number())
 	{
-		wait(NULL);
+		wait(&status);
 		i++;
 	}
 }
