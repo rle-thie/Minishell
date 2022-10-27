@@ -30,6 +30,8 @@ enum	e_token_type
 	PIPE = '|',
 	REDIR_IN = '<',
 	REDIR_OUT = '>',
+	DOUBLE_REDIR_IN = 73,
+	DOUBLE_REDIR_OUT = 79,
 	REDIR = 67,
 	DGREATER = 8,
 	HERE_DOC = 9,
@@ -62,8 +64,6 @@ struct	s_cmd
 	char				**args;
 	int					nbr_args;
 	char				**flags_and_args;
-	char				**redir_in;
-	char				**redir_out;
 	int					bool_redir_out;
 	int					bool_redir_in;
 	int					pipe_in;

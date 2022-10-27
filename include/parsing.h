@@ -42,6 +42,8 @@ void	add_bool_var(t_cmd	*format_cmd);
 
 // redir.c
 t_redir	*parse_redir(t_token *cmd);
+// redir_parse_lst.c
+void	format_redir_lst(t_redir *lst);
 // redir_utils.c
 t_redir	*add_back_redir(t_redir *token, char *str);
 t_redir	*lst_put_start(t_redir *lst);
