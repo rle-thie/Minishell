@@ -104,6 +104,7 @@ t_redir	*parse_redir(t_token *cmd)
 	// ft_print_token(cmd);
 	// printf("fin\n");
 	redir_lst = format_redir_lst(redir_lst);
-	redir_lst = clean_all_redir(redir_lst);
+	if (redir_lst)
+		redir_lst = clean_all_redir(redir_lst);
 	return (redir_lst);
 }
