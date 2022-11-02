@@ -25,6 +25,9 @@ void	fill_type(t_token *cmd, t_data *data);
 // lexer_space.c
 void	lexer_space(t_token *cmd);
 
+// quote
+void	check_quote(t_token *cmd);
+
 
 // flags
 char	*fill_flags(t_token *cmd);

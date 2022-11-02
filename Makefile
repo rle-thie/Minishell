@@ -18,7 +18,8 @@ SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 										init.c init_env.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
-									lexer_cmd_utils.c lexer_space.c)
+									lexer_cmd_utils.c lexer_space.c \
+									lexer_quote.c)
 
 SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
 								parser_flags.c parser_flags_utils.c \
