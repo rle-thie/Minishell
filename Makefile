@@ -25,7 +25,7 @@ SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
 								parser_args.c \
 								parser_flags_args.c \
 								parser_bool.c \
-								parser_redir.c parser_redir_utils.c parser_redir_lst.c)
+								parser_redir.c parser_redir_utils.c parser_redir_lst.c parser_redir_clean.c)
 
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
 										ft_print_token.c \

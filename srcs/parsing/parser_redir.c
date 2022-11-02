@@ -103,6 +103,7 @@ t_redir	*parse_redir(t_token *cmd)
 	delete_redir_type(cmd);
 	// ft_print_token(cmd);
 	// printf("fin\n");
-	format_redir_lst(redir_lst);
+	redir_lst = format_redir_lst(redir_lst);
+	redir_lst = clean_all_redir(redir_lst);
 	return (redir_lst);
 }

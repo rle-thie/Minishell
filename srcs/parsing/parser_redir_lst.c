@@ -165,15 +165,13 @@ t_redir	*divise_lst(char *str, t_redir *lst)
 	return (lst);
 }
 
-void	format_redir_lst(t_redir *lst)
+t_redir	*format_redir_lst(t_redir *lst)
 {
 	if (!lst)
-		return ;
-	
+		return (NULL);
 	while (lst->next)
 	{
 		lst->file_name = del_first_space(lst->file_name);
-
 		if (check_one_redir(lst->file_name) >= 2)
 		{
 			while (check_one_redir(lst->file_name) >= 2)
@@ -185,30 +183,10 @@ void	format_redir_lst(t_redir *lst)
 	if (lst)
 	{
 		lst->file_name = del_first_space(lst->file_name);
-
-		// ft_printstr(lst->file_name);
-		// printf("nbr:%d\n", check_one_redir(lst->file_name));
 		while (check_one_redir(lst->file_name) >= 2)
-		{
 			lst = divise_lst(lst->file_name, lst);
-			// printf("filename:%s\n", lst->file_name);
-		}
-		// printf("nbr:%d\n", check_one_redir(lst->file_name));
-		// lst = lst->next;
 	}
-
-
-
 	while (lst->prev)
 		lst = lst->prev;
-	while (lst->next)
-	{
-		ft_printstr(lst->file_name);
-		lst = lst->next;
-	}
-	if (lst)
-	{
-		ft_printstr(lst->file_name);
-	}
-	ft_printstr("fin pipe");
+	return (lst);
 }
