@@ -30,7 +30,8 @@ SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
 										ft_print_token.c \
 										ft_strdup_gc.c \
-										ft_delete_lst.c)
+										ft_delete_lst.c \
+										ft_printstr.c)
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
 									my_env.c my_unset.c my_export.c my_cd.c)

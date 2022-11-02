@@ -42,7 +42,8 @@ enum	e_token_type
 	CMD = 14,
 	ARG = 15,
 	HERE_DOC_EXPEND = 16,
-	JSP = 666
+	JSP = 666,
+	FT_ERROR = 667
 };
 
 struct	s_token
@@ -92,6 +93,7 @@ struct s_redir
 	t_redir			*prev;
 	char			*file_name;
 	t_token_type	type;
+	int				index;
 };
 
 struct s_data

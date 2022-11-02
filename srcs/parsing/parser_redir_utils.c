@@ -21,6 +21,7 @@ t_redir	*ft_create_redir(char *str)
 	new->prev = NULL;
 	new->file_name = str;
 	new->type = 0;
+	new->index = -1;
 	// str=str;
 	// new->type = type;
 	// printf("lst created '%s'\n", str);
