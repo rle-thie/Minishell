@@ -95,7 +95,7 @@ char	*ft_strndup(char *str, int i)
 	tab = NULL;
 	if (!str)
 		return (NULL);
-	tab = ft_calloc(sizeof(char) * i + 2, &g_data);
+	tab = ft_calloc(sizeof(char) * i + 99, &g_data);
 	while (str[i] && y <= i)
 	{
 		tab[y] = str[y];
@@ -138,15 +138,15 @@ char	*delete_first_redir(char *str, int i)
 
 t_redir	*divise_lst(char *str, t_redir *lst)
 {
-	char *str2;
+	// char *str2;
 	char *extract;
 	extract = NULL;
 	int	i;
 
 	i = 0;
 	
-	str2 = ft_calloc(sizeof(char) * 2, &g_data);
-	str2[0] = ' ';
+	// str2 = ft_calloc(sizeof(char) * 2, &g_data);
+	// str2[0] = ' ';
 	while (str[i] && (str[i] == '<' || str[i] == '>' || str[i] == ' '))
 		i++;
 	while (str[i] && ft_isprint(str[i]) && str[i] != '<' && str[i] != '>' && str[i] != ' ')
@@ -191,7 +191,7 @@ void	format_redir_lst(t_redir *lst)
 		while (check_one_redir(lst->file_name) >= 2)
 		{
 			lst = divise_lst(lst->file_name, lst);
-			printf("filename:%s\n", lst->file_name);
+			// printf("filename:%s\n", lst->file_name);
 		}
 		// printf("nbr:%d\n", check_one_redir(lst->file_name));
 		// lst = lst->next;
@@ -199,16 +199,16 @@ void	format_redir_lst(t_redir *lst)
 
 
 
-	// while (lst->prev)
-	// 	lst = lst->prev;
-	// while (lst->next)
-	// {
-	// 	ft_printstr(lst->file_name);
-	// 	lst = lst->next;
-	// }
-	// if (lst)
-	// {
-	// 	ft_printstr(lst->file_name);
-	// }
-	// ft_printstr("fin pipe");
+	while (lst->prev)
+		lst = lst->prev;
+	while (lst->next)
+	{
+		ft_printstr(lst->file_name);
+		lst = lst->next;
+	}
+	if (lst)
+	{
+		ft_printstr(lst->file_name);
+	}
+	ft_printstr("fin pipe");
 }

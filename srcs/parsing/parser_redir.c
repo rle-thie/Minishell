@@ -20,15 +20,13 @@ void	select_redir(t_token *cmd)
 		{
 			if (cmd->next)
 				cmd = cmd->next;
-			if (cmd->type == WHITE_SPACE && cmd->next)
+			while ((cmd->type == WHITE_SPACE || cmd->type == REDIR) && cmd->next)
 			{
 				cmd->type = cmd->prev->type;
 				cmd = cmd->next;
 			}
 			if (cmd->type == PIPE)
-			{
 				break ;
-			}
 			cmd->type = cmd->prev->type;
 			// printf("'%s'\n", cmd->str);
 
