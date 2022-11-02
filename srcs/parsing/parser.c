@@ -135,5 +135,5 @@ void	parser(void)
 	// delete_lst(g_data.formated_cmd->next->next->next);
 	// if (g_data.formated_cmd == NULL)
 	// 	printf("caca\n");
-	ft_print_formated(g_data.formated_cmd);
+	// ft_print_formated(g_data.formated_cmd);
 }
