@@ -20,9 +20,9 @@ t_token_type	select_type(char c)
 	else if (c == ' ')
 		return (WHITE_SPACE);
 	else if (c == '>')
-		return (REDIR_IN);
+		return (REDIR);
 	else if (c == '<')
-		return (REDIR_OUT);
+		return (REDIR);
 	// else if (c == IN_DQUOTE)
 	// 	return (IN_DQUOTE);
 	// else if (c == IN_QUOTE)

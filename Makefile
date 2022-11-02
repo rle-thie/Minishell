@@ -21,12 +21,17 @@ SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c lexer_space.c)
 
 SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
-										parser_flags.c parser_flags_utils.c \
-										parser_args.c \
-										parser_flags_args.c \
-										parser_bool.c)
+								parser_flags.c parser_flags_utils.c \
+								parser_args.c \
+								parser_flags_args.c \
+								parser_bool.c \
+								parser_redir.c parser_redir_utils.c parser_redir_lst.c)
 
-SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c ft_print_token.c)
+SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
+										ft_print_token.c \
+										ft_strdup_gc.c \
+										ft_delete_lst.c \
+										ft_printstr.c)
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
 									my_env.c my_unset.c my_export.c my_cd.c)
