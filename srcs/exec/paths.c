@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:35:48 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/14 17:47:17 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/02 17:37:50 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*path(char *cmd)
 
 	env_path = find_path_str();
 	if (!env_path || !access(cmd, X_OK | F_OK))
-		return (cmd);
+		return (NULL);
 	tmp_path = make_path(ft_split(env_path, ':'), cmd);
 	if (tmp_path)
 	{
@@ -29,7 +29,7 @@ char	*path(char *cmd)
 		free(tmp_path);
 		return (path);
 	}
-	return (cmd);
+	return (NULL);
 }
 
 char	*make_path(char **test_path, char *cmd)

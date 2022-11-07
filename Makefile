@@ -6,7 +6,7 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/10/25 18:32:07 by ldevy            ###   ########.fr        #
+#    Updated: 2022/11/02 20:45:38 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,10 @@ SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c ft_print_token.c)
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
-									my_env.c my_unset.c my_export.c my_cd.c)
+										my_env.c my_unset.c my_export.c my_cd.c)
 									
-SRCS_EXEC = $(addprefix srcs/exec/, paths.c exec.c env_to_char.c)
+SRCS_EXEC = $(addprefix srcs/exec/, paths.c exec.c env_to_char.c \
+										builtin_ex.c utils.c)
 									
 OBJDIR = objs
 
@@ -86,7 +87,6 @@ v: fclean all
 t: fclean all
 	${RM} ${OBJS}
 	clear
-	ulimit -n 6
-	valgrind --suppressions=ignoreleak ./${NAME}
+	valgrind --suppressions=ignoreleak --track-fds=yes ./${NAME}
 
 .PHONY: all clean fclean re

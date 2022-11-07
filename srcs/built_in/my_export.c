@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:11:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/07 12:32:24 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/31 19:22:32 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,27 @@ static void	ft_print_error(char *str)
 	ft_putstr_fd("bash: export: `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-	//exit status failure
 }
 
-void	my_export(char **cmd)
+int	my_export(char **cmd)
 {
 	int	i;
+	int	ret;
 
 	i = 0;
+	ret = 0;
 	if (!cmd)
 		env_order();
 	while (cmd[i])
 	{
 		if (!void_arg_export_checker(cmd[i]))
+		{
 			ft_print_error(cmd[i]);
+			ret = 1;
+		}
 		i++;
-		//exit status success
 	}
+	return (ret);
 }
 
 int	void_arg_export_checker(char *str)

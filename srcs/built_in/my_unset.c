@@ -6,25 +6,30 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:07:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/11 18:30:06 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/02 17:16:50 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	my_unset(char **cmd)
+int	my_unset(char **cmd)
 {
 	int	i;
+	int	ret;
 
-	i = 1;
+	i = 0; // passé de 1 a 0 ARGS DE CMD
+	ret = 0;
 	while (cmd[i])
 	{
-		look_for_var(cmd[i]);
+		if (look_for_var(cmd[i]))
+			ret = 1;
 		i++;
 	}
+	printf("expected ret : %d", ret);
+	return (ret);
 }
 
-void	look_for_var(char *str)
+int	look_for_var(char *str)
 {
 	t_env	*head;
 
@@ -34,11 +39,11 @@ void	look_for_var(char *str)
 		if (!ft_strncmp(str, head->name, ft_strlen(head->name)))
 		{
 			del_env_link(head);
-			return ;
+			return (0);
 		}
 		head = head->next;
 	}
-	return ;
+	return (1);
 }
 
 void	del_env_link(t_env *link)
@@ -56,7 +61,6 @@ void	del_env_link(t_env *link)
 		link->next->prev = link->prev;
 	}
 	ft_free(link, &g_data);
-	//attention peut-etre double free pour le garb
 }
 
 //doit essayer de suprimmer chaque arg donné

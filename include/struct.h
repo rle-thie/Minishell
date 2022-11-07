@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/24 15:35:26 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/31 17:07:34 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ enum	e_token_type
 	HERE_DOC_EXPEND = 16,
 	JSP = 666
 };
+
+typedef struct s_builtin
+{
+	char	*nom;
+	int		(*ptr_fct)();
+}t_builtin;
 
 struct	s_token
 {
@@ -87,14 +93,15 @@ struct s_data
 	t_garbage	*garb;
 	t_env		*env_head;
 	char		**env;
-	t_token 	*token;
-	t_token 	*cmd;
+	t_token		*token;
+	t_token		*cmd;
 	t_cmd		*formated_cmd;
 	int			status;
+	t_builtin	*tab;
 };
 typedef struct s_fd
 {
 	int	fd[2];
 }	t_fd;
- 
+
 #endif

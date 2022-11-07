@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:03:11 by ldevy             #+#    #+#             */
-/*   Updated: 2022/06/10 13:45:58 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/31 19:57:00 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int	check_nl(char **cmd)
 	return (0);
 }
 
-void	my_echo(char **cmd)
+int	my_echo(char **cmd)
 {
 	int	new_line;
 	int	index;
 
-	index = 1;
+	index = 0; //chnagé de 0 a 1 ARGS DE CMD
 	new_line = check_nl(cmd);
 	if (new_line)
 		index++;
@@ -56,5 +56,5 @@ void	my_echo(char **cmd)
 	}
 	if (!new_line)
 		ft_putstr_fd("\n", STDOUT_FILENO);
-	//$? = EXIT_SUCCESS no idea comment on gere ça
+	return (EXIT_SUCCESS);
 }

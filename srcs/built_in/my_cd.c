@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:39:47 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/11 18:28:08 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/10/31 21:11:06 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@ void	ft_cd_error(char *str, int e)
 	(void)e;
 	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
 	ft_putendl_fd(strerror(errno), STDERR_FILENO);
-	//return exit failure 
 }
 
-void	my_cd(char **cmd)
+int	my_cd(char **cmd)
 {
 	int		dir_ret;
 
-	if (!cmd[1] && ((cmd[0][0] == '~' && ft_strlen(cmd[0]) == 1) || !cmd[0][0]))
+	if (!cmd[0] || ((cmd[0][0] == '~' && ft_strlen(cmd[0]) == 1) || !cmd[0][0]))
 		dir_ret = chdir(get_home());
 	else
 		dir_ret = chdir(cmd[0]);
 	if (dir_ret != 0)
 	{
 		ft_cd_error("lol", errno);
-		return ;
+		return (errno);
 	}
 	else
 		change_pwds();
+	return (EXIT_SUCCESS);
 }
 
 char	*get_home(void)

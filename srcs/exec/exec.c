@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/25 19:04:33 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/02 21:13:49 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,55 @@ void	parent_process(void)
 {
 	t_fd	*pipe_fd;
 	t_cmd	*head;
-	int		status;
-	int		i;
+	int		error;
 
-	status = 0;
+	error = 0;
+	g_data.status = 0;
 	head = g_data.formated_cmd;
 	if (!head)
 		return ;
 	pipe_fd = open_pipes();
+	if (!pipe_fd)
+		error = 1;
 	while (head)
 	{
-		if (pipe_fd || head->index == cmd_number() - 1)
+		if (pipe_fd || (!pipe_fd && head->index == cmd_number() - 1))
 			exec(pipe_fd, head);
 		head = head->next;
 	}
 	close_pipes(pipe_fd);
+	waiting_fct(get_last_cmd(), error);
+}
+
+void	waiting_fct(t_cmd *last, int error)
+{
+	int	i;
+	int	status;
+
 	i = 0;
-	while (i < cmd_number())
+	status = 0;
+	while (i < cmd_number() && !(cmd_number() == 1 && is_builtin(last)))
 	{
 		wait(&status);
+		if (error)
+			break ;
 		i++;
 	}
+	if (!(cmd_number() == 1 && is_builtin(last)))
+		g_data.status = WEXITSTATUS(status);
 }
+//je veux WEXIT sauf si il n'y qu'une cmd et que c'est une builtin
+//je veux attendre toutes les cmds mais si on a un ulimit ou sig on exec juste la derniere
 
 void	exec(t_fd *fds, t_cmd *cmd)
 {
 	int	pid;
 
+	if (is_builtin(cmd) && cmd_number() == 1)
+	{
+		g_data.status = builtin_exec(cmd);
+		return ;
+	}
 	struct_to_char();
 	pid = fork();
 	if (pid == -1)
@@ -58,6 +80,7 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 {
 	int	ret;
 
+	ret = 0;
 	if (fds)
 	{
 		if (cmd->pipe_out)
@@ -66,7 +89,18 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 			dup2(fds[cmd->index - 1].fd[0], STDIN_FILENO);
 	}
 	close_pipes(fds);
+	if (is_builtin(cmd))
+	{
+		ret = builtin_exec(cmd);
+		exit(ret);
+	}
+	if (!path(cmd->cmd_name))
+	{
+		printf("%s: command not found\n", cmd->cmd_name);
+		exit(127);
+	}
 	ret = execve(path(cmd->cmd_name), cmd->flags_and_args, g_data.env);
+	perror(cmd->cmd_name);
 	exit(ret);
 }
 
@@ -87,6 +121,7 @@ t_fd	*open_pipes(void)
 		{
 			perror("bash: start_pipeline: pgrp pipe:");
 			pipe_fd[i].fd[0] = -1;
+			close_pipes(pipe_fd);
 			return (NULL);
 		}
 		i++;
@@ -112,56 +147,4 @@ int	close_pipes(t_fd *pipe_fd)
 	}
 	ft_free(pipe_fd, &g_data);
 	return (0);
-}
-
-int	cmd_number(void)
-{
-	t_cmd	*head;
-	int		i;
-
-	i = 0;
-	head = g_data.formated_cmd;
-	while (head->next)
-	{
-		i++;
-		head = head->next;
-	}
-	if (head)
-		i++;
-	return (i);
-}
-
-void	print_cmd(t_cmd *cmd)
-{
-	int	i;
-
-	i = 0;
-	printf("cmd name : %s\n", cmd->cmd_name);
-	// while (cmd->args[i])
-	// {
-	// 	printf("cmd args : %s\n", cmd->args[i]);
-	// 	i++;
-	// }
-	i = 0;
-	while (cmd->flags_and_args[i])
-	{
-		printf("cmd args : %s\n", cmd->flags_and_args[i]);
-		i++;
-	}
-	printf("cmd index %d\n", cmd->index);
-	printf("cmd next %p\n", cmd->next);
-	printf("cmd pipe in %d\n", cmd->pipe_in);
-	printf("cmd pipe out %d\n", cmd->pipe_out);
-}
-
-void	print_pipes(t_fd *pipe_fd)
-{
-	int	i;
-
-	i = 0;
-	while (pipe_fd[i].fd[0] != -1)
-	{
-		printf("%d %d\n", pipe_fd[i].fd[0], pipe_fd[i].fd[1]);
-		i++;
-	}
 }
