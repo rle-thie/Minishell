@@ -19,7 +19,7 @@ SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c lexer_space.c \
-									lexer_quote.c)
+									lexer_quote.c lexer_multiple_quote.c lexer_putin_allquote.c lexer_repalce_allquote.c)
 
 SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
 								parser_flags.c parser_flags_utils.c \
@@ -32,7 +32,9 @@ SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
 										ft_print_token.c \
 										ft_strdup_gc.c \
 										ft_delete_lst.c \
-										ft_printstr.c)
+										ft_printstr.c \
+										ft_del_first_space.c \
+										ft_exit_provisoire.c)
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
 									my_env.c my_unset.c my_export.c my_cd.c)

@@ -26,7 +26,10 @@ void	fill_type(t_token *cmd, t_data *data);
 void	lexer_space(t_token *cmd);
 
 // quote
-void	check_quote(t_token *cmd);
+t_token	*check_quote(t_token *cmd);
+t_token	*check_multiple_allquote(t_token *cmd);
+t_token	*putin_allquote(t_token *cmd);
+t_token	*replace_allquote(t_token *cmd);
 
 
 // flags

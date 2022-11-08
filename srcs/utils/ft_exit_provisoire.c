@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr.c                                      :+:      :+:    :+:   */
+/*   ft _exit_provisoir.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 16:16:53 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/08 12:25:18 by rle-thie         ###   ########.fr       */
+/*   Created: 2022/11/08 12:25:47 by rle-thie          #+#    #+#             */
+/*   Updated: 2022/11/08 12:25:57 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*ft_printstr(char *str)
+int	ft_exit_provisoire(char *str, int err)
 {
-	if (!str)
-		return (NULL);
-	printf("%s\n", str);
-	return (str);
+	printf("%s", str);
+	ft_garb_free_all(&g_data);
+	exit(err);
 }
