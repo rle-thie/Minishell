@@ -46,7 +46,7 @@ int main(int ac, char const **av, char **envp)
     {
         str = readline("Minishell : ");
 		lexer(str, &g_data);
-		parser();
+		// parser();
 		g_data.cmd = NULL;
 		g_data.token = NULL;
 		break;

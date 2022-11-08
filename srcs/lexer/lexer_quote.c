@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:28:34 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/08 12:21:48 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/09 00:15:33 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*delete_all_quote(t_token *cmd)
 	{
 		if (cmd->type == QUOTE || cmd->type == DQUOTE)
 			cmd = delete_lst(cmd);
-		if (cmd && cmd->next)
+		else if (cmd && cmd->next)
 			cmd = cmd->next;
 	}
 	if (cmd)
@@ -28,6 +28,7 @@ t_token	*delete_all_quote(t_token *cmd)
 	}
 	if (cmd && cmd->prev)
 	cmd = cmd->prev;
+	// ft_print_token(cmd);
 	return (cmd);
 }
 
@@ -61,12 +62,14 @@ int	check_open_quote(t_token *cmd)
 // check_quote(data->cmd);
 t_token	*check_quote(t_token *cmd)
 {
+	// cmd = check_double_allquote(cmd);
 	cmd = putin_allquote(cmd);
 	cmd = check_multiple_allquote(cmd);
 	if (cmd && !check_open_quote(cmd))
 		ft_exit_provisoire("quote ouvert\n", 2);
 	cmd = replace_allquote(cmd);
 	cmd = delete_all_quote(cmd);
+	ft_print_token(cmd);
 	// while (cmd && cmd->next)
 	// {
 	// 	if (cmd->type == QUOTE)
@@ -81,6 +84,7 @@ t_token	*check_quote(t_token *cmd)
 	// }
 	while (cmd && cmd->prev)
 		cmd = cmd->prev;
+	ft_print_token(cmd);
 	// // ft_printstr("cxacacacacan\n");
 	// join_quote(cmd, NULL);
 	return (cmd);

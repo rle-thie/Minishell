@@ -77,5 +77,5 @@ void	lexer(char *str, t_data *data)
 	create_cmd(data->cmd, tmp, data, i);
 	lexer_space(data->cmd);
 	data->cmd = check_quote(data->cmd);
-	// ft_print_token(data->cmd);
+	ft_print_token(data->cmd);
 }

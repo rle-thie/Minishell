@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:17:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/23 18:08:13 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:33:10 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_token	*check_quote(t_token *cmd);
 t_token	*check_multiple_allquote(t_token *cmd);
 t_token	*putin_allquote(t_token *cmd);
 t_token	*replace_allquote(t_token *cmd);
+t_token	*check_double_allquote(t_token *cmd);
 
 
 // flags

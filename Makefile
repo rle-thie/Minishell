@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/10/20 19:10:03 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/11/08 18:33:33 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c lexer_space.c \
-									lexer_quote.c lexer_multiple_quote.c lexer_putin_allquote.c lexer_repalce_allquote.c)
+									lexer_quote.c lexer_multiple_quote.c lexer_putin_allquote.c lexer_repalce_allquote.c lexer_double_quote.c)
 
 SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
 								parser_flags.c parser_flags_utils.c \
