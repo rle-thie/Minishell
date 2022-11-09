@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 02:06:15 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/09 00:14:35 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/10 00:35:29 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,29 @@ t_token	*delete_lst(t_token *lst)
 	{
 		lst->prev->next = lst->next;
 		lst->next->prev = lst->prev;
+	}
+	return (lst);
+}
+
+t_token	*delete_lst_tok(t_token *lst)
+{
+	if (!lst->prev && !lst->next)
+		return (NULL);
+	else if (!lst->prev)
+	{
+		lst = lst->next;
+		lst->prev = NULL;
+	}
+	else if (!lst->next)
+	{
+		lst = lst->prev;
+		lst->next = NULL;
+	}
+	else if (lst->prev && lst->next)
+	{
+		lst->prev->next = lst->next;
+		lst->next->prev = lst->prev;
+		lst = lst->next;
 	}
 	return (lst);
 }
