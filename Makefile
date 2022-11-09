@@ -6,7 +6,7 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/11/09 15:12:20 by ldevy            ###   ########.fr        #
+#    Updated: 2022/11/09 15:29:42 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,13 +34,15 @@ SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
 										ft_delete_lst.c \
 										ft_printstr.c \
 										ft_del_first_space.c \
-										ft_exit_provisoire.c)
+										ft_exit_provisoire.c \
+										signals.c)
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
 										my_env.c my_unset.c my_export.c my_cd.c)
 									
 SRCS_EXEC = $(addprefix srcs/exec/, paths.c exec.c env_to_char.c \
-										builtin_ex.c utils.c)
+										builtin_ex.c utils.c \
+										pipe_ops.c)
 									
 OBJDIR = objs
 

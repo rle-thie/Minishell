@@ -14,32 +14,6 @@
 
 t_data	g_data;
 
-typedef struct s_sigs
-{
-	struct sigaction	sint;
-	struct sigaction	sexit;
-}	t_sigs;
-
-void	handle_sigctlc(int sig)
-{
-	printf("\nMinishell : ");
-	(void)sig;
-}
-
-void	sig_init(void)
-{
-	t_sigs	sig;
-
-	ft_memset(&(sig.sexit), 0, sizeof(sig.sexit));
-	ft_memset(&(sig.sint), 0, sizeof(sig.sint));
-	sig.sint.sa_handler = &handle_sigctlc;
-	sig.sint.sa_flags = SA_RESTART;
-	sig.sexit.sa_handler = SIG_IGN;
-	sig.sexit.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &(sig.sint), NULL);
-	sigaction(SIGQUIT, &(sig.sexit), NULL);
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	char	*str;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/07 11:48:23 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:26:10 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	ft_print_formated(t_cmd *token);
 void	ft_print_args(char **str);
 void	print_bool(t_cmd *cmd);
 char	*ft_printstr(char *str);
+//sigs
+void	handle_sigctlc(int sig);
+void	sig_init(void);
 
 // provisoire
 int	ft_exit_provisoire(char *str, int err);

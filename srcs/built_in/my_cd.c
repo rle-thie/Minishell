@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:39:47 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/31 21:11:06 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/09 15:38:13 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,3 @@ t_env	*find_cd_link(char *str)
 			return (head);
 	return (NULL);
 }
-//PWD ??
-//OLDPWD
-//quand on fait un cd on save le directory avant le dernier cd 
-// je crois qu'il me faut l'env dans une liste chainer pour pop et unpop des bails
-// et pouvoir consulter simplement les bails

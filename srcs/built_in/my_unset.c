@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:07:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/02 17:16:50 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/09 15:37:06 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	my_unset(char **cmd)
 	int	i;
 	int	ret;
 
-	i = 0; // passé de 1 a 0 ARGS DE CMD
+	i = 0;
 	ret = 0;
 	while (cmd[i])
 	{

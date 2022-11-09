@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:31:54 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/02 20:20:09 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/09 15:36:07 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	print_cmd(t_cmd *cmd)
 
 	i = 0;
 	printf("cmd name : %s\n", cmd->cmd_name);
-	// i = 0;
-	// while (cmd->flags_and_args[i])
-	// {
-	// 	printf("cmd args : %s\n", cmd->flags_and_args[i]);
-	// 	i++;
-	// }
+	i = 0;
+	while (cmd->flags_and_args[i])
+	{
+		printf("cmd args : %s\n", cmd->flags_and_args[i]);
+		i++;
+	}
 	i = 0;
 	while (cmd->flags_and_args[i])
 	{

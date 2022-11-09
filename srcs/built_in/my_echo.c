@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:03:11 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/31 19:57:00 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/09 15:37:21 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	my_echo(char **cmd)
 	int	new_line;
 	int	index;
 
-	index = 0; //chnagé de 0 a 1 ARGS DE CMD
+	index = 0;
 	new_line = check_nl(cmd);
 	if (new_line)
 		index++;

@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/07 16:56:59 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/09 15:22:46 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,11 @@ typedef struct s_fd
 {
 	int	fd[2];
 }	t_fd;
+
+typedef struct s_sigs
+{
+	struct sigaction	sint;
+	struct sigaction	sexit;
+}	t_sigs;
 
 #endif

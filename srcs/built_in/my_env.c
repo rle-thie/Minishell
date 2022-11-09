@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 17:54:34 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/02 16:05:01 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/09 15:37:41 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	err_msg(char *cmd)
 
 int	my_env(char **cmd)
 {
-	if (!cmd[0]) // passé de 1 a 0 ARGS DE CMD
+	if (!cmd[0])
 	{
 		show_env();
 		return (EXIT_SUCCESS);
