@@ -6,28 +6,53 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:28:34 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/09 00:15:33 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/09 01:35:20 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+t_token	*delete_lst_tok(t_token *lst)
+{
+	if (!lst->prev && !lst->next)
+		return (NULL);
+	else if (!lst->prev)
+	{
+		lst = lst->next;
+		lst->prev = NULL;
+	}
+	else if (!lst->next)
+	{
+		lst = lst->prev;
+		lst->next = NULL;
+	}
+	else if (lst->prev && lst->next)
+	{
+		lst->prev->next = lst->next;
+		lst->next->prev = lst->prev;
+		lst = lst->next;
+	}
+	return (lst);
+}
 
 t_token	*delete_all_quote(t_token *cmd)
 {
 	while (cmd && cmd->next)
 	{
 		if (cmd->type == QUOTE || cmd->type == DQUOTE)
-			cmd = delete_lst(cmd);
-		else if (cmd && cmd->next)
+		{
+			cmd = delete_lst_tok(cmd);
+		}
+		else if (cmd->next)
 			cmd = cmd->next;
 	}
 	if (cmd)
 	{
 		if (cmd->type == QUOTE || cmd->type == DQUOTE)
-			cmd = delete_lst(cmd);
+		{
+			cmd = delete_lst_to(cmd);
+		}
 	}
-	if (cmd && cmd->prev)
-	cmd = cmd->prev;
 	// ft_print_token(cmd);
 	return (cmd);
 }
@@ -62,29 +87,17 @@ int	check_open_quote(t_token *cmd)
 // check_quote(data->cmd);
 t_token	*check_quote(t_token *cmd)
 {
-	// cmd = check_double_allquote(cmd);
+	cmd = check_double_allquote(cmd);
 	cmd = putin_allquote(cmd);
-	cmd = check_multiple_allquote(cmd);
+	// cmd = check_multiple_allquote(cmd);
 	if (cmd && !check_open_quote(cmd))
 		ft_exit_provisoire("quote ouvert\n", 2);
 	cmd = replace_allquote(cmd);
 	cmd = delete_all_quote(cmd);
-	ft_print_token(cmd);
-	// while (cmd && cmd->next)
-	// {
-	// 	if (cmd->type == QUOTE)
-	// 		cmd = lex_quote(cmd);
-	// 	if (cmd->next)
-	// 		cmd = cmd->next;
-	// }
-	// if (cmd)
-	// {
-	// 	if (cmd->type == QUOTE)
-	// 		cmd = lex_quote(cmd);
-	// }
+
 	while (cmd && cmd->prev)
 		cmd = cmd->prev;
-	ft_print_token(cmd);
+	// cmd = delete_all_quote(cmd);
 	// // ft_printstr("cxacacacacan\n");
 	// join_quote(cmd, NULL);
 	return (cmd);
