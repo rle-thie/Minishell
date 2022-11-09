@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:17:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/23 18:08:13 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:33:10 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ void	fill_type(t_token *cmd, t_data *data);
 // lexer_space.c
 void	lexer_space(t_token *cmd);
 
+// quote
+t_token	*check_quote(t_token *cmd);
+t_token	*check_multiple_allquote(t_token *cmd);
+t_token	*putin_allquote(t_token *cmd);
+t_token	*replace_allquote(t_token *cmd);
+t_token	*check_double_allquote(t_token *cmd);
+
 
 // flags
 char	*fill_flags(t_token *cmd);
@@ -39,6 +46,18 @@ char	**fill_flags_args(char *flags, char **args, int nbr_args, char *cmd);
 
 // booleen
 void	add_bool_var(t_cmd	*format_cmd);
+
+// redir.c
+t_redir	*parse_redir(t_token *cmd);
+// redir_parse_lst.c
+t_redir	*format_redir_lst(t_redir *lst);
+// parser_redir_clean.c
+t_redir	*clean_all_redir(t_redir *lst);
+// redir_utils.c
+t_redir	*ft_create_redir(char *str);
+t_redir	*add_back_redir(t_redir *token, char *str);
+t_redir	*lst_put_start(t_redir *lst);
+t_token	*lst_start_token(t_token *lst);
 
 // parsing
 void	parser(void);

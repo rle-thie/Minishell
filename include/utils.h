@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/19 19:02:47 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:48:23 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 # define UTILS_H
 
 char	*ft_strjoin_gc(char *s1, char *s2, t_data *data);
+char	*ft_strdup_gc(const char *s, t_data *data);
+t_token	*delete_lst(t_token *lst);
+char	*del_first_space(char *str);
 
 void	ft_print_token(t_token *token);
 void	ft_print_formated(t_cmd *token);
 void	ft_print_args(char **str);
 void	print_bool(t_cmd *cmd);
+char	*ft_printstr(char *str);
+
+// provisoire
+int	ft_exit_provisoire(char *str, int err);
 
 #endif

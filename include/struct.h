@@ -19,6 +19,7 @@ typedef struct s_token		t_token;
 typedef struct s_cmd		t_cmd;
 typedef enum e_token_type	t_token_type;
 typedef struct s_env		t_env;
+typedef struct s_redir		t_redir;
 
 enum	e_token_type
 {
@@ -29,6 +30,9 @@ enum	e_token_type
 	PIPE = '|',
 	REDIR_IN = '<',
 	REDIR_OUT = '>',
+	DOUBLE_REDIR_IN = 73,
+	DOUBLE_REDIR_OUT = 79,
+	REDIR = 67,
 	DGREATER = 8,
 	HERE_DOC = 9,
 	DOLLAR = '$',
@@ -38,7 +42,8 @@ enum	e_token_type
 	CMD = 14,
 	ARG = 15,
 	HERE_DOC_EXPEND = 16,
-	JSP = 666
+	JSP = 666,
+	FT_ERROR = 667
 };
 
 typedef struct s_builtin
@@ -60,13 +65,12 @@ struct	s_cmd
 {
 	struct s_cmd		*prev;
 	struct s_cmd		*next;
+	struct s_redir		*redir;
 	char				*cmd_name;
 	char				*flags;
 	char				**args;
 	int					nbr_args;
 	char				**flags_and_args;
-	char				**redir_in;
-	char				**redir_out;
 	int					bool_redir_out;
 	int					bool_redir_in;
 	int					pipe_in;
@@ -88,6 +92,16 @@ struct s_env
 	char	*str;
 	char	*name;
 };
+
+struct s_redir
+{
+	t_redir			*next;
+	t_redir			*prev;
+	char			*file_name;
+	t_token_type	type;
+	int				index;
+};
+
 struct s_data
 {
 	t_garbage	*garb;

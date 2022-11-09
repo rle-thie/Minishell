@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:28 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/20 22:28:05 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/10/24 01:39:51 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	ft_print_token(t_token *token)
 {
+
 	printf("-----CMD-----\n");
+	if (!token)
+		return ;
 	while (token->next)
 	{
 		printf("%p %p [%s] %d %p\n", token->prev, token, token->str, token->type, token->next);
@@ -29,11 +32,11 @@ void	ft_print_formated(t_cmd *token)
 	printf("-----FORMATED_CMD-----\n");
 	while (token && token->next)
 	{
-		printf("%p %p [%s] [%s] [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->args[0], token->args[1], token->next);
+		printf("%p %p [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->next);
 		token = token->next;
 	}
 	if (token)
-		printf("%p %p [%s] [%s] [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->args[0], token->args[1], token->next);
+		printf("%p %p [%s] [%s] %p\n", token->prev, token, token->cmd_name, token->flags, token->next);
 }
 
 void	ft_print_args(char **str)
@@ -43,6 +46,7 @@ void	ft_print_args(char **str)
 	i = 0;
 	if (!str)
 		return ;
+	printf("-----ARGS-----\n");
 	while (str[i] != NULL)
 	{
 		printf("'%s' ", str[i++]);
