@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/02 21:13:49 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/08 17:05:58 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	waiting_fct(t_cmd *last, int error)
 	if (!(cmd_number() == 1 && is_builtin(last)))
 		g_data.status = WEXITSTATUS(status);
 }
-//je veux WEXIT sauf si il n'y qu'une cmd et que c'est une builtin
-//je veux attendre toutes les cmds mais si on a un ulimit ou sig on exec juste la derniere
 
 void	exec(t_fd *fds, t_cmd *cmd)
 {
