@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:28:34 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/09 01:35:20 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/09 01:40:00 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_token	*delete_all_quote(t_token *cmd)
 	{
 		if (cmd->type == QUOTE || cmd->type == DQUOTE)
 		{
-			cmd = delete_lst_to(cmd);
+			cmd = delete_lst_tok(cmd);
 		}
 	}
 	// ft_print_token(cmd);
