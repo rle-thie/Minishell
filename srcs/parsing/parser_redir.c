@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:06:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/24 16:06:47 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:53:58 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,17 @@ t_redir	*parse_redir(t_token *cmd)
 	redir_lst = format_redir_lst(redir_lst);
 	if (redir_lst)
 		redir_lst = clean_all_redir(redir_lst);
+	redir_lst = delete_chevron(redir_lst);
+
+	// while (redir_lst && redir_lst->next)
+	// {
+	// 	printf("%s\n", redir_lst->file_name);
+	// 	redir_lst = redir_lst->next;
+	// }
+	// if (redir_lst)
+	// 	printf("%s\n", redir_lst->file_name);
+	
+	while (redir_lst && redir_lst->prev)
+		redir_lst = redir_lst->prev;
 	return (redir_lst);
 }
