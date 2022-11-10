@@ -24,7 +24,7 @@ int	main(int ac, char **av, char **envp)
 	sig_init();
 	while (1)
 	{
-		str = readline("Minishell : ");
+		str = readline(input_name());
 		if (!str)
 		{
 			printf("exit\n");
