@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:17:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/08 18:33:10 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/10 00:55:58 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	fill_type(t_token *cmd, t_data *data);
 
 // lexer_space.c
 void	lexer_space(t_token *cmd);
+
+// variable d'env
+t_token	*check_variable_env(t_token *cmd);
+t_token	*check_double_dollar(t_token *cmd, int i, int len);
+t_token	*expand_var(t_token *cmd);
+char	*expand_status(char *str);
 
 // quote
 t_token	*check_quote(t_token *cmd);

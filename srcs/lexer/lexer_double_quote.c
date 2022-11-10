@@ -6,20 +6,11 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:06:14 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/09 00:47:25 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/09 02:42:21 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-char	*create_one_char(char c)
-{
-	char	*str;
-
-	str = ft_calloc(sizeof(char) * 2, &g_data);
-	str[0] = c;
-	return (str);
-}
 
 t_token	*ft_create_token(t_token_type type)
 {

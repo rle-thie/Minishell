@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
+#    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/11/09 15:29:42 by ldevy            ###   ########.fr        #
+#    Updated: 2022/11/10 02:15:57 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c lexer_space.c \
-									lexer_quote.c lexer_multiple_quote.c lexer_putin_allquote.c lexer_repalce_allquote.c lexer_double_quote.c)
+									lexer_quote.c lexer_multiple_quote.c lexer_putin_allquote.c lexer_repalce_allquote.c lexer_double_quote.c \
+									lexer_variable_env.c lexer_checkdouble_dollar.c lexer_expand_var.c lexer_expand_status.c)
 
 SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
 								parser_flags.c parser_flags_utils.c \
@@ -36,6 +37,8 @@ SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
 										ft_del_first_space.c \
 										ft_exit_provisoire.c \
 										signals.c)
+										ft_create_one_char.c \
+										ft_itoa_gc.c )
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
 										my_env.c my_unset.c my_export.c my_cd.c)
