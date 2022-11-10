@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/11/10 02:23:03 by rle-thie         ###   ########.fr        #
+#    Updated: 2022/11/10 23:43:09 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS_PARSER = $(addprefix srcs/parsing/, parser.c \
 								parser_args.c \
 								parser_flags_args.c \
 								parser_bool.c \
-								parser_redir.c parser_redir_utils.c parser_redir_lst.c parser_redir_clean.c)
+								parser_redir.c parser_redir_utils.c parser_redir_lst.c parser_redir_clean.c delete_chevron.c)
 
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
 										ft_print_token.c \
