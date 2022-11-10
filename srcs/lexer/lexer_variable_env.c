@@ -6,17 +6,33 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 02:04:31 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/10 00:44:19 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:49:55 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+t_token	*delete_double_space(t_token *cmd)
+{
+	while (cmd && cmd->next)
+	{
+		while (cmd && cmd->next && cmd->type == WHITE_SPACE && cmd->next->type == WHITE_SPACE)
+		{
+			cmd = delete_lst_tok(cmd);
+		}
+		if (cmd && cmd->next)
+			cmd = cmd->next;
+	}
+	while (cmd && cmd->prev)
+		cmd = cmd->prev;
+	return (cmd);
+}
+
 t_token	*delete_all_dollar(t_token *cmd)
 {
 	while (cmd && cmd->next)
 	{
-		if (cmd->type == DOLLAR)
+		if (cmd->type == DOLLAR || cmd->type == FT_ERROR)
 		{
 			cmd = delete_lst_tok(cmd);
 		}
@@ -25,12 +41,14 @@ t_token	*delete_all_dollar(t_token *cmd)
 	}
 	if (cmd)
 	{
-		if (cmd->type == DOLLAR)
+		if (cmd->type == DOLLAR || cmd->type == FT_ERROR)
 		{
 			cmd = delete_lst_tok(cmd);
 		}
 	}
 	// ft_print_token(cmd);
+	while (cmd->prev)
+		cmd = cmd->prev;
 	return (cmd);
 }
 
@@ -38,13 +56,13 @@ t_token	*dollar_to_word_type(t_token *cmd)
 {
 	while (cmd && cmd->next)
 	{
-		if (!cmd->next || (cmd->next && cmd->next->type != WORD))
+		if (!cmd->next || (cmd && cmd->type == DOLLAR && cmd->next && cmd->next->type != WORD))
 			cmd->type = WORD;
 		cmd = cmd->next;
 	}
 	if (cmd)
 	{
-		if (!cmd->next || (cmd->next && cmd->next->type != WORD))
+		if (!cmd->next || (cmd && cmd->type == DOLLAR && cmd->next && cmd->next->type != WORD))
 			cmd->type = WORD;
 	}
 	while (cmd && cmd->prev)
@@ -60,7 +78,7 @@ t_token	*check_variable_env(t_token *cmd)
 	cmd = dollar_to_word_type(cmd);
 	cmd = expand_var(cmd);
 	cmd = delete_all_dollar(cmd);
-
+	cmd = delete_double_space(cmd);
 	while (cmd->prev)
 		cmd = cmd->prev;
 	return (cmd);

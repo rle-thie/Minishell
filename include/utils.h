@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/10 00:35:35 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:19:15 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 char	*ft_strjoin_gc(char *s1, char *s2, t_data *data);
 char	*ft_strdup_gc(const char *s, t_data *data);
+char	*ft_itoa_gc(int n);
 t_token	*delete_lst(t_token *lst);
 t_token	*delete_lst_tok(t_token *lst);
 char	*del_first_space(char *str);

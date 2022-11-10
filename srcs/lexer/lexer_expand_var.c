@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 02:57:19 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/10 00:48:48 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:40:17 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	is_envvar(char *str)
 		return (0);
 	else
 		return (1);
-	str = str;
 	return (1);
 }
 
@@ -56,9 +55,21 @@ t_token	*expand_var(t_token *cmd)
 	{
 		if (cmd->type == DOLLAR)
 		{
-			// if (cmd->next->str)
-			if (is_envvar(cmd->next->str) == 1)
+			if (cmd->next->str[0] == '?')
+			{
+				// ft_printstr("1");
+				cmd->next->str = expand_status(cmd->next->str);
+			}
+			else if (is_envvar(cmd->next->str) == 1)
+			{
+				// ft_printstr("2");
 				cmd->next->str = add_expand(cmd->next->str);
+			}
+			else if (is_envvar(cmd->next->str) == 0)
+			{
+				printf("-%s-\n", cmd->str);
+				cmd->next->type = FT_ERROR;
+			}
 		}
 		cmd = cmd->next;
 	}
