@@ -6,11 +6,11 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/11/09 15:29:42 by ldevy            ###   ########.fr        #
+#    Updated: 2022/11/10 16:26:55 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ${SRCS_MAIN} ${SRCS_INIT} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_UTILS} ${SRCS_BUILT_IN} ${ENV} ${SRCS_EXEC}
+SRCS = ${SRCS_MAIN} ${SRCS_INIT} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_UTILS} ${SRCS_BUILT_IN} ${ENV} ${SRCS_EXEC} ${SRCS_IO_GESTION}
 
 SRCS_MAIN = $(addprefix srcs/, main.c)
 
@@ -41,9 +41,11 @@ SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
 										my_env.c my_unset.c my_export.c my_cd.c)
 									
 SRCS_EXEC = $(addprefix srcs/exec/, paths.c exec.c env_to_char.c \
-										builtin_ex.c utils.c \
-										pipe_ops.c)
-									
+										builtin_ex.c utils.c)
+										
+SRCS_IO_GESTION = $(addprefix srcs/io_gestion/, pipe_ops.c \
+											redir.c)
+								
 OBJDIR = objs
 
 OBJS = $(addprefix ${OBJDIR}/, ${SRCS:.c=.o})

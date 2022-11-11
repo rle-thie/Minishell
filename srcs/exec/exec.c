@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/09 15:28:58 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/10 16:17:03 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,7 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 	int	ret;
 
 	ret = 0;
-	if (fds)
-	{
-		if (cmd->pipe_out)
-			dup2(fds[cmd->index].fd[1], STDOUT_FILENO);
-		if (cmd->pipe_in)
-			dup2(fds[cmd->index - 1].fd[0], STDIN_FILENO);
-	}
-	close_pipes(fds);
+	redir_pipe(fds, cmd);
 	if (is_builtin(cmd))
 	{
 		ret = builtin_exec(cmd);
