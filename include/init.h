@@ -6,13 +6,15 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:16:50 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/14 12:22:06 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/10 03:12:53 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
 
+// prompt
+char	*input_name(void);
 
 // garbage collector init/create
 void	ft_garb_add(t_data *data, t_garbage *new);

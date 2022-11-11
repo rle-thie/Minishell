@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:00:12 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/09 01:40:10 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/10 02:25:52 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	lexer(char *str, t_data *data)
 		return ;
 	create_cmd(data->cmd, tmp, data, i);
 	lexer_space(data->cmd);
+	data->cmd = check_variable_env(data->cmd);
 	data->cmd = check_quote(data->cmd);
 	// ft_print_token(data->cmd);
 }
