@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:05:09 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/12 17:47:39 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/12 19:38:25 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,11 @@ void	ft_cd_error(char *str, int e);
 char	*get_home(void);
 void	change_pwds(void);
 t_env	*find_cd_link(char *str);
+
+//my_exit
+int		nb_args(char **args);
+int		char_present(char *str);
+int		check_args(char **arg);
+int		my_exit(char **cmd);
 
 #endif

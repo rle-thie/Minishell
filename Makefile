@@ -6,7 +6,7 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/11/11 19:02:50 by ldevy            ###   ########.fr        #
+#    Updated: 2022/11/12 17:54:54 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,9 @@ SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
 										ft_itoa_gc.c)
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
-										my_env.c my_unset.c my_export.c my_cd.c)
+										my_env.c my_unset.c \
+										my_export.c my_cd.c \
+										my_exit.c)
 									
 SRCS_EXEC = $(addprefix srcs/exec/, paths.c exec.c env_to_char.c \
 										builtin_ex.c utils.c)
