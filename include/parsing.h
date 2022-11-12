@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:17:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/10 23:42:37 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/12 15:42:54 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_redir	*parse_redir(t_token *cmd);
 t_redir	*format_redir_lst(t_redir *lst);
 // parser_redir_clean.c
 t_redir	*clean_all_redir(t_redir *lst);
+t_redir	*check_heredoc(t_redir *lst);
 // redir_utils.c
 t_redir	*ft_create_redir(char *str);
 t_redir	*add_back_redir(t_redir *token, char *str);
