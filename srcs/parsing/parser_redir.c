@@ -109,13 +109,13 @@ t_redir	*parse_redir(t_token *cmd)
 	redir_lst = delete_chevron(redir_lst);
 	redir_lst = check_heredoc(redir_lst);
 
-	while (redir_lst && redir_lst->next)
-	{
-		printf("'%s'\n", redir_lst->file_name);
-		redir_lst = redir_lst->next;
-	}
-	if (redir_lst)
-		printf("'%s'\n", redir_lst->file_name);
+	// while (redir_lst && redir_lst->next)
+	// {
+	// 	printf("'%s'\n", redir_lst->file_name);
+	// 	redir_lst = redir_lst->next;
+	// }
+	// if (redir_lst)
+	// 	printf("'%s'\n", redir_lst->file_name);
 	
 	while (redir_lst && redir_lst->prev)
 		redir_lst = redir_lst->prev;
