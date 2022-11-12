@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 18:51:36 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/31 20:57:36 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/12 17:51:52 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_builtin	*init_builtin(void)
 {
 	t_builtin	*built_point;
 
-	built_point = ft_malloc(sizeof(t_builtin) * 7, &g_data);
+	built_point = ft_malloc(sizeof(t_builtin) * 8, &g_data);
 	built_point[0].nom = "echo";
 	built_point[0].ptr_fct = my_echo;
 	built_point[1].nom = "cd";
@@ -29,10 +29,10 @@ t_builtin	*init_builtin(void)
 	built_point[4].ptr_fct = my_unset;
 	built_point[5].nom = "env";
 	built_point[5].ptr_fct = my_env;
-	// built_point[6].nom = "exit";
-	// built_point[6].ptr_fct = my_exit;
-	built_point[6].nom = NULL;
-	built_point[6].ptr_fct = NULL;
+	built_point[6].nom = "exit";
+	built_point[6].ptr_fct = my_exit;
+	built_point[7].nom = NULL;
+	built_point[7].ptr_fct = NULL;
 	return (built_point);
 }
 

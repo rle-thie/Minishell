@@ -29,10 +29,7 @@ int	main(int ac, char **av, char **envp)
 		str = readline("minishell:");
 		add_history(str);
 		if (!str)
-		{
-			printf("exit\n");
 			break ;
-		}
 		lexer(str, &g_data);
 		parser();
 		parent_process();
@@ -40,8 +37,7 @@ int	main(int ac, char **av, char **envp)
 		g_data.cmd = NULL;
 		g_data.formated_cmd = NULL;
 		g_data.token = NULL;
-		// break ;
 	}
-	ft_garb_free_all(&g_data);
-	return (0);
+	printf("\nexit\n");
+	my_exit(NULL);
 }
