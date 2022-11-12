@@ -6,16 +6,26 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:26:21 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/10 17:07:06 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/12 00:27:45 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	err_msg_rd(void)
+static void	err_msg_rd(char *str)
 {
-	perror("bash: ");
+	printf("bash: %s : %s", str, strerror(errno));
 	exit (1);
+}
+
+int	heredoc(t_redir *rd)
+{
+	int	fd;
+
+	(void)rd;
+	fd = open("/tmp/.hd", O_RDWR | O_CREAT | O_TRUNC, 0644);
+	write(fd, "lolololololololo\n", 18);
+	return (fd);
 }
 
 int	open_file_out(char *path, int mode)
@@ -25,11 +35,7 @@ int	open_file_out(char *path, int mode)
 	if (mode == REDIR_OUT)
 		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (mode == DOUBLE_REDIR_OUT)
-	{
-		// if (access(path, W_OK))
-		// 	return (1);
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	}
 	if (fd == -1)
 		return (1);
 	dup2(fd, STDOUT_FILENO);
@@ -37,17 +43,21 @@ int	open_file_out(char *path, int mode)
 	return (0);
 }
 
-int	open_file_in(char *path, int mode)
+int	open_file_in(t_redir *rd)
 {
 	int	fd;
 
-	if (access(path, R_OK))
+	if (rd->type == REDIR_IN)
+	{
+		if (access(rd->file_name, F_OK))
+			return (1);
+		fd = open(rd->file_name, O_RDONLY);
+	}
+	else if (rd->type == DOUBLE_REDIR_IN)
+		fd = heredoc(rd);
+	if (fd == -1)
 		return (1);
-	if (mode == REDIR_IN)
-		fd = open(path, O_CREAT | O_RDONLY | O_TRUNC, 0644);
-	// else
-	// 	mettre ici la gestion de heredoc;
-	dup2(fd, STDOUT_FILENO);
+	dup2(fd, STDIN_FILENO);
 	close(fd);
 	return (0);
 }
@@ -79,9 +89,9 @@ int	redir_loop(t_cmd *cmd)
 		if (head->type == REDIR_OUT || head->type == DOUBLE_REDIR_OUT)
 			error = open_file_out(head->file_name, head->type);
 		if (head->type == REDIR_IN || head->type == DOUBLE_REDIR_IN)
-			error = open_file_in(head->file_name, head->type);
+			error = open_file_in(head);
 		if (error)
-			err_msg_rd();
+			err_msg_rd(head->file_name);
 		head = head->next;
 	}
 	return (0);

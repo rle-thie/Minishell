@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/10 16:17:03 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/11 22:25:04 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	waiting_fct(t_cmd *last, int error)
 	int	i;
 	int	status;
 
+	signal(SIGINT, SIG_IGN);
 	i = 0;
 	status = 0;
 	while (i < cmd_number() && !(cmd_number() == 1 && is_builtin(last)))
@@ -91,6 +92,6 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 		exit(127);
 	}
 	ret = execve(path(cmd->cmd_name), cmd->flags_and_args, g_data.env);
-	perror(cmd->cmd_name);
+	perror("lol mdr");
 	exit(ret);
 }

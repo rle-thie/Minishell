@@ -24,7 +24,10 @@ int	main(int ac, char **av, char **envp)
 	sig_init();
 	while (1)
 	{
-		str = readline(input_name());
+		sigaction(SIGINT, &(g_data.sig.sint), NULL);
+		// str = readline(input_name());
+		str = readline("minishell:");
+		add_history(str);
 		if (!str)
 		{
 			printf("exit\n");

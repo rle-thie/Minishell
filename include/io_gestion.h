@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:19:25 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/10 16:23:15 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/11 23:52:17 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ t_fd	*open_pipes(void);
 int		close_pipes(t_fd	*pipe_fd);
 
 //redirs et pipe
+int		heredoc(t_redir *rd);
 int		open_file_out(char *path, int mode);
-int		open_file_in(char *path, int mode);
+int		open_file_in(t_redir *rd);
 void	redir_pipe(t_fd *fds, t_cmd *cmd);
 int		redir_loop(t_cmd *cmd);
 

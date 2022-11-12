@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/09 15:22:46 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/11 22:22:32 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ typedef struct s_builtin
 	char	*nom;
 	int		(*ptr_fct)();
 }t_builtin;
+
+typedef struct s_sigs
+{
+	struct sigaction	sint;
+	struct sigaction	sexit;
+}	t_sigs;
 
 struct	s_token
 {
@@ -112,16 +118,11 @@ struct s_data
 	t_cmd		*formated_cmd;
 	int			status;
 	t_builtin	*tab;
+	t_sigs		sig;
 };
 typedef struct s_fd
 {
 	int	fd[2];
 }	t_fd;
-
-typedef struct s_sigs
-{
-	struct sigaction	sint;
-	struct sigaction	sexit;
-}	t_sigs;
 
 #endif
