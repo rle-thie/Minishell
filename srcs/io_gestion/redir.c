@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:26:21 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/12 00:27:45 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/12 17:19:15 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	heredoc(t_redir *rd)
 
 	(void)rd;
 	fd = open("/tmp/.hd", O_RDWR | O_CREAT | O_TRUNC, 0644);
-	write(fd, "lolololololololo\n", 18);
+	write(fd, rd->file_name, ft_strlen(rd->file_name));
 	return (fd);
 }
 
