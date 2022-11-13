@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:21:49 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/11 22:54:10 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/13 20:45:02 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_sigctlc(int sig)
 {
-	printf("\nMinishell : ");
+	printf("\n%s", input_name());
 	(void)sig;
 	g_data.status = 130;
 }

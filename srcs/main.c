@@ -25,9 +25,9 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		sigaction(SIGINT, &(g_data.sig.sint), NULL);
-		// str = readline(input_name());
-		str = readline("minishell:");
-		add_history(str);
+		str = readline(input_name());
+		if (str && *str)
+			add_history(str);
 		if (!str)
 			break ;
 		lexer(str, &g_data);
@@ -38,6 +38,6 @@ int	main(int ac, char **av, char **envp)
 		g_data.formated_cmd = NULL;
 		g_data.token = NULL;
 	}
-	printf("\nexit\n");
+	printf("exit\n");
 	my_exit(NULL);
 }
