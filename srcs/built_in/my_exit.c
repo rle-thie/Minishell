@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:49:00 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/12 19:28:30 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/13 20:18:05 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ int	char_present(char *str)
 	return (0);
 }
 
-
 int	check_args(char **arg)
 {
 	int	i;
 
 	i = 0;
+	if (!arg)
+		return (1);
 	if (arg[i])
 	{
 		if (nb_args(arg) == 1 && !char_present(arg[i]))
