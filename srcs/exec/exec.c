@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/11 22:25:04 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/13 20:34:56 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ void	waiting_fct(t_cmd *last, int error)
 		i++;
 	}
 	if (!(cmd_number() == 1 && is_builtin(last)))
-		g_data.status = WEXITSTATUS(status);
+	{
+		if (WIFSIGNALED(status))
+			g_data.status = WTERMSIG(status) + 128;
+		if (WIFEXITED(status))
+			g_data.status = WEXITSTATUS(status);
+	}
 }
 
 void	exec(t_fd *fds, t_cmd *cmd)
@@ -89,6 +94,7 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 	if (!path(cmd->cmd_name))
 	{
 		printf("%s: command not found\n", cmd->cmd_name);
+		ft_garb_free_all(&g_data);
 		exit(127);
 	}
 	ret = execve(path(cmd->cmd_name), cmd->flags_and_args, g_data.env);
