@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:26:21 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/14 20:59:14 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/14 21:21:34 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	open_file_in(t_redir *rd)
 	if (rd->type == REDIR_IN)
 	{
 		if (access(rd->file_name, F_OK))
-			return (1);
+			return (-1);
 		fd = open(rd->file_name, O_RDONLY);
 	}
 	else if (rd->type == DOUBLE_REDIR_IN)
