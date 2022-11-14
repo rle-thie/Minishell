@@ -62,7 +62,7 @@ t_token	*dollar_to_word_type(t_token *cmd)
 	}
 	if (cmd)
 	{
-		if (!cmd->next || (cmd && cmd->type == DOLLAR && cmd->next && cmd->next->type != WORD))
+		if ((!cmd->next && cmd->type == DOLLAR)|| (cmd && cmd->type == DOLLAR && cmd->next && cmd->next->type != WORD))
 			cmd->type = WORD;
 	}
 	while (cmd && cmd->prev)
