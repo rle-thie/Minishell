@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:14:18 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/02 20:21:06 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/14 21:09:36 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		waiting_fct(t_cmd *last, int error);
 t_builtin	*init_builtin(void);
 int			is_builtin(t_cmd *cmd);
 int			builtin_exec(t_cmd *cmd);
+int			builtin_exec_two(t_cmd *cmd, t_builtin *tab, char **args, int i);
 
 //utils
 t_cmd		*get_last_cmd(void);

@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   io_gestion.h                                       :+:      :+:    :+:   */
+/*   redir_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 16:19:25 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/14 20:57:38 by ldevy            ###   ########.fr       */
+/*   Created: 2022/11/14 19:52:51 by ldevy             #+#    #+#             */
+/*   Updated: 2022/11/14 20:20:03 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IO_GESTION_H
-# define IO_GESTION_H
+#include "../../include/minishell.h"
 
-//pipe_ops
-t_fd	*open_pipes(void);
-int		close_pipes(t_fd	*pipe_fd);
-
-//redirs et pipe
-int		heredoc(t_redir *rd);
-int		open_file_out(char *path, int mode);
-int		open_file_in(t_redir *rd);
-int		redir_pipe(t_fd *fds, t_cmd *cmd);
-int		redir_loop(t_cmd *cmd);
-void	err_msg_rd(char *str);
-
-#endif
+void	err_msg_rd(char *str)
+{
+	printf("bash: %s : %s", str, strerror(errno));
+	exit (1);
+}
