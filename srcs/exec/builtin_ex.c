@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 18:51:36 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/12 17:51:52 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/14 21:08:35 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	builtin_exec(t_cmd *cmd)
 {
 	int			i;
 	int			buff;
-	int			ret;
 	t_builtin	*tab;
 	char		**args;
 
@@ -73,13 +72,21 @@ int	builtin_exec(t_cmd *cmd)
 	{
 		buff = ft_strlen(cmd->cmd_name) + ft_strlen(tab[i].nom);
 		if (!ft_strncmp(cmd->cmd_name, tab[i].nom, buff))
-		{
-			ret = (*tab[i].ptr_fct)(&args[1]);
-			ft_free(tab, &g_data);
-			return (ret);
-		}
+			return (builtin_exec_two(cmd, tab, args, i));
 		i++;
 	}
 	ft_free(tab, &g_data);
 	return (0);
+}
+
+int	builtin_exec_two(t_cmd *cmd, t_builtin *tab, char **args, int i)
+{
+	int	ret;
+	int	fd;
+
+	fd = redir_pipe(NULL, cmd);
+	ret = (*tab[i].ptr_fct)(&args[1]);
+	dup2(STDIN_FILENO, fd);
+	ft_free(tab, &g_data);
+	return (ret);
 }

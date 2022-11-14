@@ -64,6 +64,7 @@ int	check_open_quote(t_token *cmd)
 // check_quote(data->cmd);
 t_token	*check_quote(t_token *cmd)
 {
+	// ft_print_token(cmd);
 	cmd = check_double_allquote(cmd);
 	cmd = putin_allquote(cmd);
 	// cmd = check_multiple_allquote(cmd);

@@ -67,7 +67,7 @@ t_token	*expand_var(t_token *cmd)
 			}
 			else if (is_envvar(cmd->next->str) == 0)
 			{
-				printf("-%s-\n", cmd->str);
+				// printf("-%s-\n", cmd->str);
 				cmd->next->type = FT_ERROR;
 			}
 		}
