@@ -30,6 +30,7 @@ t_token	*check_variable_env(t_token *cmd);
 t_token	*check_double_dollar(t_token *cmd, int i, int len);
 t_token	*expand_var(t_token *cmd);
 char	*expand_status(char *str);
+char	*expand_varchar(char *str);
 
 // quote
 t_token	*check_quote(t_token *cmd);

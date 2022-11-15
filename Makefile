@@ -20,7 +20,7 @@ SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c lexer_space.c \
 									lexer_quote.c lexer_multiple_quote.c lexer_putin_allquote.c lexer_repalce_allquote.c lexer_double_quote.c \
-									lexer_variable_env.c lexer_checkdouble_dollar.c lexer_expand_var.c lexer_expand_status.c)
+									lexer_variable_env.c lexer_checkdouble_dollar.c lexer_expand_var.c lexer_expand_status.c lexer_expand_varchar.c)
 
 SRCS_PARSER = $(addprefix srcs/parsing/, parser.c parsing_input_name.c \
 								parser_flags.c parser_flags_utils.c \

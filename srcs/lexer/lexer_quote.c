@@ -78,5 +78,6 @@ t_token	*check_quote(t_token *cmd)
 	// cmd = delete_all_quote(cmd);
 	// // ft_printstr("cxacacacacan\n");
 	// join_quote(cmd, NULL);
+	// ft_print_token(cmd);
 	return (cmd);
 }

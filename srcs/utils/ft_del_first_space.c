@@ -19,7 +19,7 @@ char	*del_first_space(char *str)
 
 	i = 1;
 	str2 = NULL;
-	if (ft_strlen(str) <= 1)
+	if (!str ||ft_strlen(str) <= 1)
 		return (NULL);
 	if (str[0] != ' ')
 		return (str);
