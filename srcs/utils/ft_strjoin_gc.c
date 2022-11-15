@@ -44,19 +44,19 @@ char	*ft_strjoinchar_gc(char *s1, char s2, t_data *data)
 	size_t	i;
 	size_t	y;
 
-	if (!s1)
+	if (!s1 || s2 == '\0')
 		return (NULL);
 	i = 0;
 	y = 0;
 	lentt = ft_strlen(s1) + 1;
-	tab = ft_malloc(sizeof(char) * (lentt + 1), data);
+	tab = ft_calloc(sizeof(char) * (lentt + 1), data);
 	if (!tab)
 		return (NULL);
 	while (s1[y])
 		tab[i++] = s1[y++];
 	tab[i] = s2;
 	i++;
-	tab[i] = '\0';
+	// tab[i] = '\0';
 	ft_free(s1, data);
 	return (tab);
 }

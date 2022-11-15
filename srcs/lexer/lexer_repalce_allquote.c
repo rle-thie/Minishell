@@ -29,6 +29,8 @@ char *join_inquote(t_token *cmd, t_token_type type)
 		tab = ft_strjoin_gc(tab, cmd->str, &g_data);
 	}
 	tab = del_first_space(tab);
+	if (type == IN_DQUOTE)
+		tab = expand_varchar(tab);
 	return (tab);
 }
 
@@ -110,5 +112,6 @@ t_token	*replace_allquote(t_token *cmd)
 	}
 	while (cmd && cmd->prev)
 		cmd = cmd->prev;
+
 	return (cmd);
 }
