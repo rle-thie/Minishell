@@ -99,6 +99,8 @@ char	*input_name(void)
 	char	*home;
 	char	dpoint[2];
 
+	if (!find_env_var("HOME"))
+		return ("minishell : ");
 	dpoint[0] = ':';
 	dpoint[1] = '\0';
 	prompt = ft_calloc(sizeof(char) * 2, &g_data);
