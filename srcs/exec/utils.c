@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:31:54 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/09 15:36:07 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/15 17:28:20 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,12 @@ void	print_cmd(t_cmd *cmd)
 		printf("cmd args : %s\n", cmd->flags_and_args[i]);
 		i++;
 	}
-	i = 0;
-	while (cmd->flags_and_args[i])
-	{
-		printf("all args : %s\n", cmd->flags_and_args[i]);
-		i++;
-	}
-	printf("cmd index %d\n", cmd->index);
-	printf("cmd next %p\n", cmd->next);
-	printf("cmd pipe in %d\n", cmd->pipe_in);
-	printf("cmd pipe out %d\n", cmd->pipe_out);
+	// i = 0;
+	// while (cmd->flags_and_args[i])
+	// {
+	// 	printf("all args : %s\n", cmd->flags_and_args[i]);
+	// 	i++;
+	// }
 }
 
 void	print_pipes(t_fd *pipe_fd)
