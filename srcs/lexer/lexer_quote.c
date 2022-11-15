@@ -56,28 +56,37 @@ int	check_open_quote(t_token *cmd)
 		else if (cmd->type == DQUOTE)
 			y++;
 	}
-	if (i % 2 != 0 || y % 2 != 0)
-		return (0);
+	if (i % 2 != 0)
+		return (-1);
+	else if (y % 2 != 0)
+		return (-2);
 	return (1); 
 }
 
 // check_quote(data->cmd);
 t_token	*check_quote(t_token *cmd)
 {
+	int	error;
+
+	error = 0;
 	// ft_print_token(cmd);
 	cmd = check_double_allquote(cmd);
 	cmd = putin_allquote(cmd);
 	// cmd = check_multiple_allquote(cmd);
-	if (cmd && !check_open_quote(cmd))
-		ft_exit_provisoire("quote ouvert\n", 2);
+	if (cmd)
+	{
+		error = check_open_quote(cmd);
+		if (error == -1)
+			ft_exit_provisoire("minishell: syntax error near unexpected token `\''\n", 0);
+		else if (error == -2)
+			ft_exit_provisoire("minishell: syntax error near unexpected token `\"'\n", 0);
+	}
+	if (g_data.error == 1)
+		return (NULL);
 	cmd = replace_allquote(cmd);
 	cmd = delete_all_quote(cmd);
 
 	while (cmd && cmd->prev)
 		cmd = cmd->prev;
-	// cmd = delete_all_quote(cmd);
-	// // ft_printstr("cxacacacacan\n");
-	// join_quote(cmd, NULL);
-	// ft_print_token(cmd);
 	return (cmd);
 }

@@ -24,6 +24,7 @@ int	main(int ac, char **av, char **envp)
 	sig_init();
 	while (1)
 	{
+		g_data.error = 0;
 		sigaction(SIGINT, &(g_data.sig.sint), NULL);
 		str = readline(input_name());
 		if (str && *str)
@@ -31,8 +32,11 @@ int	main(int ac, char **av, char **envp)
 		if (!str)
 			break ;
 		lexer(str, &g_data);
-		parser();
-		parent_process();
+		if (g_data.error == 0)
+		{
+			parser();
+			parent_process();
+		}
 		printf("\nEXIT STATUS : %d\n\n", g_data.status);
 		g_data.cmd = NULL;
 		g_data.formated_cmd = NULL;

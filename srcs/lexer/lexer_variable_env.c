@@ -72,6 +72,8 @@ t_token	*dollar_to_word_type(t_token *cmd)
 
 t_token	*check_variable_env(t_token *cmd)
 {
+	if (g_data.error == 1)
+		return (NULL);
 	cmd = check_double_dollar(cmd, -1, 0);
 	while (cmd->prev)
 		cmd = cmd->prev;

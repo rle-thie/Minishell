@@ -117,6 +117,7 @@ struct s_data
 	t_token		*cmd;
 	t_cmd		*formated_cmd;
 	int			status;
+	int			error;
 	t_builtin	*tab;
 	t_sigs		sig;
 };

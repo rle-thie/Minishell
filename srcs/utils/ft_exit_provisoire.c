@@ -15,6 +15,9 @@
 int	ft_exit_provisoire(char *str, int err)
 {
 	printf("%s", str);
-	ft_garb_free_all(&g_data);
-	exit(err);
+	g_data.error = 1;
+	g_data.status = err;
+	// ft_garb_free_all(&g_data);
+	// exit(err);
+	return (err);
 }
