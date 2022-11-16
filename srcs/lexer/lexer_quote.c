@@ -17,20 +17,15 @@ t_token	*delete_all_quote(t_token *cmd)
 	while (cmd && cmd->next)
 	{
 		if (cmd->type == QUOTE || cmd->type == DQUOTE)
-		{
 			cmd = delete_lst_tok(cmd);
-		}
 		else if (cmd->next)
 			cmd = cmd->next;
 	}
 	if (cmd)
 	{
 		if (cmd->type == QUOTE || cmd->type == DQUOTE)
-		{
 			cmd = delete_lst_tok(cmd);
-		}
 	}
-	// ft_print_token(cmd);
 	return (cmd);
 }
 
@@ -60,7 +55,7 @@ int	check_open_quote(t_token *cmd)
 		return (-1);
 	else if (y % 2 != 0)
 		return (-2);
-	return (1); 
+	return (1);
 }
 
 // check_quote(data->cmd);
@@ -69,10 +64,8 @@ t_token	*check_quote(t_token *cmd)
 	int	error;
 
 	error = 0;
-	// ft_print_token(cmd);
 	cmd = check_double_allquote(cmd);
 	cmd = putin_allquote(cmd);
-	// cmd = check_multiple_allquote(cmd);
 	if (cmd)
 	{
 		error = check_open_quote(cmd);
@@ -85,7 +78,6 @@ t_token	*check_quote(t_token *cmd)
 		return (NULL);
 	cmd = replace_allquote(cmd);
 	cmd = delete_all_quote(cmd);
-
 	while (cmd && cmd->prev)
 		cmd = cmd->prev;
 	return (cmd);

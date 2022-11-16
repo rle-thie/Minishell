@@ -13,13 +13,13 @@
 #include "../../include/minishell.h"
 
 // type = INQUOTE ou INDQUOTE
-char *join_inquote(t_token *cmd, t_token_type type)
+char	*join_inquote(t_token *cmd, t_token_type type)
 {
-	char *tab;
-	
+	char	*tab;
+
 	tab = ft_calloc(sizeof(char) * 2, &g_data);
 	tab[0] = ' ';
-	while(cmd && cmd->next && cmd->type == type)
+	while (cmd && cmd->next && cmd->type == type)
 	{
 		tab = ft_strjoin_gc(tab, cmd->str, &g_data);
 		cmd = cmd->next;
@@ -36,20 +36,16 @@ char *join_inquote(t_token *cmd, t_token_type type)
 
 t_token	*fill_word_inquote(t_token *cmd)
 {
-	// char *str;
-
 	if (cmd->next && cmd->next->type == IN_QUOTE)
 		cmd = cmd->next;
 	else
 		return (cmd);
-	// str = join_inquote(cmd, IN_QUOTE);
 	cmd->str = join_inquote(cmd, IN_QUOTE);
 	cmd->type = WORD;
 	if (cmd->next && cmd->next->type == IN_QUOTE)
 		cmd = cmd->next;
 	else
 		return (cmd);
-	// cmd = cmd->next;
 	while (cmd && cmd->next && cmd->type == IN_QUOTE)
 	{
 		cmd = delete_lst(cmd);
@@ -57,26 +53,21 @@ t_token	*fill_word_inquote(t_token *cmd)
 	}
 	if (cmd && cmd->type == IN_QUOTE)
 		cmd = delete_lst(cmd);
-	// ft_printstr(join_inquote(cmd, IN_QUOTE));
 	return (cmd);
 }
 
 t_token	*fill_word_indquote(t_token *cmd)
 {
-	// char *str;
-
 	if (cmd->next && cmd->next->type == IN_DQUOTE)
 		cmd = cmd->next;
 	else
 		return (cmd);
-	// str = join_inquote(cmd, IN_QUOTE);
 	cmd->str = join_inquote(cmd, IN_DQUOTE);
 	cmd->type = WORD;
 	if (cmd->next && cmd->next->type == IN_DQUOTE)
 		cmd = cmd->next;
 	else
 		return (cmd);
-	// cmd = cmd->next;
 	while (cmd && cmd->next && cmd->type == IN_DQUOTE)
 	{
 		cmd = delete_lst(cmd);
@@ -84,13 +75,12 @@ t_token	*fill_word_indquote(t_token *cmd)
 	}
 	if (cmd && cmd->type == IN_DQUOTE)
 		cmd = delete_lst(cmd);
-	// ft_printstr(join_inquote(cmd, IN_QUOTE));
 	return (cmd);
 }
 
 t_token	*replace_allquote(t_token *cmd)
 {
-	while(cmd && cmd->next)
+	while (cmd && cmd->next)
 	{
 		if (cmd->type == QUOTE)
 		{
@@ -112,6 +102,5 @@ t_token	*replace_allquote(t_token *cmd)
 	}
 	while (cmd && cmd->prev)
 		cmd = cmd->prev;
-
 	return (cmd);
 }

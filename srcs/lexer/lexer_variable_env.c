@@ -16,7 +16,8 @@ t_token	*delete_double_space(t_token *cmd)
 {
 	while (cmd && cmd->next)
 	{
-		while (cmd && cmd->next && cmd->type == WHITE_SPACE && cmd->next->type == WHITE_SPACE)
+		while (cmd && cmd->next && cmd->type == WHITE_SPACE
+			&& cmd->next->type == WHITE_SPACE)
 		{
 			cmd = delete_lst_tok(cmd);
 		}
@@ -46,7 +47,6 @@ t_token	*delete_all_dollar(t_token *cmd)
 			cmd = delete_lst_tok(cmd);
 		}
 	}
-	// ft_print_token(cmd);
 	while (cmd->prev)
 		cmd = cmd->prev;
 	return (cmd);
@@ -56,13 +56,15 @@ t_token	*dollar_to_word_type(t_token *cmd)
 {
 	while (cmd && cmd->next)
 	{
-		if (!cmd->next || (cmd && cmd->type == DOLLAR && cmd->next && cmd->next->type != WORD))
+		if (!cmd->next || (cmd && cmd->type == DOLLAR && cmd->next
+				&& cmd->next->type != WORD))
 			cmd->type = WORD;
 		cmd = cmd->next;
 	}
 	if (cmd)
 	{
-		if ((!cmd->next && cmd->type == DOLLAR)|| (cmd && cmd->type == DOLLAR && cmd->next && cmd->next->type != WORD))
+		if ((!cmd->next && cmd->type == DOLLAR) || (cmd && cmd->type == DOLLAR
+				&& cmd->next && cmd->next->type != WORD))
 			cmd->type = WORD;
 	}
 	while (cmd && cmd->prev)

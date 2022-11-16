@@ -38,6 +38,5 @@ void	lexer_space(t_token *cmd)
 	while (tmp->prev)
 		tmp = tmp->prev;
 	g_data.cmd = tmp;
-	// ft_print_token(g_data.cmd);
 }
 // je mange du caca | et du pipi

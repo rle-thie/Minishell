@@ -32,37 +32,33 @@ static char	*find_env_var(char *str)
 // $PWD to rle-thie/sdljgdgjkgj/flsjfj
 char	*expand_envvar(char *str, int i)
 {
-	char *tab;
+	char	*tab;
 
 	if (!str[i] && str[i + 1])
 		return (NULL);
-	// ft_printstr(str);
 	tab = ft_calloc(sizeof(char) * 2, &g_data);
 	tab[0] = ' ';
 	i++;
 	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\'')
 	{
-		// printf("'%c'\n", str[i]);
 		tab = ft_strjoinchar_gc(tab, str[i], &g_data);
 		i++;
 	}
 	tab = del_first_space(tab);
-	// ft_printstr(tab);
 	if (tab[0] && tab[0] == '?')
 		tab = ft_itoa_gc(g_data.status);
 	else if (find_env_var(tab))
 		tab = find_env_var(tab);
 	else
 		tab = NULL;
-	// printf("exp:-%s-\n", tab);
 	return (tab);
 }
 
 char	*expand_varchar(char *str)
 {
 	char	*new;
-	int		i;
 	char	*tab;
+	int		i;
 	int		status;
 
 	status = 0;
@@ -71,25 +67,21 @@ char	*expand_varchar(char *str)
 	tab[0] = ' ';
 	while (str[i])
 	{
-		// printf("'-%c'\n", str[i]);
-		if (str[i] == '$' && str[i + 1] && str[i + 1] != '$' && str[i + 1] != ' ' && str[i + 1] != '\'')
+		if (str[i] == '$' && str[i + 1] && str[i + 1] != '$'
+			&& str[i + 1] != ' ' && str[i + 1] != '\'')
 		{
 			new = expand_envvar(&str[i++], 0);
 			if (new)
 				tab = ft_strjoin_gc(tab, new, &g_data);
-			// i++;
 			if (str[i] && str[i++] == '?')
 				status = 1;
-			while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\'' && status != 1)
-			{
-				// printf("'%c'\n", str[i]);
+			while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\''
+				&& status != 1)
 				i++;
-			}
 		}
 		else
 			tab = ft_strjoinchar_gc(tab, str[i++], &g_data);
 	}
 	tab = del_first_space(tab);
-	// printf("final expand:-%s-\n", tab);
 	return (tab);
 }
