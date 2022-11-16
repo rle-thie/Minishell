@@ -20,7 +20,7 @@ char	*expand_status(char *str)
 	int 	len_str;
 
 	str_status = ft_itoa_gc(g_data.status);
-	if(ft_strlen(str) == 1)
+	if (ft_strlen(str) == 1)
 		return (str_status);
 	len_status = ft_strlen(str_status);
 	len_str = ft_strlen(str) - 1;

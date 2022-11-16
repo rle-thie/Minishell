@@ -99,12 +99,14 @@ char	*input_name(void)
 	char	*home;
 	char	dpoint[2];
 
+	getcwd(s, sizeof(s));
+	cwd = ft_strdup_gc(s, &g_data);
+	if (!find_env_var("HOME") || !find_env_var("USER") || !cwd)
+		return ("minishell : ");
 	dpoint[0] = ':';
 	dpoint[1] = '\0';
 	prompt = ft_calloc(sizeof(char) * 2, &g_data);
 	prompt[0] = ' ';
-	getcwd(s, sizeof(s));
-	cwd = ft_strdup_gc(s, &g_data);
 	user = ft_strdup_gc(add_expand("USER"), &g_data);
 	home = ft_strdup_gc(add_expand("HOME"), &g_data);
 	if (!user || !home || !&g_data.env || !cwd)

@@ -50,7 +50,7 @@ char	*put_null_char(char *str)
 	return (tab);
 }
 
-char	*create_heredoc(char *str)
+char	*create_heredoc(char *str, int i)
 {
 	char	*tab;
 	char	*tab_join;
@@ -64,12 +64,17 @@ char	*create_heredoc(char *str)
 		tab = put_null_char(tab);
 		if (is_same(str, tab) == 1)
 			break ;
+		if (i != 0)
+			tab_join = ft_strjoinchar_gc(tab_join, '\n', &g_data);
 		tab_join = ft_strjoin_gc(tab_join, tab, &g_data);
-		tab_join = ft_strjoinchar_gc(tab_join, '\n', &g_data);
+		tab_join = expand_heredoc(tab_join, 0);
+		i++;
 	}
 	if (ft_strlen(tab_join) <= 1)
 		return (NULL);
 	tab_join = del_first_space(tab_join);
+	// tab_join = del_last_return(tab_join, 0);
+	// printf("'%s'\n", tab_join);
 	return (tab_join);
 }
 
@@ -79,18 +84,17 @@ t_redir	*check_heredoc(t_redir *lst)
 	{
 		if (lst->type == DOUBLE_REDIR_IN)
 		{
-			lst->file_name = create_heredoc(lst->file_name);
-			// printf("'%s'\n", lst->file_name);
+			lst->file_name = create_heredoc(lst->file_name, 0);
+			// if (lst->file_name)
+			// 	lst->file_name = expand_var_herdoc(lst->file_name);
 		}
 		lst = lst->next;
 	}
-	if (lst)
+	if (lst && lst->type == DOUBLE_REDIR_IN)
 	{
-		if (lst->type == DOUBLE_REDIR_IN)
-		{
-			lst->file_name = create_heredoc(lst->file_name);
-			// printf("'%s'\n", lst->file_name);
-		}
+		lst->file_name = create_heredoc(lst->file_name, 0);
+		// if (lst->file_name)
+		// 	lst->file_name = expand_var_herdoc(lst->file_name);
 	}
 	while (lst && lst->prev)
 		lst = lst->prev;
