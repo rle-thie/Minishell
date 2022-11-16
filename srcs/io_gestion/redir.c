@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:26:21 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/15 17:51:12 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/16 17:02:45 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	heredoc(t_redir *rd)
 {
 	int	fd;
 
-	fd = open("/tmp/.hd", O_RDWR | O_CREAT | O_TRUNC, 0644);
+	fd = open("/tmp/.to_hide", O_RDWR | O_CREAT | O_TRUNC, 0666);
 	write(fd, rd->file_name, ft_strlen(rd->file_name));
+	close(fd);
+	fd = open("/tmp/.to_hide", O_RDONLY);
 	return (fd);
 }
 
@@ -59,16 +61,14 @@ int	open_file_in(t_redir *rd)
 
 int	redir_pipe(t_fd *fds, t_cmd *cmd)
 {
-	if (fds && !cmd->redir)
+	if (fds && !cmd->redir) // pb si redir plus pipe
 	{
 		if (cmd->pipe_out)
 			dup2(fds[cmd->index].fd[1], STDOUT_FILENO);
 		if (cmd->pipe_in)
 			dup2(fds[cmd->index - 1].fd[0], STDIN_FILENO);
-		close_pipes(fds);
 		return (0);
 	}
-	close_pipes(fds);
 	return (redir_loop(cmd));
 }
 

@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:31:54 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/15 17:28:20 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/16 16:34:32 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	cmd_number(void)
 void	print_cmd(t_cmd *cmd)
 {
 	int	i;
+	t_redir	*head;
 
 	i = 0;
 	printf("cmd name : %s\n", cmd->cmd_name);
@@ -41,12 +42,13 @@ void	print_cmd(t_cmd *cmd)
 		printf("cmd args : %s\n", cmd->flags_and_args[i]);
 		i++;
 	}
-	// i = 0;
-	// while (cmd->flags_and_args[i])
-	// {
-	// 	printf("all args : %s\n", cmd->flags_and_args[i]);
-	// 	i++;
-	// }
+	head = cmd->redir;
+	while (head)
+	{
+		printf("name : %s, type %d", head->file_name, head->type);
+		head = head->next;
+	}
+
 }
 
 void	print_pipes(t_fd *pipe_fd)
