@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:35:48 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 19:37:18 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/16 20:16:53 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*path(char *cmd)
 	char	*tmp_path;
 	char	*path;
 
-	if (!cmd)
-		return (cmd);
 	env_path = find_path_str();
 	if (!env_path || !access(cmd, X_OK | F_OK))
 		return (cmd);
