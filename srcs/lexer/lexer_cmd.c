@@ -14,34 +14,27 @@
 
 static t_token	*ft_create_lst_cmd(t_data *data, char *str)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = ft_malloc(sizeof(t_token), data);
 	new->next = NULL;
 	new->prev = NULL;
 	new->str = str;
-	// str=str;
-	// new->type = type;
-
-	
-	// printf("lst created '%s'\n", new->str);
 	return (new);
 }
 
 t_token	*ft_cmd_add(t_token *token, t_data *data, char *str)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = token;
 	if (!token)
 	{
 		new = ft_create_lst_cmd(data, str);
-		// new->str = str;
 	}
 	else
 	{
 		new->next = ft_create_lst_cmd(data, str);
-		// new->str = str;
 		new->next->prev = new;
 		new = new->next;
 	}
@@ -50,8 +43,8 @@ t_token	*ft_cmd_add(t_token *token, t_data *data, char *str)
 
 void	create_cmd_ok(t_token *cmd, t_token *token, t_data *data)
 {
-	char *str;
-	t_token_type type;
+	char			*str;
+	t_token_type	type;
 
 	while (token->next)
 	{
@@ -68,7 +61,7 @@ void	create_cmd_ok(t_token *cmd, t_token *token, t_data *data)
 		else
 			token = token->next;
 		cmd = ft_cmd_add(cmd, data, str);
-		if(token && !token->next && token->type == type)
+		if (token && !token->next && token->type == type)
 			cmd->str = ft_strjoin_gc(cmd->str, trans(token->c, data), data);
 		else if (token && !token->next && token->type != type)
 			cmd = ft_cmd_add(cmd, data, trans(token->c, data));

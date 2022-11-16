@@ -14,7 +14,7 @@
 
 t_token_type	choose_type_char(char ch)
 {
-	t_token_type type;
+	t_token_type	type;
 
 	if (ch == ' ')
 		type = WHITE_SPACE;
@@ -37,24 +37,21 @@ t_token_type	choose_type_char(char ch)
 
 t_token	*ft_create_lst_token(t_data *data, char ch)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = ft_malloc(sizeof(t_token), data);
 	new->next = NULL;
 	new->prev = NULL;
 	new->c = '\0';
 	new->c = ch;
-	// new->str = NULL;
 	new->type = choose_type_char(new->c);
-	// printf("lst created '%c' %d\n", new->c, new->type);
 	return (new);
 }
 
-
 void	lexer(char *str, t_data *data)
 {
-	int i;
-	t_token *tmp;
+	t_token	*tmp;
+	int		i;
 
 	i = 0;
 	while (str[i])
@@ -78,5 +75,4 @@ void	lexer(char *str, t_data *data)
 	lexer_space(data->cmd);
 	data->cmd = check_quote(data->cmd);
 	data->cmd = check_variable_env(data->cmd);
-	// ft_print_token(data->cmd);
 }

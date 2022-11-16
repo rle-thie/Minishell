@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-t_token *putin_quote(t_token *cmd)
+t_token	*putin_quote(t_token *cmd)
 {
 	if (cmd->next)
 		cmd = cmd->next;
@@ -26,10 +26,9 @@ t_token *putin_quote(t_token *cmd)
 		cmd->type = IN_QUOTE;
 	}
 	return (cmd);
-	
 }
 
-t_token *putin_dquote(t_token *cmd)
+t_token	*putin_dquote(t_token *cmd)
 {
 	if (cmd->next)
 		cmd = cmd->next;
@@ -43,10 +42,9 @@ t_token *putin_dquote(t_token *cmd)
 		cmd->type = IN_DQUOTE;
 	}
 	return (cmd);
-	
 }
 
-t_token *putin_allquote(t_token *cmd)
+t_token	*putin_allquote(t_token *cmd)
 {
 	while (cmd && cmd->next)
 	{

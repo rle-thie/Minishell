@@ -15,12 +15,12 @@
 t_token	*ft_create_token(t_token_type type)
 {
 	char	*str;
+	t_token	*new;
 
 	if (type == QUOTE)
 		str = create_one_char('\'');
 	else if (type == DQUOTE)
 		str = create_one_char('\"');
-	t_token *new;
 	new = ft_malloc(sizeof(t_token), &g_data);
 	new->next = NULL;
 	new->prev = NULL;
@@ -38,7 +38,6 @@ t_token	*add_before_token(t_token *lst, t_token_type type)
 	{
 		lst->prev = new;
 		new->next = lst;
-		// lst = lst->prev;
 		return (lst);
 	}
 	else if (lst->prev)
@@ -47,12 +46,10 @@ t_token	*add_before_token(t_token *lst, t_token_type type)
 		new->prev = lst->prev;
 		lst->prev = new;
 		new->next = lst;
-		// lst = lst->prev;
 		return (lst);
 	}
 	return (NULL);
 }
-
 
 t_token	*check_double_quote(t_token *cmd, int i, int len)
 {
@@ -61,7 +58,7 @@ t_token	*check_double_quote(t_token *cmd, int i, int len)
 		if (cmd->type == QUOTE && ft_strlen(cmd->str) > 1)
 		{
 			len = ft_strlen(cmd->str);
-			while(++i < len)
+			while (++i < len)
 				cmd = add_before_token(cmd, QUOTE);
 			cmd = delete_lst(cmd);
 		}
@@ -74,12 +71,10 @@ t_token	*check_double_quote(t_token *cmd, int i, int len)
 		if (cmd->type == QUOTE && ft_strlen(cmd->str) > 1)
 		{
 			len = ft_strlen(cmd->str);
-			while(++i < len)
+			while (++i < len)
 				cmd = add_before_token(cmd, QUOTE);
 			cmd = delete_lst(cmd);
 		}
-		// if (cmd && cmd->next)
-		// 	cmd = cmd->next;
 	}
 	return (cmd);
 }
@@ -91,7 +86,7 @@ t_token	*check_double_dquote(t_token *cmd, int i, int len)
 		if (cmd->type == DQUOTE && ft_strlen(cmd->str) > 1)
 		{
 			len = ft_strlen(cmd->str);
-			while(++i < len)
+			while (++i < len)
 				cmd = add_before_token(cmd, DQUOTE);
 			cmd = delete_lst(cmd);
 		}
@@ -104,12 +99,10 @@ t_token	*check_double_dquote(t_token *cmd, int i, int len)
 		if (cmd->type == DQUOTE && ft_strlen(cmd->str) > 1)
 		{
 			len = ft_strlen(cmd->str);
-			while(++i < len)
+			while (++i < len)
 				cmd = add_before_token(cmd, DQUOTE);
 			cmd = delete_lst(cmd);
 		}
-		// if (cmd && cmd->next)
-		// 	cmd = cmd->next;
 	}
 	return (cmd);
 }

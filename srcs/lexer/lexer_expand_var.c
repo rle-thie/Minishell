@@ -57,17 +57,14 @@ t_token	*expand_var(t_token *cmd)
 		{
 			if (cmd->next->str[0] == '?')
 			{
-				// ft_printstr("1");
 				cmd->next->str = expand_status(cmd->next->str);
 			}
 			else if (is_envvar(cmd->next->str) == 1)
 			{
-				// ft_printstr("2");
 				cmd->next->str = add_expand(cmd->next->str);
 			}
 			else if (is_envvar(cmd->next->str) == 0)
 			{
-				// printf("-%s-\n", cmd->str);
 				cmd->next->type = FT_ERROR;
 			}
 		}

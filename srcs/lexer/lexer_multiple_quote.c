@@ -38,7 +38,7 @@ t_token	*check_multiple_dquote_utils(t_token *cmd, char *tab)
 
 t_token	*check_multiple_quote(t_token *cmd)
 {
-	char *tab;
+	char	*tab;
 
 	tab = NULL;
 	tab = ft_calloc(sizeof(char) * 2, &g_data);
@@ -64,7 +64,7 @@ t_token	*check_multiple_quote(t_token *cmd)
 
 t_token	*check_multiple_dquote(t_token *cmd)
 {
-	char *tab;
+	char	*tab;
 
 	tab = NULL;
 	tab = ft_calloc(sizeof(char) * 2, &g_data);

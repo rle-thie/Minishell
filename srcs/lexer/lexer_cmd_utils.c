@@ -14,7 +14,6 @@
 
 t_token_type	select_type(char c)
 {
-	// printf("%c\n", c);
 	if (c == '|')
 		return (PIPE);
 	else if (c == ' ')
@@ -23,10 +22,6 @@ t_token_type	select_type(char c)
 		return (REDIR);
 	else if (c == '<')
 		return (REDIR);
-	// else if (c == IN_DQUOTE)
-	// 	return (IN_DQUOTE);
-	// else if (c == IN_QUOTE)
-	// 	return (IN_QUOTE);
 	else if (c == '$')
 		return (DOLLAR);
 	else if (c == '"')
@@ -37,14 +32,13 @@ t_token_type	select_type(char c)
 		return (WORD);
 	else
 		return (JSP);
-	
-		
 }
 
 char	*trans(char c, t_data *data)
 {
-	char *str;
-	str = ft_malloc(sizeof(char)*2, data);
+	char	*str;
+
+	str = ft_malloc(sizeof(char) * 2, data);
 	str[0] = c;
 	str[1] = '\0';
 	return (str);
@@ -57,11 +51,8 @@ void	fill_type(t_token *cmd, t_data *data)
 		cmd->type = select_type(cmd->str[0]);
 		cmd = cmd->prev;
 	}
-	// while (cmd->next)
-	// 	cmd = cmd->next;
 	if (cmd)
 	{
-		// printf("%d '%c'\n", cmd->type, cmd->str[0]);
 		cmd->type = select_type(cmd->str[0]);
 	}
 	data->cmd = cmd;
