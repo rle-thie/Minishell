@@ -42,12 +42,12 @@ char	*expand_envvar(char *str, int i)
 	i++;
 	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\'')
 	{
-		printf("'%c'\n", str[i]);
+		// printf("'%c'\n", str[i]);
 		tab = ft_strjoinchar_gc(tab, str[i], &g_data);
 		i++;
 	}
 	tab = del_first_space(tab);
-	ft_printstr(tab);
+	// ft_printstr(tab);
 	if (tab[0] && tab[0] == '?')
 		tab = ft_itoa_gc(g_data.status);
 	else if (find_env_var(tab))

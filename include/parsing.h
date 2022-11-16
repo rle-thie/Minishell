@@ -61,6 +61,7 @@ t_redir	*format_redir_lst(t_redir *lst);
 // parser_redir_clean.c
 t_redir	*clean_all_redir(t_redir *lst);
 t_redir	*check_heredoc(t_redir *lst);
+char	*expand_heredoc(char *str, int i);
 // redir_utils.c
 t_redir	*ft_create_redir(char *str);
 t_redir	*add_back_redir(t_redir *token, char *str);
