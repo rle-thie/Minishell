@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:11:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/10/31 19:22:32 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/16 18:06:19 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	my_export(char **cmd)
 
 	i = 0;
 	ret = 0;
-	if (!cmd)
+	if (nb_args(cmd) == 0)
 		env_order();
 	while (cmd[i])
 	{
