@@ -30,6 +30,12 @@ int	is_same(char *str1, char *str2)
 	return (1);
 }
 
+void	exit_eof(void)
+{
+	ft_garb_free_all(&g_data);
+	exit(0);
+}
+
 char	*put_null_char(char *str)
 {
 	int len;
@@ -38,7 +44,7 @@ char	*put_null_char(char *str)
 
 	i = 0;
 	if (!str)
-		return (NULL);
+		exit_eof();
 	len = ft_strlen(str);
 	tab = ft_calloc(sizeof(char) * (len + 1), &g_data);
 	while (i < len)
