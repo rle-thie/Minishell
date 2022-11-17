@@ -123,7 +123,7 @@ t_redir	*divise_lst(char *str, t_redir *lst)
 	int	i;
 
 	i = 0;
-	
+
 	// str2 = ft_calloc(sizeof(char) * 2, &g_data);
 	// str2[0] = ' ';
 	while (str[i] && (str[i] == '<' || str[i] == '>' || str[i] == ' '))
@@ -140,7 +140,7 @@ t_redir	*divise_lst(char *str, t_redir *lst)
 	lst->file_name = &str[i];
 	lst = add_before_lst(lst, extract);
 	// ft_printstr(str);
-	
+
 	return (lst);
 }
 

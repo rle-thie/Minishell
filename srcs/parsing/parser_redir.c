@@ -20,7 +20,12 @@ void	select_redir(t_token *cmd)
 		{
 			if (cmd->next)
 				cmd = cmd->next;
-			while ((cmd->type == WHITE_SPACE || cmd->type == REDIR) && cmd->next)
+			while (cmd && cmd->type == REDIR && cmd->next)
+			{
+				cmd->type = cmd->prev->type;
+				cmd = cmd->next;
+			}
+			while(cmd && cmd->type == WHITE_SPACE)
 			{
 				cmd->type = cmd->prev->type;
 				cmd = cmd->next;
@@ -97,26 +102,28 @@ t_redir	*parse_redir(t_token *cmd)
 
 	select_redir(cmd);
 	redir_lst = join_redir(cmd);
+
+	while (redir_lst && redir_lst->next)
+	{
+		printf("'%s'\n", redir_lst->file_name);
+		redir_lst = redir_lst->next;
+	}
+	if (redir_lst)
+		printf("'%s'\n", redir_lst->file_name);
 	if (redir_lst)
 		redir_lst = lst_put_start(redir_lst);
 	delete_redir_type(cmd);
 	delete_redir_type(cmd);
-	// ft_print_token(cmd);
-	// printf("fin\n");
-	redir_lst = format_redir_lst(redir_lst);
-	if (redir_lst)
-		redir_lst = clean_all_redir(redir_lst);
-	redir_lst = delete_chevron(redir_lst);
-	redir_lst = check_heredoc(redir_lst);
+	if (is_valid_redir(redir_lst) == 1)
+	{
+		redir_lst = format_redir_lst(redir_lst);
+		if (redir_lst)
+			redir_lst = clean_all_redir(redir_lst);
+		redir_lst = delete_chevron(redir_lst);
+		redir_lst = check_heredoc(redir_lst);
+	}
+	check_redir_error(redir_lst, 0);
 
-	// while (redir_lst && redir_lst->next)
-	// {
-	// 	printf("'%s'\n", redir_lst->file_name);
-	// 	redir_lst = redir_lst->next;
-	// }
-	// if (redir_lst)
-	// 	printf("'%s'\n", redir_lst->file_name);
-	
 	while (redir_lst && redir_lst->prev)
 		redir_lst = redir_lst->prev;
 	return (redir_lst);

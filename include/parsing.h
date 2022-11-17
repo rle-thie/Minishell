@@ -69,6 +69,8 @@ t_redir	*lst_put_start(t_redir *lst);
 t_token	*lst_start_token(t_token *lst);
 // delete_chevron
 t_redir	*delete_chevron(t_redir *lst);
+int		check_redir_error(t_redir *lst, int i);
+int		is_valid_redir(t_redir *lst);
 // parsing
 void	parser(void);
 

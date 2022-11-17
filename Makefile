@@ -27,7 +27,7 @@ SRCS_PARSER = $(addprefix srcs/parsing/, parser.c parsing_input_name.c \
 								parser_args.c \
 								parser_flags_args.c \
 								parser_bool.c \
-								parser_redir.c parser_redir_utils.c parser_redir_lst.c parser_redir_clean.c delete_chevron.c \
+								parser_redir.c parser_redir_utils.c parser_redir_lst.c parser_redir_clean.c delete_chevron.c parser_redir_error.c \
 								parser_heredoc.c parser_herdoc_exp.c)
 
 SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
@@ -45,13 +45,13 @@ SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
 										my_env.c my_unset.c \
 										my_export.c my_cd.c \
 										my_exit.c my_cd_err.c)
-									
+
 SRCS_EXEC = $(addprefix srcs/exec/, paths.c exec.c env_to_char.c \
 										builtin_ex.c utils.c)
-										
+
 SRCS_IO_GESTION = $(addprefix srcs/io_gestion/, pipe_ops.c \
 											redir.c redir_two.c)
-								
+
 OBJDIR = objs
 
 OBJS = $(addprefix ${OBJDIR}/, ${SRCS:.c=.o})
@@ -101,7 +101,7 @@ v: fclean all
 	${RM} ${OBJS}
 	clear
 	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME}
-	
+
 t: fclean all
 	${RM} ${OBJS}
 	clear

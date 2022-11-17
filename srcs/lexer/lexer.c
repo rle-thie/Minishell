@@ -16,7 +16,7 @@ t_token_type	choose_type_char(char ch)
 {
 	t_token_type	type;
 
-	if (ch == ' ')
+	if (ch == ' ' || ch =='\n' || ch == '\t' || ch == '\r')
 		type = WHITE_SPACE;
 	else if (ch == PIPE)
 		type = PIPE;
