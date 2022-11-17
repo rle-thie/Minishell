@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 20:29:54 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/17 18:34:30 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,9 @@ void	exec(t_fd *fds, t_cmd *cmd)
 void	child_process(t_fd *fds, t_cmd *cmd)
 {
 	int	ret;
-	int	fd;
 
 	ret = 0;
-	fd = redir_pipe(fds, cmd);
+	redir_pipe(fds, cmd);
 	close_pipes(fds);
 	if (is_builtin(cmd))
 	{
@@ -99,7 +98,10 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 		ft_garb_free_all(&g_data);
 		exit(127);
 	}
+	printf("\t%s\n", path(cmd->cmd_name));
 	ret = execve(path(cmd->cmd_name), cmd->flags_and_args, g_data.env);
-	perror("bash :");
+	perror("bash ");
+	if (!find_path_str())
+		exit(127);
 	exit(ret);
 }

@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:39:47 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/15 15:51:08 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/17 18:40:06 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	change_pwds(void)
 	t_env	*pwd;
 	char	*temp;
 
+	if (!find_cd_link("PWD") || !find_cd_link("OLDPWD"))
+		return ;
 	temp = getcwd((char *) NULL, 0);
 	oldpwd = find_cd_link("OLDPWD");
 	pwd = find_cd_link("PWD");
