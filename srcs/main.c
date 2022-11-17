@@ -26,7 +26,8 @@ int	main(int ac, char **av, char **envp)
 	{
 		g_data.error = 0;
 		sigaction(SIGINT, &(g_data.sig.sint), NULL);
-		str = readline(input_name());
+		// str = readline(input_name());
+		str = readline("mini:");
 		if (str && *str)
 			add_history(str);
 		if (!str)

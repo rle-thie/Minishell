@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/14 19:40:04 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/16 16:38:55 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 
 	ret = 0;
 	redir_pipe(fds, cmd);
+	close_pipes(fds);
 	if (is_builtin(cmd))
 	{
 		ret = builtin_exec(cmd);
@@ -98,6 +99,6 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 		exit(127);
 	}
 	ret = execve(path(cmd->cmd_name), cmd->flags_and_args, g_data.env);
-	perror("lol mdr");
+	perror("bash :");
 	exit(ret);
 }
