@@ -12,16 +12,16 @@
 
 #include "../../include/minishell.h"
 
-int	check_redir_error(t_redir *lst, int i)
+int	check_redir_error(t_redir *lst)
 {
 	while (lst && lst->next)
 	{
 		if (lst->type == FT_ERROR)
 		{
 			g_data.error = 1;
-			printf("Minishell: parse error'\n");
 			g_data.status = 2;
-			i++;
+			printf("Minishell: parse error'\n");
+			return (1);
 		}
 		lst = lst->next;
 	}
@@ -32,10 +32,10 @@ int	check_redir_error(t_redir *lst, int i)
 			g_data.error = 1;
 			printf("Minishell: parse error\n");
 			g_data.status = 2;
-			i++;
+			return (1);
 		}
 	}
-	return (i);
+	return (0);
 }
 
 int	is_valid_redir_utils(char *str, int i)

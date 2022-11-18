@@ -34,10 +34,9 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		lexer(str, &g_data);
 		if (g_data.error == 0)
-		{
 			parser();
-			// parent_process();
-		}
+		if (g_data.error == 0)
+			parent_process();
 		printf("\nEXIT STATUS : %d\n\n", g_data.status);
 		g_data.cmd = NULL;
 		g_data.formated_cmd = NULL;

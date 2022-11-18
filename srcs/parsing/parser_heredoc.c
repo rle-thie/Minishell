@@ -86,6 +86,8 @@ char	*create_heredoc(char *str, int i)
 
 t_redir	*check_heredoc(t_redir *lst)
 {
+	if (g_data.error != 0)
+		return (NULL);
 	while (lst && lst->next)
 	{
 		if (lst->type == DOUBLE_REDIR_IN)

@@ -12,6 +12,17 @@
 
 #include "../../include/minishell.h"
 
+static t_token	*select_redir_utils(t_token *cmd)
+{
+	if (cmd && cmd->type == REDIR && (cmd->str[0] == '<' || cmd->str[0] == '>'))
+	{
+		g_data.error = 1;
+		g_data.status = 2;
+		printf("Minishell: parse error'\n");
+	}
+	return (cmd);
+}
+
 void	select_redir(t_token *cmd)
 {
 	while (cmd->next && cmd->next->type != PIPE && cmd && cmd->type != PIPE)
@@ -25,20 +36,20 @@ void	select_redir(t_token *cmd)
 				cmd->type = cmd->prev->type;
 				cmd = cmd->next;
 			}
-			while(cmd && cmd->type == WHITE_SPACE)
+			while(cmd && cmd->type == WHITE_SPACE && cmd->next)
 			{
 				cmd->type = cmd->prev->type;
 				cmd = cmd->next;
 			}
-			if (cmd->type == PIPE)
+			if (cmd && cmd->type == PIPE)
 				break ;
-			cmd->type = cmd->prev->type;
-			// printf("'%s'\n", cmd->str);
-
+			if (cmd)
+				cmd->type = cmd->prev->type;
 		}
 		if (cmd->next)
 			cmd = cmd->next;
 	}
+	cmd = select_redir_utils(cmd);
 }
 
 
@@ -103,18 +114,11 @@ t_redir	*parse_redir(t_token *cmd)
 	select_redir(cmd);
 	redir_lst = join_redir(cmd);
 
-	while (redir_lst && redir_lst->next)
-	{
-		printf("'%s'\n", redir_lst->file_name);
-		redir_lst = redir_lst->next;
-	}
-	if (redir_lst)
-		printf("'%s'\n", redir_lst->file_name);
 	if (redir_lst)
 		redir_lst = lst_put_start(redir_lst);
 	delete_redir_type(cmd);
 	delete_redir_type(cmd);
-	if (is_valid_redir(redir_lst) == 1)
+	if (g_data.error == 0 && is_valid_redir(redir_lst) == 1)
 	{
 		redir_lst = format_redir_lst(redir_lst);
 		if (redir_lst)
@@ -122,7 +126,14 @@ t_redir	*parse_redir(t_token *cmd)
 		redir_lst = delete_chevron(redir_lst);
 		redir_lst = check_heredoc(redir_lst);
 	}
-	check_redir_error(redir_lst, 0);
+	// while (redir_lst && redir_lst->next)
+	// {
+	// 	printf("'%s'\n", redir_lst->file_name);
+	// 	redir_lst = redir_lst->next;
+	// }
+	// if (redir_lst)
+	// 	printf("'%s'\n", redir_lst->file_name);
+	check_redir_error(redir_lst);
 
 	while (redir_lst && redir_lst->prev)
 		redir_lst = redir_lst->prev;
