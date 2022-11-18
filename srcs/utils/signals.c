@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:21:49 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/15 15:37:26 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/18 15:24:54 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	handle_sigctlc(int sig)
 	printf("\nmini:");
 	(void)sig;
 	g_data.status = 130;
+	g_data.error = 1;
 }
 
 void	sig_init(void)
