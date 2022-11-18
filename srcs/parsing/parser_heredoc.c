@@ -30,31 +30,25 @@ int	is_same(char *str1, char *str2)
 	return (1);
 }
 
-void	exit_eof(void)
-{
-	ft_garb_free_all(&g_data);
-	exit(0);
-}
+// char	*put_null_char(char *str)
+// {
+// 	int len;
+// 	int	i;
+// 	char *tab;
 
-char	*put_null_char(char *str)
-{
-	int len;
-	int	i;
-	char *tab;
-
-	i = 0;
-	if (!str)
-		exit_eof();
-	len = ft_strlen(str);
-	tab = ft_calloc(sizeof(char) * (len + 1), &g_data);
-	while (i < len)
-	{
-		tab[i] = str[i];
-		i++;
-	}
-	// printf("-%s-\n", tab);
-	return (tab);
-}
+// 	i = 0;
+// 	if (!str)
+// 		exit_eof();
+// 	len = ft_strlen(str);
+// 	tab = ft_calloc(sizeof(char) * (len + 1), &g_data);
+// 	while (i < len)
+// 	{
+// 		tab[i] = str[i];
+// 		i++;
+// 	}
+// 	// printf("-%s-\n", tab);
+// 	return (tab);
+// }
 
 char	*create_heredoc(char *str, int i)
 {
@@ -63,12 +57,11 @@ char	*create_heredoc(char *str, int i)
 
 	tab_join = ft_calloc(sizeof(char) * 2, &g_data);
 	tab_join[0] = ' ';
-	tab = NULL;
 	while (1 && g_data.error == 0)
 	{
 		tab = readline("heredoc> ");
-		tab = put_null_char(tab);
-		if (is_same(str, tab) == 1)
+		// tab = put_null_char(tab);
+		if (!tab || is_same(str, tab) == 1)
 			break ;
 		if (i != 0)
 			tab_join = ft_strjoinchar_gc(tab_join, '\n', &g_data);
@@ -76,11 +69,11 @@ char	*create_heredoc(char *str, int i)
 		tab_join = expand_heredoc(tab_join, 0);
 		i++;
 	}
+	if (!tab)
+		printf("end of heredoc (%s)\n", str);
 	if (ft_strlen(tab_join) <= 1)
-		return (NULL);
+		return ("\0");
 	tab_join = del_first_space(tab_join);
-	// tab_join = del_last_return(tab_join, 0);
-	// printf("'%s'\n", tab_join);
 	return (tab_join);
 }
 
@@ -101,6 +94,7 @@ t_redir	*check_heredoc(t_redir *lst)
 	if (lst && lst->type == DOUBLE_REDIR_IN)
 	{
 		lst->file_name = create_heredoc(lst->file_name, 0);
+		// printf("'%s'\n",  lst->file_name);
 		// if (lst->file_name)
 		// 	lst->file_name = expand_var_herdoc(lst->file_name);
 	}
