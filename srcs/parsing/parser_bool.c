@@ -47,6 +47,8 @@ void	init_index(t_cmd *cmd)
 
 void	add_bool_var(t_cmd *format_cmd)
 {
+	if (!format_cmd->cmd_name)
+		g_data.error = 1;
 	init_index(format_cmd);
 	add_pipe(format_cmd);
 	// print_bool(format_cmd); 
