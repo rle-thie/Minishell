@@ -6,7 +6,7 @@
 #    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/11/16 16:34:56 by ldevy            ###   ########.fr        #
+#    Updated: 2022/11/18 12:31:44 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,5 +106,11 @@ t: fclean all
 	${RM} ${OBJS}
 	clear
 	valgrind --suppressions=ignoreleak ./${NAME}
+	
+m: fclean all
+	${RM} ${OBJS}
+	clear
+	valgrind --suppressions=ignoreleak --track-fds=yes --trace-children=yes ./${NAME}
+
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 18:51:36 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/14 21:08:35 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/16 19:32:21 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	is_builtin(t_cmd *cmd)
 
 	tab = init_builtin();
 	i = 0;
+	if (!cmd->cmd_name)
+		return (0);
 	while (tab[i].nom)
 	{
 		buff = ft_strlen(cmd->cmd_name) + ft_strlen(tab[i].nom);
@@ -65,6 +67,8 @@ int	builtin_exec(t_cmd *cmd)
 	t_builtin	*tab;
 	char		**args;
 
+	if (!cmd->cmd_name)
+		return (0);
 	args = cmd->flags_and_args;
 	tab = init_builtin();
 	i = 0;

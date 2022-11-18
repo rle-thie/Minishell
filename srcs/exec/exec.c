@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 16:38:55 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/18 12:47:38 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,11 @@ void	exec(t_fd *fds, t_cmd *cmd)
 
 void	child_process(t_fd *fds, t_cmd *cmd)
 {
-	int	ret;
+	int		ret;
+	char	*pa;
 
 	ret = 0;
+	pa = path(cmd->cmd_name);
 	redir_pipe(fds, cmd);
 	close_pipes(fds);
 	if (is_builtin(cmd))
@@ -92,13 +94,17 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 		ret = builtin_exec(cmd);
 		exit(ret);
 	}
-	if (!path(cmd->cmd_name))
+	if (!pa)
 	{
 		printf("%s: command not found\n", cmd->cmd_name);
-		ft_garb_free_all(&g_data);
 		exit(127);
 	}
-	ret = execve(path(cmd->cmd_name), cmd->flags_and_args, g_data.env);
-	perror("bash :");
+	ret = execve(pa, cmd->flags_and_args, g_data.env);
+	perror("bash ");
+	if (!find_path_str())
+		ret = 127;
+	else if (!access(pa, F_OK) && access(pa, X_OK))
+		ret = 126;
+	ft_free(pa, &g_data);
 	exit(ret);
 }

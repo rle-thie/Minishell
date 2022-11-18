@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:07:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/09 15:37:06 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/16 19:10:50 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	look_for_var(char *str)
 	t_env	*head;
 
 	head = g_data.env_head;
-	while (head->next)
+	while (head)
 	{
 		if (!ft_strncmp(str, head->name, ft_strlen(head->name)))
 		{
