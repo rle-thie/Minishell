@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:32:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/12 16:57:32 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:26:33 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*create_heredoc(char *str, int i)
 	tab_join = ft_calloc(sizeof(char) * 2, &g_data);
 	tab_join[0] = ' ';
 	tab = NULL;
-	while (1)
+	while (1 && g_data.error == 0)
 	{
 		tab = readline("heredoc> ");
 		tab = put_null_char(tab);
