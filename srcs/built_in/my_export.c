@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:11:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 18:06:19 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/17 19:24:00 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	my_export(char **cmd)
 	i = 0;
 	ret = 0;
 	if (nb_args(cmd) == 0)
+	{
 		env_order();
+		return (EXIT_SUCCESS);
+	}
 	while (cmd[i])
 	{
 		if (!void_arg_export_checker(cmd[i]))
@@ -42,7 +45,8 @@ int	my_export(char **cmd)
 
 int	void_arg_export_checker(char *str)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	if (!ft_strchr(str, '=') || (!ft_isalpha(str[i]) && str[i] != '_'))
@@ -54,7 +58,12 @@ int	void_arg_export_checker(char *str)
 			return (0);
 		i++;
 	}
+	tmp = ft_malloc(find_signe(str) + 1, &g_data);
+	ft_strlcpy(tmp, str, find_signe(str) + 1);
+	if (find_cd_link(tmp))
+		del_env_link(find_cd_link(tmp));
 	make_node(str);
+	ft_free(tmp, &g_data);
 	return (1);
 }
 

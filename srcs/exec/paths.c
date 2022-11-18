@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:35:48 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 20:16:53 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/17 19:51:11 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*make_path(char **test_path, char *cmd)
 		if (tmp_path)
 			free(tmp_path);
 		tmp_path = exec_path_test(tmp_cmd, test_path[i]);
-		if (!access(tmp_path, X_OK | F_OK))
+		if (!access(tmp_path, F_OK))
 		{
 			i = -1;
 			break ;
