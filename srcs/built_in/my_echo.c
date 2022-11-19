@@ -40,23 +40,58 @@ int	check_nl(char **cmd)
 	return (0);
 }
 
+int	is_n(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 'n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	is_flag_n(char **str)
+{
+	int	i;
+	int	y;
+
+	y = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i][0] == '-' && is_n(str[i]) == 1)
+			y++;
+		else if (str[i][0] != '-')
+			return (y);
+		i++;
+	}
+	return (y);
+}
+
 int	my_echo(char **cmd)
 {
 	int	new_line;
 	int	index;
 
 	index = 0;
-	new_line = check_nl(cmd);
-	if (new_line)
-		index++;
-	while (cmd[index])
+	new_line = 0;
+	if (is_flag_n(cmd) != 0)
+	{
+		index += is_flag_n(cmd);
+		new_line = 1;
+	}
+	while (cmd && cmd[index])
 	{
 		ft_putstr_fd(cmd[index], STDOUT_FILENO);
 		index++;
 		if (cmd[index])
 			ft_putstr_fd(" ", STDOUT_FILENO);
 	}
-	if (!new_line)
+	if (new_line == 0)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }
