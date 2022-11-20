@@ -20,6 +20,7 @@ typedef struct s_cmd		t_cmd;
 typedef enum e_token_type	t_token_type;
 typedef struct s_env		t_env;
 typedef struct s_redir		t_redir;
+typedef struct s_opened		t_opened;
 
 enum	e_token_type
 {
@@ -108,9 +109,17 @@ struct s_redir
 	int				index;
 };
 
+struct	s_opened
+{
+	struct s_opened	*prev;
+	int				fd;
+	struct s_opened	*next;
+};
+
 struct s_data
 {
 	t_garbage	*garb;
+	t_opened	*opened;
 	t_env		*env_head;
 	char		**env;
 	t_token		*token;
@@ -121,6 +130,7 @@ struct s_data
 	t_builtin	*tab;
 	t_sigs		sig;
 };
+
 typedef struct s_fd
 {
 	int	fd[2];

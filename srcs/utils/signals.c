@@ -38,3 +38,21 @@ void	sig_init(void)
 	sigaction(SIGQUIT, &(sig.sexit), NULL);
 	g_data.sig = sig;
 }
+
+void	sig_heredoc(int sig)
+{
+	if (sig == SIGINT)
+	{
+		close(0);
+		g_data.status = 130;
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
+}
+
+void	sig_handler_heredoc(void)
+{
+	signal(SIGINT, sig_heredoc);
+	signal(SIGQUIT, SIG_IGN);
+}

@@ -15,7 +15,8 @@ SRCS = ${SRCS_MAIN} ${SRCS_INIT} ${SRCS_LEXER} ${SRCS_PARSER} ${SRCS_UTILS} ${SR
 SRCS_MAIN = $(addprefix srcs/, main.c)
 
 SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
-										init.c init_env.c)
+										init.c init_env.c \
+										ft_open.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c lexer_space.c \

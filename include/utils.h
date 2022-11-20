@@ -30,6 +30,8 @@ char	*ft_printstr(char *str);
 //sigs
 void	handle_sigctlc(int sig);
 void	sig_init(void);
+void	sig_heredoc(int sig);
+void	sig_handler_heredoc(void);
 
 // provisoire
 int	ft_exit_provisoire(char *str, int err);

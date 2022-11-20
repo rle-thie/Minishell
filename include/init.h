@@ -39,4 +39,10 @@ int		add_back_env(t_env *new);
 int		find_signe(char *str);
 int		env_size(void);
 
+// fd_opened;
+t_opened	*ft_opened_new(int fd, t_data *data);
+void	opened_addback(t_opened *new, t_data *data);
+void	close_all(t_data *data);
+int	ft_open(char *filename, int flags, int mod, t_data *data);
+
 #endif
