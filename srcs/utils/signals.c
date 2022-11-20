@@ -15,10 +15,13 @@
 void	handle_sigctlc(int sig)
 {
 	// printf("\n%s", input_name());
-	printf("\nmini:");
-	(void)sig;
 	g_data.status = 130;
-	g_data.error = 1;
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	(void)sig;
+	// g_data.error = 1;
 }
 
 void	sig_init(void)
