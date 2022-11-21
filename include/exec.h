@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:14:18 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/14 21:09:36 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/21 22:27:13 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int			close_pipes(t_fd	*pipe_fd);
 int			cmd_number(void);
 void		child_process(t_fd *fds, t_cmd *cmd);
 void		waiting_fct(t_cmd *last, int error);
+void		cmd_not_found(char *str);
 
 //builtin_ex
 t_builtin	*init_builtin(void);

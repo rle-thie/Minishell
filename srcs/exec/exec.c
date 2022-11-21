@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/21 17:04:03 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/21 22:26:34 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,7 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 		exit(ret);
 	}
 	if (!pa)
-	{
-		printf("%s: command not found\n", cmd->cmd_name);
-		exit(127);
-	}
+		cmd_not_found(cmd->cmd_name);
 	ret = execve(pa, cmd->flags_and_args, g_data.env);
 	perror("bash ");
 	if (!find_path_str())
@@ -110,4 +107,11 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 		ret = 126;
 	ft_free(pa, &g_data);
 	exit(ret);
+}
+
+void	cmd_not_found(char *str)
+{
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": command not found", 2);
+	exit(127);
 }
