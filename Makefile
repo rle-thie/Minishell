@@ -16,7 +16,7 @@ SRCS_MAIN = $(addprefix srcs/, main.c)
 
 SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 										init.c init_env.c \
-										secret_env.c)
+										secret_env.c \
 										ft_open.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
