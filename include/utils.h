@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/12 16:52:23 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/21 11:32:08 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	handle_sigctlc(int sig);
 void	sig_init(void);
 void	sig_heredoc(int sig);
 void	sig_handler_heredoc(void);
+
+// get_nxt_line
+char	*get_next_line(int fd);
 
 // provisoire
 int	ft_exit_provisoire(char *str, int err);
