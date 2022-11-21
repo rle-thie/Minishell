@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/11 22:22:32 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/21 16:06:04 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ struct s_data
 	int			error;
 	t_builtin	*tab;
 	t_sigs		sig;
+	int			pid;
 };
 typedef struct s_fd
 {

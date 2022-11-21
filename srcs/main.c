@@ -37,7 +37,7 @@ int	main(int ac, char **av, char **envp)
 			parser();
 		if (g_data.error == 0)
 			parent_process();
-		printf("\nEXIT STATUS : %d\n\n", g_data.status);
+		// printf("\nEXIT STATUS : %d\n\n", g_data.status);
 		g_data.cmd = NULL;
 		g_data.formated_cmd = NULL;
 		g_data.token = NULL;

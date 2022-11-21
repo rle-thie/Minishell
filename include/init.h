@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:16:50 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/10 03:12:53 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:10:20 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int		make_node(char *str);
 int		add_back_env(t_env *new);
 int		find_signe(char *str);
 int		env_size(void);
+void	spe_env(void);
 
 #endif
