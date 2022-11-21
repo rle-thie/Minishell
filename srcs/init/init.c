@@ -35,6 +35,7 @@ void	init_all(char **envp)
 	data.status = 0;
 	data.error = 0;
 	init_garb(&data);
+	data.opened = NULL;
 	g_data = data;
 	init_env();
 }

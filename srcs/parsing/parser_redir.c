@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:06:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/12 16:54:25 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:11:53 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ t_redir	*parse_redir(t_token *cmd)
 		redir_lst = delete_chevron(redir_lst);
 		redir_lst = check_heredoc(redir_lst);
 	}
+	if (g_data.status != 0)
+		sig_handler_heredoc();
 	// while (redir_lst && redir_lst->next)
 	// {
 	// 	printf("'%s'\n", redir_lst->file_name);

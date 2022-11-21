@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
+#    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 00:41:02 by rle-thie          #+#    #+#              #
-#    Updated: 2022/11/21 18:10:42 by ldevy            ###   ########.fr        #
+#    Updated: 2022/11/21 11:29:56 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS_MAIN = $(addprefix srcs/, main.c)
 SRCS_INIT = $(addprefix srcs/init/, gc.c gc_utils.c \
 										init.c init_env.c \
 										secret_env.c)
+										ft_open.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_cmd.c \
 									lexer_cmd_utils.c lexer_space.c \
@@ -40,7 +41,8 @@ SRCS_UTILS = $(addprefix srcs/utils/, ft_strjoin_gc.c \
 										ft_exit_provisoire.c \
 										signals.c \
 										ft_create_one_char.c \
-										ft_itoa_gc.c)
+										ft_itoa_gc.c \
+										ft_get_next_line.c)
 
 SRCS_BUILT_IN = $(addprefix srcs/built_in/, my_echo.c my_pwd.c \
 										my_env.c my_unset.c \

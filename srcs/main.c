@@ -25,6 +25,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g_data.error = 0;
+		// g_data.status = 0;
 		sigaction(SIGINT, &(g_data.sig.sint), NULL);
 		// str = readline(input_name());
 		str = readline("mini:");
@@ -35,7 +36,7 @@ int	main(int ac, char **av, char **envp)
 		lexer(str, &g_data);
 		if (g_data.error == 0)
 			parser();
-		if (g_data.error == 0)
+		if (g_data.error == 0 && g_data.status == 0)
 			parent_process();
 		// printf("\nEXIT STATUS : %d\n\n", g_data.status);
 		g_data.cmd = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:21:49 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/18 15:24:54 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/21 12:05:35 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 void	handle_sigctlc(int sig)
 {
 	// printf("\n%s", input_name());
-	printf("\nmini:");
-	(void)sig;
 	g_data.status = 130;
-	g_data.error = 1;
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	(void)sig;
+	// g_data.error = 1;
 }
 
 void	sig_init(void)
@@ -34,4 +37,22 @@ void	sig_init(void)
 	sigaction(SIGINT, &(sig.sint), NULL);
 	sigaction(SIGQUIT, &(sig.sexit), NULL);
 	g_data.sig = sig;
+}
+
+void	sig_heredoc(int sig)
+{
+	if (sig == SIGINT)
+	{
+		close(0);
+		g_data.status = 130;
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
+}
+
+void	sig_handler_heredoc(void)
+{
+	signal(SIGINT, sig_heredoc);
+	signal(SIGQUIT, SIG_IGN);
 }
