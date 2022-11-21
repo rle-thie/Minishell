@@ -126,7 +126,7 @@ t_redir	*parse_redir(t_token *cmd)
 		redir_lst = delete_chevron(redir_lst);
 		redir_lst = check_heredoc(redir_lst);
 	}
-	if (g_data.status != 0)
+	if (g_data.error != 0)
 		sig_handler_heredoc();
 	// while (redir_lst && redir_lst->next)
 	// {

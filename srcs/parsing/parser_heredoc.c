@@ -279,7 +279,9 @@ t_redir	*check_heredoc(t_redir *lst)
 		{
 			g_data.status = create_heredoc(lst->file_name, content);
 			if (g_data.status != 130)
-			lst->file_name = put_heredoc("/tmp/.heredocss");
+				lst->file_name = put_heredoc("/tmp/.heredocss");
+			else
+				g_data.error = 1;
 			// g_data.str_tmp = NULL;
 			// if (lst->file_name)
 			// 	lst->file_name = expand_var_herdoc(lst->file_name);
@@ -291,6 +293,8 @@ t_redir	*check_heredoc(t_redir *lst)
 		g_data.status = create_heredoc(lst->file_name, content);
 		if (g_data.status != 130)
 			lst->file_name = put_heredoc("/tmp/.heredocss");
+		else
+			g_data.error = 1;
 		// printf("'%s'\n", lst->file_name);
 		// printf("'%s'\n",  lst->file_name);
 		// g_data.str_tmp = NULL;
