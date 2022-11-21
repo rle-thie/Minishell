@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/18 12:47:38 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/21 17:04:03 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	waiting_fct(t_cmd *last, int error)
 	status = 0;
 	while (i < cmd_number() && !(cmd_number() == 1 && is_builtin(last)))
 	{
-		wait(&status);
+		if (waitpid(g_data.pid, &status, 0) == -1)
+			wait(NULL);
 		if (error)
 			break ;
 		i++;
@@ -64,6 +65,7 @@ void	exec(t_fd *fds, t_cmd *cmd)
 {
 	int	pid;
 
+	g_data.pid = -1;
 	if (is_builtin(cmd) && cmd_number() == 1)
 	{
 		g_data.status = builtin_exec(cmd);
@@ -71,6 +73,7 @@ void	exec(t_fd *fds, t_cmd *cmd)
 	}
 	struct_to_char();
 	pid = fork();
+	g_data.pid = pid;
 	if (pid == -1)
 	{
 		perror("bash :");
