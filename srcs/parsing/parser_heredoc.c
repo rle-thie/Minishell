@@ -162,14 +162,10 @@ int	heredoc_loop_return(char *content, char *line, char *eof)
 
 void	copy_in_heredoc(int fd, char *s)
 {
-	// int		i;
 	char	*dst;
 
-	// i = 0;
 	if (!s)
 		return ;
-	// if (lst->type == HERE_DOC_EXPEND)
-	// 	dst = find_dollar_value(data, s, i);
 	else
 	{
 		dst = ft_strdup_gc(s, &g_data);
@@ -177,6 +173,13 @@ void	copy_in_heredoc(int fd, char *s)
 	}
 	write(fd, dst, ft_strlen(dst));
 	ft_free(dst, &g_data);
+}
+
+void	error_ctrld(char *eof)
+{
+	ft_putstr_fd("minishell: end of heredoc (wanted `", 2);
+	ft_putstr_fd(eof, 2);
+	ft_putstr_fd("')\n", 2);
 }
 
 int	heredoc_loop(char **content, char *eof)
@@ -189,17 +192,13 @@ int	heredoc_loop(char **content, char *eof)
 		line = readline("heredoc> ");
 		if (g_data.status == 130)
 			return (1);
-		if (!line)
+		if (!line && !heredoc_loop_return(*content, line, eof))
 		{
-			ft_putstr_fd("minishell: end of heredoc (wanted `", 2);
-			ft_putstr_fd(eof, 2);
-			ft_putstr_fd("')\n", 2);
+			// error_ctrld(eof);
 			break;
 		}
 		if (!ft_strcmp(line, eof))
-		{
 			break;
-		}
 		if (!*content)
 			*content = ft_strdup_gc(line, &g_data);
 		else
@@ -207,9 +206,6 @@ int	heredoc_loop(char **content, char *eof)
 		*content = ft_strjoinchar_gc(*content, '\n', &g_data);
 		free(line);
 	}
-	// printf("total :--%s--\n", *content);
-	// *content = ft_strdup(*content);
-	// printf("total :--%s--\n", *content);
 	return (heredoc_loop_return(*content, line, eof));
 }
 
@@ -239,7 +235,7 @@ int create_heredoc(char *str, char *content)
 	waitpid(pid, &g_data.status, 0);
 	g_data.status = g_data.status % 255;
 	close(dup_stdin);
-	printf("status:%d\n", g_data.status);
+	// printf("status:%d\n", g_data.status);
 	return (g_data.status);
 }
 
@@ -282,6 +278,8 @@ t_redir	*check_heredoc(t_redir *lst)
 		if (lst->type == DOUBLE_REDIR_IN)
 		{
 			g_data.status = create_heredoc(lst->file_name, content);
+			if (g_data.status != 130)
+			lst->file_name = put_heredoc("/tmp/.heredocss");
 			// g_data.str_tmp = NULL;
 			// if (lst->file_name)
 			// 	lst->file_name = expand_var_herdoc(lst->file_name);
