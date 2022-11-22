@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/21 11:32:08 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/21 23:19:16 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	handle_sigctlc(int sig);
 void	sig_init(void);
 void	sig_heredoc(int sig);
 void	sig_handler_heredoc(void);
+void	sig_quit(int sig);
 
 // get_nxt_line
 char	*get_next_line(int fd);

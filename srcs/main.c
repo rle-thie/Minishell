@@ -25,10 +25,11 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g_data.error = 0;
-		// g_data.status = 0;
 		sigaction(SIGINT, &(g_data.sig.sint), NULL);
+		sig_init();
 		// str = readline(input_name());
 		str = readline("mini:");
+		g_data.status = 0;
 		if (str && *str)
 			add_history(str);
 		if (!str)

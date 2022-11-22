@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/21 22:26:34 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/22 00:33:54 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	waiting_fct(t_cmd *last, int error)
 	int	status;
 
 	signal(SIGINT, SIG_IGN);
+	sigaction(SIGQUIT, &(g_data.sig.sextwo), NULL);
 	i = 0;
 	status = 0;
 	while (i < cmd_number() && !(cmd_number() == 1 && is_builtin(last)))
@@ -54,7 +55,7 @@ void	waiting_fct(t_cmd *last, int error)
 	}
 	if (!(cmd_number() == 1 && is_builtin(last)))
 	{
-		if (WIFSIGNALED(status))
+		if (WIFSIGNALED(status) && g_data.status != 131)
 			g_data.status = WTERMSIG(status) + 128;
 		if (WIFEXITED(status))
 			g_data.status = WEXITSTATUS(status);
