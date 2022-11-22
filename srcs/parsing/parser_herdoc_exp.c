@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:49:03 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/15 16:49:04 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:54:17 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,16 @@ char	*var_name(char *str)
 	int		i;
 	char	*tab;
 
-	tab = ft_calloc(sizeof(char) * 2, &g_data);
-	tab[0] = ' ';
+	tab = ft_calloc(sizeof(char) * 1, &g_data);
 	i = 0;
-	while (str[i] && isin_str(str[i], "$\'\" ") == 1)
+	while (str[i] && isin_str(str[i], "$\'\" \n") == 1)
 	{
 		tab = ft_strjoinchar_gc(tab, str[i], &g_data);
 		i++;
 	}
 	// if (isin_str(str[i], "$\'\" ") != 1)
 	// 	printf("%d\n", isin_str(str[i], "$\'\" "));
-	tab = del_first_space(tab);
+	// tab = del_first_space(tab);
 	return (tab);
 }
 
@@ -70,8 +69,8 @@ char	*expand_heredoc(char *str, int i)
 	char	*tab;
 	char	*new;
 
-	tab = ft_calloc(sizeof(char) * 2, &g_data);
-	tab[0] = ' ';
+	tab = ft_calloc(sizeof(char) * 1, &g_data);
+	// tab[0] = ' ';
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1] && str[i + 1] == '?')
@@ -85,11 +84,12 @@ char	*expand_heredoc(char *str, int i)
 			if (envvar(var_name(&str[i + 1])))
 				tab = ft_strjoin_gc(tab, envvar(new), &g_data);
 			i++;
-			while (str[i] && isin_str(str[i], "$\'\" ") == 1)
+			while (str[i] && isin_str(str[i], "$\'\"  \n") == 1)
 				i++;
 		}
 		else
 			tab = ft_strjoinchar_gc(tab, str[i++], &g_data);
 	}
-	return (del_first_space(tab));
+	// return (del_first_space(tab));
+	return (tab);
 }

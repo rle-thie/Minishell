@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:32:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/21 12:45:51 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:52:24 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,13 +256,14 @@ char	*put_heredoc(char *file)
 		str = get_next_line(fd);
 		if (str && ft_strlen(str) >= 1)
 		{
+			str = expand_heredoc(str, 0);
+			// printf("%s\n", str);
 			tab = ft_strjoin_gc(tab, str, &g_data);
 		}
 		else
 			i = 1;
 	}
-	close_all(&g_data);
-	// printf("%s\n", tab);
+	close_all(&g_data);;
 	return (tab);
 }
 
