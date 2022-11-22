@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/21 16:06:04 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/22 12:09:10 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ struct	s_cmd
 	int					pipe_in;
 	int					pipe_out;
 	int					index;
+	int					pid;
 };
 
 struct	s_garbage
