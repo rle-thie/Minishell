@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/21 23:14:14 by ldevy            ###   ########.fr       */
+/*   Created: 2022/11/22 12:12:27 by ldevy             #+#    #+#             */
+/*   Updated: 2022/11/22 12:12:31 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ struct	s_cmd
 	int					pipe_in;
 	int					pipe_out;
 	int					index;
+	int					pid;
 };
 
 struct	s_garbage
