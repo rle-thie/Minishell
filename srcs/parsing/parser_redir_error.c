@@ -40,7 +40,7 @@ int	check_redir_error(t_redir *lst)
 
 int	is_valid_redir_utils(char *str, int i)
 {
-	size_t count;
+	size_t	count;
 
 	count = 0;
 	while (!str)

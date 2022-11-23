@@ -57,9 +57,6 @@ char	*var_name(char *str)
 		tab = ft_strjoinchar_gc(tab, str[i], &g_data);
 		i++;
 	}
-	// if (isin_str(str[i], "$\'\" ") != 1)
-	// 	printf("%d\n", isin_str(str[i], "$\'\" "));
-	// tab = del_first_space(tab);
 	return (tab);
 }
 
@@ -70,7 +67,6 @@ char	*expand_heredoc(char *str, int i)
 	char	*new;
 
 	tab = ft_calloc(sizeof(char) * 1, &g_data);
-	// tab[0] = ' ';
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1] && str[i + 1] == '?')
@@ -78,7 +74,8 @@ char	*expand_heredoc(char *str, int i)
 			tab = ft_strjoin_gc(tab, ft_itoa_gc(g_data.status), &g_data);
 			i = i + 2;
 		}
-		else if (str[i] == '$' && str[i + 1] && isin_str(str[i + 1], "$\'\" ") == 1)
+		else if (str[i] == '$' && str[i + 1]
+			&& isin_str(str[i + 1], "$\'\" ") == 1)
 		{
 			new = var_name(&str[i + 1]);
 			if (envvar(var_name(&str[i + 1])))
@@ -90,6 +87,5 @@ char	*expand_heredoc(char *str, int i)
 		else
 			tab = ft_strjoinchar_gc(tab, str[i++], &g_data);
 	}
-	// return (del_first_space(tab));
 	return (tab);
 }
