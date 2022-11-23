@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void 	ft_garb_free_all(t_data *data)
+void	ft_garb_free_all(t_data *data)
 {
 	while (!data->garb || data->garb->next != NULL)
 		data->garb = data->garb->next;
@@ -27,5 +27,14 @@ void 	ft_garb_free_all(t_data *data)
 		free(data->garb->ptr);
 		free(data->garb);
 	}
-	// free(data);
+}
+
+void	ft_garb_add(t_data *data, t_garbage *new)
+{
+	while (data->garb->next)
+		data->garb = data->garb->next;
+	new->prev = data->garb;
+	data->garb->next = new;
+	while (data->garb->prev)
+		data->garb = data->garb->prev;
 }

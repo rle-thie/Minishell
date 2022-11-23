@@ -55,7 +55,6 @@ int	ft_open(char *filename, int flags, int mod, t_data *data)
 		fd = open(filename, flags, mod);
 	else
 		fd = open(filename, flags);
-	// printf(";%d;\n", fd);
 	if (!data->opened)
 	{
 		data->opened = ft_malloc(sizeof(t_opened), data);
