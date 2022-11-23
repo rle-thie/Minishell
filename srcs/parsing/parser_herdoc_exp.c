@@ -52,7 +52,7 @@ char	*var_name(char *str)
 
 	tab = ft_calloc(sizeof(char) * 1, &g_data);
 	i = 0;
-	while (str[i] && isin_str(str[i], "$\'\" \n") == 1)
+	while (str[i] && isin_str(str[i], "$\'\" ") == 1)
 	{
 		tab = ft_strjoinchar_gc(tab, str[i], &g_data);
 		i++;
@@ -84,7 +84,7 @@ char	*expand_heredoc(char *str, int i)
 			if (envvar(var_name(&str[i + 1])))
 				tab = ft_strjoin_gc(tab, envvar(new), &g_data);
 			i++;
-			while (str[i] && isin_str(str[i], "$\'\"  \n") == 1)
+			while (str[i] && isin_str(str[i], "$\'\" ") == 1)
 				i++;
 		}
 		else

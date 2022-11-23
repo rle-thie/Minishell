@@ -175,13 +175,6 @@ void	copy_in_heredoc(int fd, char *s)
 	ft_free(dst, &g_data);
 }
 
-void	error_ctrld(char *eof)
-{
-	ft_putstr_fd("minishell: end of heredoc (wanted `", 2);
-	ft_putstr_fd(eof, 2);
-	ft_putstr_fd("')\n", 2);
-}
-
 int	heredoc_loop(char **content, char *eof)
 {
 	char	*line;
@@ -239,6 +232,25 @@ int create_heredoc(char *str, char *content)
 	return (g_data.status);
 }
 
+char	*del_last_n(char *str)
+{
+	char	*tab;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(str) - 1;
+	if (i < 0)
+		return (NULL);
+	tab = ft_calloc(sizeof(char) * 1, &g_data);
+	while (i < len)
+	{
+		tab = ft_strjoinchar_gc(tab, str[i], &g_data);
+		i++;
+	}
+	return (tab);
+}
+
 char	*put_heredoc(char *file)
 {
 	int		i;
@@ -246,23 +258,23 @@ char	*put_heredoc(char *file)
 	char	*str;
 	char	*tab;
 
-	tab = ft_calloc(sizeof(char) * 2, &g_data);
-	tab[0] = '\0';
 	i = 0;
-	str = NULL;
+	tab = ft_calloc(sizeof(char) * 1, &g_data);
 	fd = ft_open(file, O_RDONLY, 0, &g_data);
 	while (i == 0)
 	{
 		str = get_next_line(fd);
 		if (str && ft_strlen(str) >= 1)
 		{
+			str = del_last_n(str);
 			str = expand_heredoc(str, 0);
-			// printf("%s\n", str);
+			str = ft_strjoinchar_gc(str, '\n', &g_data);
 			tab = ft_strjoin_gc(tab, str, &g_data);
 		}
 		else
 			i = 1;
 	}
+	// tab = del_last_n(tab);
 	close_all(&g_data);;
 	return (tab);
 }
