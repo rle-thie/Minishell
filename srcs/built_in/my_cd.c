@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:39:47 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/23 16:01:44 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 17:24:43 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ t_env	*find_cd_link(char *str)
 	head = g_data.env_head;
 	while (head->next)
 	{
-		if (!ft_strncmp(head->name, str, ft_strlen(str)))
+		if (!ft_strncmp(head->name, str, ft_strlen(str) + 1))
 			return (head);
 		head = head->next;
 	}
 	if (head)
-		if (!ft_strncmp(head->name, str, ft_strlen(str)))
+		if (!ft_strncmp(head->name, str, ft_strlen(str) + 1))
 			return (head);
 	return (NULL);
 }
