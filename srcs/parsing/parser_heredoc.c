@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:32:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/21 12:45:51 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/22 12:52:24 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,53 +29,6 @@ int	is_same(char *str1, char *str2)
 	}
 	return (1);
 }
-
-// char	*put_null_char(char *str)
-// {
-// 	int len;
-// 	int	i;
-// 	char *tab;
-
-// 	i = 0;
-// 	if (!str)
-// 		exit_eof();
-// 	len = ft_strlen(str);
-// 	tab = ft_calloc(sizeof(char) * (len + 1), &g_data);
-// 	while (i < len)
-// 	{
-// 		tab[i] = str[i];
-// 		i++;
-// 	}
-// 	// printf("-%s-\n", tab);
-// 	return (tab);
-// }
-
-// char	*create_heredoc(char *str, int i)
-// {
-// 	char	*tab;
-// 	char	*tab_join;
-
-// 	tab_join = ft_calloc(sizeof(char) * 2, &g_data);
-// 	tab_join[0] = ' ';
-// 	while (1 && g_data.error == 0)
-// 	{
-// 		tab = readline("heredoc> ");
-// 		// tab = put_null_char(tab);
-// 		if (!tab || is_same(str, tab) == 1)
-// 			break ;
-// 		if (i != 0)
-// 			tab_join = ft_strjoinchar_gc(tab_join, '\n', &g_data);
-// 		tab_join = ft_strjoin_gc(tab_join, tab, &g_data);
-// 		tab_join = expand_heredoc(tab_join, 0);
-// 		i++;
-// 	}
-// 	if (!tab)
-// 		printf("end of heredoc (%s)\n", str);
-// 	if (ft_strlen(tab_join) <= 1)
-// 		return ("\0");
-// 	tab_join = del_first_space(tab_join);
-// 	return (tab_join);
-// }
 
 static int	ft_strcmp(char *s1, char *s2)
 {
@@ -175,11 +128,18 @@ void	copy_in_heredoc(int fd, char *s)
 	ft_free(dst, &g_data);
 }
 
-void	error_ctrld(char *eof)
+int	check_eof(char *line, char *eof)
 {
-	ft_putstr_fd("minishell: end of heredoc (wanted `", 2);
-	ft_putstr_fd(eof, 2);
-	ft_putstr_fd("')\n", 2);
+	char	*dst;
+
+	dst = ft_strdup_gc(line, &g_data);
+	if (!ft_strcmp(dst, eof))
+	{
+		ft_free(dst, &g_data);
+		return (1);
+	}
+	ft_free(dst, &g_data);
+	return (0);
 }
 
 int	heredoc_loop(char **content, char *eof)
@@ -192,7 +152,7 @@ int	heredoc_loop(char **content, char *eof)
 		line = readline("heredoc> ");
 		if (g_data.status == 130)
 			return (1);
-		if (!line && !heredoc_loop_return(*content, line, eof))
+		if (!line || !ft_strcmp(line, eof) ||check_eof(line, eof))
 		{
 			// error_ctrld(eof);
 			break;
@@ -239,6 +199,25 @@ int create_heredoc(char *str, char *content)
 	return (g_data.status);
 }
 
+char	*del_last_n(char *str)
+{
+	char	*tab;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(str) - 1;
+	if (i < 0)
+		return (NULL);
+	tab = ft_calloc(sizeof(char) * 1, &g_data);
+	while (i < len)
+	{
+		tab = ft_strjoinchar_gc(tab, str[i], &g_data);
+		i++;
+	}
+	return (tab);
+}
+
 char	*put_heredoc(char *file)
 {
 	int		i;
@@ -246,23 +225,24 @@ char	*put_heredoc(char *file)
 	char	*str;
 	char	*tab;
 
-	tab = ft_calloc(sizeof(char) * 2, &g_data);
-	tab[0] = '\0';
 	i = 0;
-	str = NULL;
+	tab = ft_calloc(sizeof(char) * 1, &g_data);
 	fd = ft_open(file, O_RDONLY, 0, &g_data);
 	while (i == 0)
 	{
 		str = get_next_line(fd);
 		if (str && ft_strlen(str) >= 1)
 		{
+			str = del_last_n(str);
+			str = expand_heredoc(str, 0);
+			str = ft_strjoinchar_gc(str, '\n', &g_data);
 			tab = ft_strjoin_gc(tab, str, &g_data);
 		}
 		else
 			i = 1;
 	}
-	close_all(&g_data);
-	// printf("%s\n", tab);
+	// tab = del_last_n(tab);
+	close_all(&g_data);;
 	return (tab);
 }
 
