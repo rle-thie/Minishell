@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/23 13:26:54 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 15:00:29 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	parent_process(void)
 	int		error;
 
 	error = 0;
-	g_data.status = 0;
 	head = g_data.formated_cmd;
 	if (!head)
 		return ;
@@ -73,6 +72,7 @@ void	exec(t_fd *fds, t_cmd *cmd)
 	}
 	struct_to_char();
 	sig_reset();
+	g_data.status = 0;
 	cmd->pid = fork();
 	if (cmd->pid == -1)
 	{

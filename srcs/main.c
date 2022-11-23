@@ -26,7 +26,6 @@ int	main(int ac, char **av, char **envp)
 		g_data.error = 0;
 		sig_init();
 		str = readline(input_name());
-		g_data.status = 0;
 		if (str && *str)
 			add_history(str);
 		if (!str)
@@ -41,6 +40,5 @@ int	main(int ac, char **av, char **envp)
 		g_data.formated_cmd = NULL;
 		g_data.token = NULL;
 	}
-	printf("exit\n");
 	my_exit(NULL);
 }
