@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/21 23:19:16 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 13:04:47 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	sig_init(void);
 void	sig_heredoc(int sig);
 void	sig_handler_heredoc(void);
 void	sig_quit(int sig);
+void	sig_reset(void);
+void	sig_fork(int sig);
 
 // get_nxt_line
 char	*get_next_line(int fd);

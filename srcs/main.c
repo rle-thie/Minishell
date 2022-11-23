@@ -21,14 +21,11 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	init_all(envp);
-	sig_init();
 	while (1)
 	{
 		g_data.error = 0;
-		sigaction(SIGINT, &(g_data.sig.sint), NULL);
 		sig_init();
-		// str = readline(input_name());
-		str = readline("mini:");
+		str = readline(input_name());
 		g_data.status = 0;
 		if (str && *str)
 			add_history(str);

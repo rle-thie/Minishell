@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/23 12:21:20 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 13:55:54 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_sigs
 {
 	struct sigaction	sint;
 	struct sigaction	sexit;
-	struct sigaction	sextwo;
 }	t_sigs;
 
 struct	s_token
