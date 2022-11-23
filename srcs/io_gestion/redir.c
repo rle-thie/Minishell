@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:26:21 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 17:34:00 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 16:20:38 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	redir_loop(t_cmd *cmd)
 			ret = open_file_out(head->file_name, head->type);
 		if (head->type == REDIR_IN || head->type == DOUBLE_REDIR_IN)
 			ret = open_file_in(head);
-		if (ret == -1)
-			err_msg_rd(head->file_name);
+		if (ret == -1 && err_msg_rd(head->file_name, cmd))
+			return (ret);
 		head = head->next;
 	}
 	return (ret);
