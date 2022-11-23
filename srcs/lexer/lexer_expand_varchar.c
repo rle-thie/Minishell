@@ -20,12 +20,12 @@ static char	*find_env_var(char *str)
 	while (head->next)
 	{
 		if (!ft_strcmp(head->name, str))
-			return (head);
+			return (head->str);
 		head = head->next;
 	}
 	if (head)
 		if (!ft_strcmp(head->name, str))
-			return (head);
+			return (head->str);
 	return (NULL);
 }
 
