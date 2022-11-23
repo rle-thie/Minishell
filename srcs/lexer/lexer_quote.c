@@ -70,9 +70,11 @@ t_token	*check_quote(t_token *cmd)
 	{
 		error = check_open_quote(cmd);
 		if (error == -1)
-			ft_exit_provisoire("minishell: syntax error near unexpected token `\''\n", 0);
+			ft_exit_provisoire("minishell: syntax error near unexpected\
+			 token `\''\n", 0);
 		else if (error == -2)
-			ft_exit_provisoire("minishell: syntax error near unexpected token `\"'\n", 0);
+			ft_exit_provisoire("minishell: syntax error near unexpected\
+			 token `\"'\n", 0);
 	}
 	if (g_data.error == 1)
 		return (NULL);

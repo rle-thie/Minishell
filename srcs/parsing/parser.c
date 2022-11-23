@@ -14,7 +14,7 @@
 
 t_cmd	*create_parser_list(void)
 {
-	t_cmd *new;
+	t_cmd	*new;
 
 	new = ft_malloc(sizeof(t_cmd), &g_data);
 	new->prev = NULL;
@@ -35,13 +35,8 @@ t_cmd	*create_parser_list(void)
 
 void	add_back_parser(void)
 {
-	// t_cmd	*tmp;
-
 	if (!g_data.formated_cmd)
-	{
 		g_data.formated_cmd = create_parser_list();
-		// tmp = g_data.cmd;
-	}
 	else
 	{
 		g_data.formated_cmd->next = create_parser_list();
@@ -76,12 +71,9 @@ char	*select_cmd(t_token *cmd)
 
 void	fill_cmd(t_token *cmd)
 {
-	// cmd=cmd;
 	add_back_parser();
 	g_data.formated_cmd->redir = parse_redir(cmd);
 	g_data.formated_cmd->cmd_name = select_cmd(cmd);
-	// g_data.formated_cmd->cmd_name = cmd->str;
-	// g_data.formated_cmd->cmd_name = fill_cmdname(cmd);
 	if (cmd->next)
 	{
 		cmd = cmd->next;
@@ -89,19 +81,17 @@ void	fill_cmd(t_token *cmd)
 		g_data.formated_cmd->args = fill_args(cmd);
 	}
 	g_data.formated_cmd->flags_and_args = fill_flags_args(
-		g_data.formated_cmd->flags,
-		g_data.formated_cmd->args,
-		g_data.formated_cmd->nbr_args,
-		g_data.formated_cmd->cmd_name);
-	// ft_print_args(g_data.formated_cmd->flags_and_args);
-	// printf("%s\n", g_data.formated_cmd->cmd_name);
+			g_data.formated_cmd->flags,
+			g_data.formated_cmd->args,
+			g_data.formated_cmd->nbr_args,
+			g_data.formated_cmd->cmd_name);
 }
 
 void	parser(void)
 {
-	int	i;
 	t_token	*tmp;
-	
+	int		i;
+
 	i = 0;
 	tmp = g_data.cmd;
 	if (!g_data.cmd)
@@ -123,14 +113,4 @@ void	parser(void)
 	while (g_data.formated_cmd->prev)
 		g_data.formated_cmd = g_data.formated_cmd->prev;
 	add_bool_var(g_data.formated_cmd);
-
-	// if (g_data.cmd)
-	// 	ft_print_token(g_data.cmd);
-
-	// printf("%s %s\n", g_data.formated_cmd->prev->cmd_name, g_data.formated_cmd->cmd_name);
-	// ft_print_formated(g_data.formated_cmd);
-	// delete_lst(g_data.formated_cmd->next->next->next);
-	// if (g_data.formated_cmd == NULL)
-	// 	printf("caca\n");
-	// ft_print_formated(g_data.formated_cmd);
 }
