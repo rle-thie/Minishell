@@ -92,7 +92,7 @@ t_token	*delete_null_tok(t_token *cmd)
 
 t_token	*check_variable_env(t_token *cmd)
 {
-	if (g_data.error == 1)
+	if (g_data.error == 1 || !g_data.cmd)
 		return (NULL);
 	cmd = check_double_dollar(cmd, -1, 0);
 	while (cmd->prev)
