@@ -19,13 +19,13 @@ static char	*find_env_var(char *str)
 	head = g_data.env_head;
 	while (head->next)
 	{
-		if (!ft_strncmp(head->name, str, ft_strlen(str)))
-			return (head->str);
+		if (!ft_strcmp(head->name, str))
+			return (head);
 		head = head->next;
 	}
 	if (head)
-		if (!ft_strncmp(head->name, str, ft_strlen(str)))
-			return (head->str);
+		if (!ft_strcmp(head->name, str))
+			return (head);
 	return (NULL);
 }
 
