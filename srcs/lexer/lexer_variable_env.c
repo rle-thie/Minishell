@@ -72,6 +72,24 @@ t_token	*dollar_to_word_type(t_token *cmd)
 	return (cmd);
 }
 
+t_token	*delete_null_tok(t_token *cmd)
+{
+	while (cmd && cmd->next)
+	{
+		if (cmd->type == WORD && !cmd->str)
+			cmd->type = WHITE_SPACE;
+		if (cmd->next)
+			cmd = cmd->next;
+	}
+	if (cmd && cmd->type == WORD && !cmd->str)
+	{
+		cmd->type = WHITE_SPACE;
+	}
+	while (cmd && cmd->prev)
+		cmd = cmd->prev;
+	return (cmd);
+}
+
 t_token	*check_variable_env(t_token *cmd)
 {
 	if (g_data.error == 1)
@@ -82,6 +100,7 @@ t_token	*check_variable_env(t_token *cmd)
 	cmd = dollar_to_word_type(cmd);
 	cmd = expand_var(cmd);
 	cmd = delete_all_dollar(cmd);
+	cmd = delete_null_tok(cmd);
 	cmd = delete_double_space(cmd);
 	while (cmd->prev)
 		cmd = cmd->prev;
