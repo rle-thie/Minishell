@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 18:51:36 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/23 19:09:27 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 20:16:08 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int	builtin_exec_two(t_cmd *cmd, t_builtin *tab, char **args, int i)
 		return (1);
 	}
 	ret = (*tab[i].ptr_fct)(&args[1]);
-	if (!(is_builtin(cmd) && cmd_number() == 1))
+	printf("fd : %d\n", fd);
+	if (!(is_builtin(cmd) && cmd_number() == 1) || fd != 0)
 		dup2(STDIN_FILENO, fd);
 	ft_free(tab, &g_data);
 	return (ret);

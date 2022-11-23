@@ -1,0 +1,28 @@
+/home/ldevy/Documents/projet/minishell/minishell
+
+EXIT STATUS : 0
+
+[?2004hldevy@minishell:/home/ldevy/Documents/projet/minishell/minishell$   ^C[?2004l
+ldevy@minishell:/home/ldevy/Documents/projet/minishell/minishell$ [?2004h^C[?2004l
+ldevy@minishell:/home/ldevy/Documents/projet/minishell/minishell$ [?2004h
+[?2004l
+EXIT STATUS : 130
+
+[?2004hldevy@minishell:/home/ldevy/Documents/projet/minishell/minishell$ 
+[?2004l
+EXIT STATUS : 130
+
+[?2004hldevy@minishell:/home/ldevy/Documents/projet/minishell/minishell$ 
+[?2004l
+EXIT STATUS : 130
+
+[?2004hldevy@minishell:/home/ldevy/Documents/projet/minishell/minishell$ 
+[?2004l
+EXIT STATUS : 130
+
+[?2004hldevy@minishell:/home/ldevy/Documents/projet/minishell/minishell$ 
+[?2004l
+EXIT STATUS : 130
+
+[?2004hldevy@minishell:/home/ldevy/Documents/projet/minishell/minishell$ [?2004l
+exit
