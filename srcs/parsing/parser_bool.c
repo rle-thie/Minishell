@@ -48,7 +48,7 @@ void	init_index(t_cmd *cmd)
 void	add_bool_var(t_cmd *format_cmd)
 {
 	if (!format_cmd->cmd_name)
-		format_cmd->cmd_name = ft_calloc(sizeof(char) * 1, &g_data);
+		format_cmd->cmd_name = NULL;
 	init_index(format_cmd);
 	add_pipe(format_cmd);
 }
