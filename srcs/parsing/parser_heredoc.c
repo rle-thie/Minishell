@@ -30,53 +30,6 @@ int	is_same(char *str1, char *str2)
 	return (1);
 }
 
-// char	*put_null_char(char *str)
-// {
-// 	int len;
-// 	int	i;
-// 	char *tab;
-
-// 	i = 0;
-// 	if (!str)
-// 		exit_eof();
-// 	len = ft_strlen(str);
-// 	tab = ft_calloc(sizeof(char) * (len + 1), &g_data);
-// 	while (i < len)
-// 	{
-// 		tab[i] = str[i];
-// 		i++;
-// 	}
-// 	// printf("-%s-\n", tab);
-// 	return (tab);
-// }
-
-// char	*create_heredoc(char *str, int i)
-// {
-// 	char	*tab;
-// 	char	*tab_join;
-
-// 	tab_join = ft_calloc(sizeof(char) * 2, &g_data);
-// 	tab_join[0] = ' ';
-// 	while (1 && g_data.error == 0)
-// 	{
-// 		tab = readline("heredoc> ");
-// 		// tab = put_null_char(tab);
-// 		if (!tab || is_same(str, tab) == 1)
-// 			break ;
-// 		if (i != 0)
-// 			tab_join = ft_strjoinchar_gc(tab_join, '\n', &g_data);
-// 		tab_join = ft_strjoin_gc(tab_join, tab, &g_data);
-// 		tab_join = expand_heredoc(tab_join, 0);
-// 		i++;
-// 	}
-// 	if (!tab)
-// 		printf("end of heredoc (%s)\n", str);
-// 	if (ft_strlen(tab_join) <= 1)
-// 		return ("\0");
-// 	tab_join = del_first_space(tab_join);
-// 	return (tab_join);
-// }
-
 static int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -175,6 +128,20 @@ void	copy_in_heredoc(int fd, char *s)
 	ft_free(dst, &g_data);
 }
 
+int	check_eof(char *line, char *eof)
+{
+	char	*dst;
+
+	dst = ft_strdup_gc(line, &g_data);
+	if (!ft_strcmp(dst, eof))
+	{
+		ft_free(dst, &g_data);
+		return (1);
+	}
+	ft_free(dst, &g_data);
+	return (0);
+}
+
 int	heredoc_loop(char **content, char *eof)
 {
 	char	*line;
@@ -185,7 +152,7 @@ int	heredoc_loop(char **content, char *eof)
 		line = readline("heredoc> ");
 		if (g_data.status == 130)
 			return (1);
-		if (!line && !heredoc_loop_return(*content, line, eof))
+		if (!line || !ft_strcmp(line, eof) ||check_eof(line, eof))
 		{
 			// error_ctrld(eof);
 			break;
