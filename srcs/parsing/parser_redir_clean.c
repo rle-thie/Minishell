@@ -14,7 +14,7 @@
 
 char	*create_clean_redir(char *str, int len)
 {
-	char *tab;
+	char	*tab;
 	int		i;
 	int		y;
 
@@ -42,8 +42,8 @@ char	*create_clean_redir(char *str, int len)
 
 char	*check_space(char *str, int i)
 {
-	int y;
 	char	*tab;
+	int		y;
 
 	y = 0;
 	if (!str)
@@ -63,10 +63,7 @@ char	*check_space(char *str, int i)
 				i++;
 		}
 	}
-
-	// printf("str:%d, '%s', %d\n", i, str, i-y);
 	tab = create_clean_redir(str, i - y);
-	// printf("tab:'%s'\n", tab);
 	return (tab);
 }
 
@@ -118,14 +115,12 @@ t_redir	*clean_all_redir(t_redir *lst)
 	{
 		lst->file_name = check_space(lst->file_name, 0);
 		lst->type = check_type(lst->file_name, -1);
-		// printf("%d\n", lst->index);
 		lst = lst->next;
 	}
 	if (lst)
 	{
 		lst->file_name = check_space(lst->file_name, 0);
 		lst->type = check_type(lst->file_name, -1);
-		// printf("%d\n", lst->index);
 	}
 	while (lst->prev)
 		lst = lst->prev;

@@ -12,25 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int	is_same(char *str1, char *str2)
-{
-	int	i;
-
-	i = 0;
-	if (!str1 || !str2)
-		return (-1);
-	if (ft_strlen(str1) != ft_strlen(str2))
-		return (-2);
-	while (str1[i])
-	{
-		if (str1[i] != str2[i])
-			return (-3);
-		i++;
-	}
-	return (1);
-}
-
-static int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -38,60 +20,6 @@ static int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
-}
-
-void	sig_reset(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-void	free_all(t_data *data)
-{
-	data=data;
-	ft_garb_free_all(&g_data);
-	// free(data);
-	rl_clear_history();
-}
-
-int	exit_heredoc_fork(t_data *data, int dup_stdin)
-{
-
-	dup_stdin=dup_stdin;
-	data=data;
-	close (0);
-	close(dup_stdin);
-	close_all(data);
-	free_all(data);
-	exit (g_data.status);
-}
-
-void	exec_error(t_data *data)
-{
-	// error(NULL, NULL, msg);
-	free_all(data);
-	data->status = 255;
-	exit(data->status);
-}
-
-int	no_line_return(int i, char *eof)
-{
-	char	p1;
-	char	p2;
-
-	p1 = '(';
-	p2 = ')';
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd("warning: here-document at line ", 2);
-	ft_putstr_fd(ft_itoa_gc(i), 2);
-	ft_putstr_fd(" delimited by end-of-file ", 2);
-	write(2, &p1, 1);
-	ft_putstr_fd("wanted `", 2);
-	ft_putstr_fd(eof, 2);
-	ft_putstr_fd("'", 2);
-	write(2, &p2, 1);
-	ft_putstr_fd("\n", 2);
-	return (0);
 }
 
 int	heredoc_loop_return(char *content, char *line, char *eof)
@@ -113,35 +41,6 @@ int	heredoc_loop_return(char *content, char *line, char *eof)
 	return (0);
 }
 
-void	copy_in_heredoc(int fd, char *s)
-{
-	char	*dst;
-
-	if (!s)
-		return ;
-	else
-	{
-		dst = ft_strdup_gc(s, &g_data);
-		ft_free(s, &g_data);
-	}
-	write(fd, dst, ft_strlen(dst));
-	ft_free(dst, &g_data);
-}
-
-int	check_eof(char *line, char *eof)
-{
-	char	*dst;
-
-	dst = ft_strdup_gc(line, &g_data);
-	if (!ft_strcmp(dst, eof))
-	{
-		ft_free(dst, &g_data);
-		return (1);
-	}
-	ft_free(dst, &g_data);
-	return (0);
-}
-
 int	heredoc_loop(char **content, char *eof)
 {
 	char	*line;
@@ -152,13 +51,10 @@ int	heredoc_loop(char **content, char *eof)
 		line = readline("heredoc> ");
 		if (g_data.status == 130)
 			return (1);
-		if (!line || !ft_strcmp(line, eof) ||check_eof(line, eof))
-		{
-			// error_ctrld(eof);
-			break;
-		}
+		if (!line || !ft_strcmp(line, eof) || check_eof(line, eof))
+			break ;
 		if (!ft_strcmp(line, eof))
-			break;
+			break ;
 		if (!*content)
 			*content = ft_strdup_gc(line, &g_data);
 		else
@@ -169,10 +65,10 @@ int	heredoc_loop(char **content, char *eof)
 	return (heredoc_loop_return(*content, line, eof));
 }
 
-int create_heredoc(char *str, char *content)
+int	create_heredoc(char *str, char *content)
 {
-	int		fd;
 	pid_t	pid;
+	int		fd;
 	int		dup_stdin;
 
 	sig_reset();
@@ -184,7 +80,7 @@ int create_heredoc(char *str, char *content)
 	{
 		sig_handler_heredoc();
 		dup2(dup_stdin, 0);
-		fd = ft_open("/tmp/.heredocss", O_CREAT | O_WRONLY | O_TRUNC, 0644, &g_data);
+		fd = ft_open("/tmp/.hdss", O_CREAT | O_WRONLY | O_TRUNC, 0644, &g_data);
 		if (fd < 0)
 			exec_error(&g_data);
 		if (heredoc_loop(&content, str))
@@ -195,61 +91,11 @@ int create_heredoc(char *str, char *content)
 	waitpid(pid, &g_data.status, 0);
 	g_data.status = g_data.status % 255;
 	close(dup_stdin);
-	// printf("status:%d\n", g_data.status);
 	return (g_data.status);
 }
 
-char	*del_last_n(char *str)
+t_redir	*check_heredoc(t_redir *lst, char *content)
 {
-	char	*tab;
-	int		len;
-	int		i;
-
-	i = 0;
-	len = ft_strlen(str) - 1;
-	if (i < 0)
-		return (NULL);
-	tab = ft_calloc(sizeof(char) * 1, &g_data);
-	while (i < len)
-	{
-		tab = ft_strjoinchar_gc(tab, str[i], &g_data);
-		i++;
-	}
-	return (tab);
-}
-
-char	*put_heredoc(char *file)
-{
-	int		i;
-	int		fd;
-	char	*str;
-	char	*tab;
-
-	i = 0;
-	tab = ft_calloc(sizeof(char) * 1, &g_data);
-	fd = ft_open(file, O_RDONLY, 0, &g_data);
-	while (i == 0)
-	{
-		str = get_next_line(fd);
-		if (str && ft_strlen(str) >= 1)
-		{
-			str = del_last_n(str);
-			str = expand_heredoc(str, 0);
-			str = ft_strjoinchar_gc(str, '\n', &g_data);
-			tab = ft_strjoin_gc(tab, str, &g_data);
-		}
-		else
-			i = 1;
-	}
-	// tab = del_last_n(tab);
-	close_all(&g_data);;
-	return (tab);
-}
-
-t_redir	*check_heredoc(t_redir *lst)
-{
-	char	*content;
-
 	content = NULL;
 	if (g_data.error != 0)
 		return (NULL);
@@ -259,12 +105,9 @@ t_redir	*check_heredoc(t_redir *lst)
 		{
 			g_data.status = create_heredoc(lst->file_name, content);
 			if (g_data.status != 130)
-				lst->file_name = put_heredoc("/tmp/.heredocss");
+				lst->file_name = put_heredoc("/tmp/.hdss");
 			else
 				g_data.error = 1;
-			// g_data.str_tmp = NULL;
-			// if (lst->file_name)
-			// 	lst->file_name = expand_var_herdoc(lst->file_name);
 		}
 		lst = lst->next;
 	}
@@ -272,19 +115,9 @@ t_redir	*check_heredoc(t_redir *lst)
 	{
 		g_data.status = create_heredoc(lst->file_name, content);
 		if (g_data.status != 130)
-			lst->file_name = put_heredoc("/tmp/.heredocss");
+			lst->file_name = put_heredoc("/tmp/.hdss");
 		else
 			g_data.error = 1;
-		// printf("'%s'\n", lst->file_name);
-		// printf("'%s'\n",  lst->file_name);
-		// g_data.str_tmp = NULL;
-		// lst->file_name = ft_strdup_gc(lst->file_name, &g_data);
-		// if (content)
-		// 	free(content);
-		// if (lst->file_name)
-		// 	lst->file_name = expand_var_herdoc(lst->file_name);
 	}
-	while (lst && lst->prev)
-		lst = lst->prev;
-	return (lst);
+	return (lst_put_start(lst));
 }

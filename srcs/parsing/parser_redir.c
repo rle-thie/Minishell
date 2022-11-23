@@ -36,7 +36,7 @@ void	select_redir(t_token *cmd)
 				cmd->type = cmd->prev->type;
 				cmd = cmd->next;
 			}
-			while(cmd && cmd->type == WHITE_SPACE && cmd->next)
+			while (cmd && cmd->type == WHITE_SPACE && cmd->next)
 			{
 				cmd->type = cmd->prev->type;
 				cmd = cmd->next;
@@ -51,7 +51,6 @@ void	select_redir(t_token *cmd)
 	}
 	cmd = select_redir_utils(cmd);
 }
-
 
 t_redir	*join_redir(t_token *cmd)
 {
@@ -76,21 +75,7 @@ t_redir	*join_redir(t_token *cmd)
 			cmd = cmd->next;
 		ft_free(str, &g_data);
 	}
-	// printf("fin\n");
 	return (redir_lst);
-}
-
-int	is_redir(t_token *cmd)
-{
-	while (cmd->next && cmd->next->type != PIPE)
-	{
-		if (cmd->type == REDIR)
-			return (1);
-		cmd = cmd->next;
-	}
-	if (cmd && cmd->type == REDIR)
-		return (1);
-	return (0);
 }
 
 void	delete_redir_type(t_token *cmd)
@@ -113,7 +98,6 @@ t_redir	*parse_redir(t_token *cmd)
 
 	select_redir(cmd);
 	redir_lst = join_redir(cmd);
-
 	if (redir_lst)
 		redir_lst = lst_put_start(redir_lst);
 	delete_redir_type(cmd);
@@ -124,19 +108,11 @@ t_redir	*parse_redir(t_token *cmd)
 		if (redir_lst)
 			redir_lst = clean_all_redir(redir_lst);
 		redir_lst = delete_chevron(redir_lst);
-		redir_lst = check_heredoc(redir_lst);
+		redir_lst = check_heredoc(redir_lst, NULL);
 	}
 	if (g_data.error != 0)
 		sig_handler_heredoc();
-	// while (redir_lst && redir_lst->next)
-	// {
-	// 	printf("'%s'\n", redir_lst->file_name);
-	// 	redir_lst = redir_lst->next;
-	// }
-	// if (redir_lst)
-	// 	printf("'%s'\n", redir_lst->file_name);
 	check_redir_error(redir_lst);
-
 	while (redir_lst && redir_lst->prev)
 		redir_lst = redir_lst->prev;
 	return (redir_lst);
