@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/23 15:00:29 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 21:38:51 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 	pa = path(cmd->cmd_name);
 	redir_pipe(fds, cmd);
 	close_pipes(fds);
+	//mettre une fct ac le booleen ici	
 	if (is_builtin(cmd))
 	{
 		ret = builtin_exec(cmd);

@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:26:21 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/23 20:49:08 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 21:39:28 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	open_file_in(t_redir *rd, t_cmd *cmd)
 		fd = heredoc(rd);
 	if (fd == -1)
 		return (fd);
-	if ((is_builtin(cmd) && cmd_number() == 1) || cmd->cmd_name)
+if ((is_builtin(cmd) && cmd_number() == 1) || // le bool ici)
 		ret = 0;
 	else
 		ret = dup2(fd, STDIN_FILENO);
