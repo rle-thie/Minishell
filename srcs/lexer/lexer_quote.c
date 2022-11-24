@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:28:34 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/10 00:35:42 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:14:47 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ int	check_open_quote(t_token *cmd)
 	return (1);
 }
 
+static int	put_err(char *str)
+{
+	return (ft_exit_provisoire(str, 0));
+}
+
 // check_quote(data->cmd);
 t_token	*check_quote(t_token *cmd)
 {
@@ -70,11 +75,9 @@ t_token	*check_quote(t_token *cmd)
 	{
 		error = check_open_quote(cmd);
 		if (error == -1)
-			ft_exit_provisoire("minishell: syntax error near unexpected\
-			 token `\''\n", 0);
+			put_err("minishell: syntax error near unexpected token `\''\n");
 		else if (error == -2)
-			ft_exit_provisoire("minishell: syntax error near unexpected\
-			 token `\"'\n", 0);
+			put_err("minishell: syntax error near unexpected token `\"'\n");
 	}
 	if (g_data.error == 1)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:47:48 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/07 11:47:54 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:52:50 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*del_first_space(char *str)
 
 	i = 1;
 	str2 = NULL;
-	if (!str ||ft_strlen(str) <= 1)
+	if (!str || ft_strlen(str) <= 1)
 		return (NULL);
 	if (str[0] != ' ')
 		return (str);
