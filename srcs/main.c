@@ -6,13 +6,20 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:03:24 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/07 16:52:21by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 12:42:30 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 t_data	g_data;
+
+void	put_null_data(void)
+{
+	g_data.cmd = NULL;
+	g_data.formated_cmd = NULL;
+	g_data.token = NULL;
+}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -36,9 +43,7 @@ int	main(int ac, char **av, char **envp)
 		if (g_data.error == 0)
 			parent_process();
 		printf("\nEXIT STATUS : %d\n\n", g_data.status);
-		g_data.cmd = NULL;
-		g_data.formated_cmd = NULL;
-		g_data.token = NULL;
+		put_null_data();
 	}
 	my_exit(NULL);
 }
