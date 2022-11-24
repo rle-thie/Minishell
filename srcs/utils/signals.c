@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:21:49 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/23 13:55:44 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 12:21:03 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	handle_sigctlc(int sig)
 {
-	// printf("\n%s", input_name());
 	g_data.status = 130;
 	ft_putstr_fd("\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 	(void)sig;
+	// g_data.error = 1;
 }
 
 void	sig_init(void)
