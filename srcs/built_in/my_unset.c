@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:07:37 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 19:10:50 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 12:45:48 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	my_unset(char **cmd)
 			ret = 1;
 		i++;
 	}
-	printf("expected ret : %d", ret);
 	return (ret);
 }
 
@@ -62,6 +61,3 @@ void	del_env_link(t_env *link)
 	}
 	ft_free(link, &g_data);
 }
-
-//doit essayer de suprimmer chaque arg donné
-//faire attention que le prev ou next existe avant de switch des addr
