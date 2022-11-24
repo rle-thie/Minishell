@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/24 11:12:33 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:49:44 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ struct	s_cmd
 	int					pipe_out;
 	int					index;
 	int					bool_cmd;
+	int					pid;
 };
 
 struct	s_garbage
