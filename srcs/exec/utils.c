@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:31:54 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 16:34:32 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 11:25:38 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,10 @@ t_cmd	*get_last_cmd(void)
 		head = head->next;
 	}
 	return (head);
+}
+
+void	check_cmd_bool(t_cmd *cmd)
+{
+	if (!cmd->bool_cmd)
+		exit(0);
 }
