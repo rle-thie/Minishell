@@ -95,7 +95,9 @@ void	delete_redir_type(t_token *cmd)
 t_redir	*parse_redir(t_token *cmd)
 {
 	t_redir	*redir_lst;
+	int		exits;
 
+	exits = g_data.status;
 	select_redir(cmd);
 	redir_lst = join_redir(cmd);
 	if (redir_lst)
@@ -108,7 +110,10 @@ t_redir	*parse_redir(t_token *cmd)
 		if (redir_lst)
 			redir_lst = clean_all_redir(redir_lst);
 		redir_lst = delete_chevron(redir_lst);
+		g_data.status = 0;
 		redir_lst = check_heredoc(redir_lst, NULL);
+		if (g_data.status != 130)
+			g_data.status = exits;
 	}
 	if (g_data.error != 0)
 		sig_handler_heredoc();
