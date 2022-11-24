@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/24 11:35:38 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 11:55:05 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 	ret = 0;
 	redir_pipe(fds, cmd);
 	close_pipes(fds);
-	printf("cmd bool : %d\n", cmd->bool_cmd);
 	check_cmd_bool(cmd);
 	pa = path(cmd->cmd_name);
 	if (is_builtin(cmd))
