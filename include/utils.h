@@ -6,11 +6,11 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 03:29:06 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/23 13:04:47 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 12:23:35 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	UTILS_H
+#ifndef UTILS_H
 # define UTILS_H
 
 char	*ft_strjoin_gc(char *s1, char *s2, t_data *data);
@@ -40,6 +40,6 @@ void	sig_fork(int sig);
 char	*get_next_line(int fd);
 
 // provisoire
-int	ft_exit_provisoire(char *str, int err);
+int		ft_exit_provisoire(char *str, int err);
 
 #endif

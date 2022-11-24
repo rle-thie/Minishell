@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:14:18 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/21 22:27:13 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 11:26:30 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int			builtin_exec_two(t_cmd *cmd, t_builtin *tab, char **args, int i);
 
 //utils
 t_cmd		*get_last_cmd(void);
+void		check_cmd_bool(t_cmd *cmd);
 
 //debug
 void		print_cmd(t_cmd *cmd);

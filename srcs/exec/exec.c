@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/23 15:00:29 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 11:55:05 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,10 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 	signal(SIGINT, sig_fork);
 	signal(SIGQUIT, sig_fork);
 	ret = 0;
-	pa = path(cmd->cmd_name);
 	redir_pipe(fds, cmd);
 	close_pipes(fds);
+	check_cmd_bool(cmd);
+	pa = path(cmd->cmd_name);
 	if (is_builtin(cmd))
 	{
 		ret = builtin_exec(cmd);

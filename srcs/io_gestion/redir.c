@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:26:21 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/23 19:11:21 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 11:27:38 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	open_file_out(char *path, int mode)
 
 int	open_file_in(t_redir *rd, t_cmd *cmd)
 {
-	int	fd;
-	int	ret;
+	int		fd;
+	int		ret;
 
 	if (rd->type == REDIR_IN)
 	{
@@ -54,7 +54,7 @@ int	open_file_in(t_redir *rd, t_cmd *cmd)
 		fd = heredoc(rd);
 	if (fd == -1)
 		return (fd);
-	if (is_builtin(cmd) && cmd_number() == 1)
+	if ((is_builtin(cmd) && cmd_number() == 1) || !cmd->bool_cmd)
 		ret = 0;
 	else
 		ret = dup2(fd, STDIN_FILENO);
