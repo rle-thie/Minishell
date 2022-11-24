@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:26:17 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/22 12:10:07 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:12:11 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_cmd	*create_parser_list(void)
 	new->bool_redir_in = 0;
 	new->bool_redir_out = 0;
 	new->index = -1;
-	new->pid = -1;
+	new->bool_cmd = -1;
 	return (new);
 }
 
