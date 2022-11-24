@@ -21,15 +21,11 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	init_all(envp);
-	sig_init();
 	while (1)
 	{
 		g_data.error = 0;
-		sigaction(SIGINT, &(g_data.sig.sint), NULL);
 		sig_init();
-		// str = readline(input_name());
-		str = readline("mini:");
-		g_data.status = 0;
+		str = readline(input_name());
 		if (str && *str)
 			add_history(str);
 		if (!str)
@@ -44,6 +40,5 @@ int	main(int ac, char **av, char **envp)
 		g_data.formated_cmd = NULL;
 		g_data.token = NULL;
 	}
-	printf("exit\n");
 	my_exit(NULL);
 }

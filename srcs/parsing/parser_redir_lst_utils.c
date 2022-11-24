@@ -1,54 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_bool.c                                      :+:      :+:    :+:   */
+/*   parser_redir_lst_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 18:04:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/10/23 19:06:11 by rle-thie         ###   ########.fr       */
+/*   Created: 2022/11/23 15:19:52 by rle-thie          #+#    #+#             */
+/*   Updated: 2022/11/23 15:19:53 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	add_pipe(t_cmd	*cmd)
-{
-	while (cmd->next)
-	{
-		cmd->pipe_out = 1;
-		if (cmd->prev)
-			cmd->pipe_in = 1;
-		cmd = cmd->next;
-	}
-	if (cmd)
-	{
-		if (cmd->prev)
-			cmd->pipe_in = 1;
-	}
-}
-
-void	init_index(t_cmd *cmd)
+int	check_one_redir(char *str)
 {
 	int	i;
+	int	c;
 
+	c = 0;
 	i = 0;
-	while (cmd->next)
+	while (str[i])
 	{
-		cmd->index = i;
+		if (str[i] && (str[i] == '<' || str[i] == '>'))
+		{
+			while (str[i] && (str[i] == '<' || str[i] == '>' || str[i] == ' '))
+				i++;
+			if (str[i] && ft_isprint(str[i]) == 1)
+				c++;
+		}
 		i++;
-		cmd = cmd->next;
 	}
-	if (cmd)
-	{
-		cmd->index = i;
-	}
+	return (c);
 }
 
-void	add_bool_var(t_cmd *format_cmd)
+int	ft_strleni(char *str, int i)
 {
-	if (!format_cmd->cmd_name)
-		format_cmd->cmd_name = NULL;
-	init_index(format_cmd);
-	add_pipe(format_cmd);
+	int	y;
+
+	y = 0;
+	while (str[i])
+	{
+		i++;
+		y++;
+	}
+	return (y);
 }

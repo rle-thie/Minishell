@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:26:21 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/16 17:34:00 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 21:39:28 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	open_file_out(char *path, int mode)
 	return (ret);
 }
 
-int	open_file_in(t_redir *rd)
+int	open_file_in(t_redir *rd, t_cmd *cmd)
 {
-	int	fd;
-	int	ret;
+	int		fd;
+	int		ret;
 
 	if (rd->type == REDIR_IN)
 	{
@@ -54,7 +54,10 @@ int	open_file_in(t_redir *rd)
 		fd = heredoc(rd);
 	if (fd == -1)
 		return (fd);
-	ret = dup2(fd, STDIN_FILENO);
+if ((is_builtin(cmd) && cmd_number() == 1) || // le bool ici)
+		ret = 0;
+	else
+		ret = dup2(fd, STDIN_FILENO);
 	close(fd);
 	return (ret);
 }
@@ -85,9 +88,9 @@ int	redir_loop(t_cmd *cmd)
 		if (head->type == REDIR_OUT || head->type == DOUBLE_REDIR_OUT)
 			ret = open_file_out(head->file_name, head->type);
 		if (head->type == REDIR_IN || head->type == DOUBLE_REDIR_IN)
-			ret = open_file_in(head);
-		if (ret == -1)
-			err_msg_rd(head->file_name);
+			ret = open_file_in(head, cmd);
+		if ((ret == -1) && err_msg_rd(head->file_name, cmd))
+			return (ret);
 		head = head->next;
 	}
 	return (ret);

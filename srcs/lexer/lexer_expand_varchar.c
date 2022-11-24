@@ -19,12 +19,12 @@ static char	*find_env_var(char *str)
 	head = g_data.env_head;
 	while (head->next)
 	{
-		if (!ft_strncmp(head->name, str, ft_strlen(str)))
+		if (!ft_strcmp(head->name, str))
 			return (head->str);
 		head = head->next;
 	}
 	if (head)
-		if (!ft_strncmp(head->name, str, ft_strlen(str)))
+		if (!ft_strcmp(head->name, str))
 			return (head->str);
 	return (NULL);
 }
@@ -54,17 +54,14 @@ char	*expand_envvar(char *str, int i)
 	return (tab);
 }
 
-char	*expand_varchar(char *str)
+char	*expand_varchar(char *str, int i)
 {
 	char	*new;
 	char	*tab;
-	int		i;
 	int		status;
 
 	status = 0;
-	i = 0;
-	tab = ft_calloc(sizeof(char) * 2, &g_data);
-	tab[0] = ' ';
+	tab = ft_calloc(sizeof(char) * 1, &g_data);
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1] && str[i + 1] != '$'
@@ -82,6 +79,5 @@ char	*expand_varchar(char *str)
 		else
 			tab = ft_strjoinchar_gc(tab, str[i++], &g_data);
 	}
-	tab = del_first_space(tab);
 	return (tab);
 }

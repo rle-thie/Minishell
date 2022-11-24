@@ -6,9 +6,10 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:12:27 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/22 12:12:31 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 11:06:11 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCT_H
 # define STRUCT_H
@@ -57,7 +58,6 @@ typedef struct s_sigs
 {
 	struct sigaction	sint;
 	struct sigaction	sexit;
-	struct sigaction	sextwo;
 }	t_sigs;
 
 struct	s_token

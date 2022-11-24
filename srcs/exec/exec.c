@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/22 00:33:54 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 21:38:51 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	parent_process(void)
 	int		error;
 
 	error = 0;
-	g_data.status = 0;
 	head = g_data.formated_cmd;
 	if (!head)
 		return ;
@@ -38,49 +37,49 @@ void	parent_process(void)
 
 void	waiting_fct(t_cmd *last, int error)
 {
-	int	i;
-	int	status;
+	int		i;
+	int		status;
+	t_cmd	*head;
 
-	signal(SIGINT, SIG_IGN);
-	sigaction(SIGQUIT, &(g_data.sig.sextwo), NULL);
 	i = 0;
 	status = 0;
+	head = g_data.formated_cmd;
 	while (i < cmd_number() && !(cmd_number() == 1 && is_builtin(last)))
 	{
-		if (waitpid(g_data.pid, &status, 0) == -1)
-			wait(NULL);
+		waitpid(head->pid, &status, 0);
+		if (WIFSIGNALED(status))
+		{
+			g_data.status = WTERMSIG(status) + 128;
+			if (g_data.status == 131)
+				printf("Quit (core dumped)");
+		}
+		else if (WIFEXITED(status))
+			g_data.status = WEXITSTATUS(status);
+		head = head->next;
 		if (error)
 			break ;
 		i++;
 	}
-	if (!(cmd_number() == 1 && is_builtin(last)))
-	{
-		if (WIFSIGNALED(status) && g_data.status != 131)
-			g_data.status = WTERMSIG(status) + 128;
-		if (WIFEXITED(status))
-			g_data.status = WEXITSTATUS(status);
-	}
+	sig_reset();
 }
 
 void	exec(t_fd *fds, t_cmd *cmd)
 {
-	int	pid;
-
-	g_data.pid = -1;
 	if (is_builtin(cmd) && cmd_number() == 1)
 	{
 		g_data.status = builtin_exec(cmd);
 		return ;
 	}
 	struct_to_char();
-	pid = fork();
-	g_data.pid = pid;
-	if (pid == -1)
+	sig_reset();
+	g_data.status = 0;
+	cmd->pid = fork();
+	if (cmd->pid == -1)
 	{
 		perror("bash :");
 		return ;
 	}
-	if (pid == 0)
+	if (cmd->pid == 0)
 		child_process(fds, cmd);
 }
 
@@ -89,14 +88,17 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 	int		ret;
 	char	*pa;
 
+	signal(SIGINT, sig_fork);
+	signal(SIGQUIT, sig_fork);
 	ret = 0;
 	pa = path(cmd->cmd_name);
 	redir_pipe(fds, cmd);
 	close_pipes(fds);
+	//mettre une fct ac le booleen ici	
 	if (is_builtin(cmd))
 	{
 		ret = builtin_exec(cmd);
-		exit(ret);
+		exit(ret % 256);
 	}
 	if (!pa)
 		cmd_not_found(cmd->cmd_name);
@@ -107,7 +109,7 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 	else if (!access(pa, F_OK) && access(pa, X_OK))
 		ret = 126;
 	ft_free(pa, &g_data);
-	exit(ret);
+	exit(ret % 256);
 }
 
 void	cmd_not_found(char *str)

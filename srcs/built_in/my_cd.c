@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:39:47 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/17 18:40:06 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/23 17:24:43 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	my_cd(char **cmd)
 	else
 		dir_ret = chdir(cmd[0]);
 	if (dir_ret != 0)
-		return (ft_cd_error("", errno));
+		return (ft_cd_error("", 3));
 	else
 		change_pwds();
 	return (EXIT_SUCCESS);
@@ -72,6 +72,7 @@ void	change_pwds(void)
 	t_env	*oldpwd;
 	t_env	*pwd;
 	char	*temp;
+	int		size;
 
 	if (!find_cd_link("PWD") || !find_cd_link("OLDPWD"))
 		return ;
@@ -79,11 +80,12 @@ void	change_pwds(void)
 	oldpwd = find_cd_link("OLDPWD");
 	pwd = find_cd_link("PWD");
 	ft_free(oldpwd->str, &g_data);
-	oldpwd->str = ft_malloc(sizeof(*(pwd->str)) * ft_strlen(pwd->str), &g_data);
-	ft_strlcpy(oldpwd->str, pwd->str, ft_strlen(pwd->str));
+	size = ft_strlen(pwd->str) + 1;
+	oldpwd->str = ft_malloc(sizeof(*(pwd->str)) * size, &g_data);
+	ft_strlcpy(oldpwd->str, pwd->str, ft_strlen(pwd->str) + 1);
 	ft_free(pwd->str, &g_data);
-	pwd->str = ft_malloc(sizeof(*temp) * ft_strlen(temp), &g_data);
-	ft_strlcpy(pwd->str, temp, ft_strlen(temp));
+	pwd->str = ft_malloc(sizeof(*temp) * ft_strlen(temp) + 1, &g_data);
+	ft_strlcpy(pwd->str, temp, ft_strlen(temp) + 1);
 	free(temp);
 }
 
@@ -94,12 +96,12 @@ t_env	*find_cd_link(char *str)
 	head = g_data.env_head;
 	while (head->next)
 	{
-		if (!ft_strncmp(head->name, str, ft_strlen(str)))
+		if (!ft_strncmp(head->name, str, ft_strlen(str) + 1))
 			return (head);
 		head = head->next;
 	}
 	if (head)
-		if (!ft_strncmp(head->name, str, ft_strlen(str)))
+		if (!ft_strncmp(head->name, str, ft_strlen(str) + 1))
 			return (head);
 	return (NULL);
 }

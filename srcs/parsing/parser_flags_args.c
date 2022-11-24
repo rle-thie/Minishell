@@ -21,19 +21,19 @@ int	is_flags(char *flags)
 		return (0);
 	else
 		return (1);
-	// printf("%d flags\n");
 	return (i);
 }
 
 char	**fill_flags_args(char *flags, char **args, int nbr_args, char *cmd)
 {
-	char **tab;
+	char	**tab;
 	int		i;
 	int		y;
 
 	y = 0;
 	i = 0;
-	tab = ft_calloc(sizeof(char *) * (nbr_args + is_flags(flags) + is_flags(cmd) + 1), &g_data);
+	tab = ft_calloc(sizeof(char *) * (nbr_args + is_flags(flags)
+				+ is_flags(cmd) + 1), &g_data);
 	if (is_flags(cmd))
 		tab[i++] = cmd;
 	if (is_flags(flags))
@@ -42,13 +42,11 @@ char	**fill_flags_args(char *flags, char **args, int nbr_args, char *cmd)
 		return (tab);
 	else
 	{
-		// printf("-%s-\n", args[0]);
 		if (args[y])
 		{
 			while (args[y])
 				tab[i++] = args[y++];
 		}
 	}
-	// ft_print_args(tab);
 	return (tab);
 }

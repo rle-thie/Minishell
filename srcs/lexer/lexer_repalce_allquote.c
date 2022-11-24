@@ -30,7 +30,7 @@ char	*join_inquote(t_token *cmd, t_token_type type)
 	}
 	tab = del_first_space(tab);
 	if (type == IN_DQUOTE)
-		tab = expand_varchar(tab);
+		tab = expand_varchar(tab, 0);
 	return (tab);
 }
 
