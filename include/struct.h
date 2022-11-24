@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:49:57 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/24 11:21:00 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 11:51:53 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ struct	s_cmd
 	int					index;
 	int					pid;
 	int					bool_cmd;
+	int					pid;
 };
 
 struct	s_garbage
