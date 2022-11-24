@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:36:19 by ldevy             #+#    #+#             */
-/*   Updated: 2022/11/24 11:55:05 by ldevy            ###   ########.fr       */
+/*   Updated: 2022/11/24 14:14:14 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	waiting_fct(t_cmd *last, int error)
 		{
 			g_data.status = WTERMSIG(status) + 128;
 			if (g_data.status == 131)
-				printf("Quit (core dumped)");
+				printf("Quit (core dumped)\n");
 		}
 		else if (WIFEXITED(status))
 			g_data.status = WEXITSTATUS(status);
@@ -115,6 +115,6 @@ void	child_process(t_fd *fds, t_cmd *cmd)
 void	cmd_not_found(char *str)
 {
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": command not found", 2);
+	ft_putstr_fd(": command not found\n", 2);
 	exit(127);
 }
