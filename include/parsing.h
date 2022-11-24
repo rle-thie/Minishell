@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:17:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/12 15:42:54 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:29:43 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**fill_flags_args(char *flags, char **args, int nbr_args, char *cmd);
 void	add_bool_var(t_cmd	*format_cmd);
 
 // redir.c
-t_redir	*parse_redir(t_token *cmd);
+t_redir	*parse_redir(t_token *cmd, int exit_s);
 // redir_parse_lst.c
 t_redir	*format_redir_lst(t_redir *lst);
 int		ft_strleni(char *str, int i);

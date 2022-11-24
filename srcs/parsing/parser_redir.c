@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:06:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2022/11/21 12:11:53 by rle-thie         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:31:53 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,10 @@ void	delete_redir_type(t_token *cmd)
 		delete_lst(cmd);
 }
 
-t_redir	*parse_redir(t_token *cmd)
+t_redir	*parse_redir(t_token *cmd, int exit_s)
 {
 	t_redir	*redir_lst;
-	int		exits;
 
-	exits = g_data.status;
 	select_redir(cmd);
 	redir_lst = join_redir(cmd);
 	if (redir_lst)
@@ -113,7 +111,7 @@ t_redir	*parse_redir(t_token *cmd)
 		g_data.status = 0;
 		redir_lst = check_heredoc(redir_lst, NULL);
 		if (g_data.status != 130)
-			g_data.status = exits;
+			g_data.status = exit_s;
 	}
 	if (g_data.error != 0)
 		sig_handler_heredoc();
